@@ -1,1172 +1,1772 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gota Glú · Agua Purificada</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-main: #ffffff;
-            --bg-secondary: #f5f9fc;
-            --dark: #1a2b3c;
-            --muted: #5f7d8e;
-            --border: #dce8f0;
-            --blue: #0077be;
-            --blue-light: #00a8e8;
-            --blue-dark: #005b8c;
-            --green-wa: #25d366;
-            --green-wa-dark: #128c4e;
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --drawer-w: 420px;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: var(--bg-main);
-            font-family: 'Nunito Sans', sans-serif;
-            color: var(--dark);
-            min-height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gota Glú · Agua Purificada</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #ffffff;
+      --bg-secondary: #f5f9fc;
+      --dark: #1a2b3c;
+      --muted: #5f7d8e;
+      --border: #dce8f0;
+      --blue: #0077be;
+      --blue-light: #00a8e8;
+      --blue-dark: #005b8c;
+      --green-wa: #25d366;
+      --green-wa-dark: #128c4e;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --drawer-w: 420px;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: var(--bg-main);
+      font-family: 'Nunito Sans', sans-serif;
+      color: var(--dark);
+      min-height: 100vh;
+    }
 
-        .announcement-bar {
-            background: var(--blue-dark);
-            color: #fff;
-            padding: 9px 0;
-            overflow: hidden;
-            position: sticky;
-            top: 0;
-            z-index: 102;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 500;
-            border-bottom: 2px solid rgba(0, 168, 232, 0.4);
-        }
-        .marquee-track {
-            display: flex;
-            width: max-content;
-            animation: marquee-smooth 22s linear infinite;
-        }
-        .announcement-bar:hover .marquee-track {
-            animation-play-state: paused;
-        }
-        .marquee-track span {
-            white-space: nowrap;
-            padding: 0 40px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .marquee-sep {
-            color: rgba(0, 168, 232, 0.8);
-            font-size: 0.5rem;
-        }
-        @keyframes marquee-smooth {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .marquee-track {
-                animation: none;
-            }
-        }
+    .announcement-bar {
+      background: var(--blue-dark);
+      color: #fff;
+      padding: 9px 0;
+      overflow: hidden;
+      position: sticky;
+      top: 0;
+      z-index: 102;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      border-bottom: 2px solid rgba(0, 168, 232, 0.4);
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-smooth 22s linear infinite;
+    }
+    .announcement-bar:hover .marquee-track {
+      animation-play-state: paused;
+    }
+    .marquee-track span {
+      white-space: nowrap;
+      padding: 0 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .marquee-sep {
+      color: rgba(0, 168, 232, 0.8);
+      font-size: 0.5rem;
+    }
+    @keyframes marquee-smooth {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+    }
 
-        .header {
-            background: var(--bg-main);
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            position: relative;
-            z-index: 100;
-            border-bottom: 1px solid var(--border);
-        }
-        .header img {
-            height: 42px;
-            width: auto;
-            object-fit: contain;
-        }
-        .header h1 {
-            font-family: 'Quicksand', sans-serif;
-            color: var(--blue-dark);
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
+    .header {
+      background: var(--bg-main);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      position: relative;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+    }
+    .header img {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+    }
+    .header h1 {
+      font-family: 'Quicksand', sans-serif;
+      color: var(--blue-dark);
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
 
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 0 0 140px;
-        }
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 0 140px;
+    }
 
-        .product-image-wrap {
-            position: relative;
-            width: 100%;
-            height: 250px;
-            overflow: hidden;
-            background: #e8f4fd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .product-image-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            padding: 16px;
-        }
-        .rating-badge {
-            position: absolute;
-            bottom: 14px;
-            left: 14px;
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid var(--border);
-            color: var(--dark);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
+    .product-image-wrap {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      background: #e8f4fd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .product-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 16px;
+    }
+    .rating-badge {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid var(--border);
+      color: var(--dark);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
 
-        .product-info {
-            padding: 24px 20px 8px;
-            text-align: center;
-        }
-        .product-info h2 {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--blue-dark);
-            margin-bottom: 4px;
-        }
-        .product-subtitle {
-            font-size: 0.78rem;
-            color: var(--muted);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
+    .product-info {
+      padding: 24px 20px 8px;
+      text-align: center;
+    }
+    .product-info h2 {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 4px;
+    }
+    .product-subtitle {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
 
-        .divider {
-            height: 1px;
-            background: var(--border);
-            margin: 20px 20px;
-        }
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 20px;
+    }
 
-        .section-label {
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--dark);
-            margin-bottom: 14px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .step-number {
-            background: var(--blue);
-            color: white;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-size: 0.65rem;
-            font-weight: 700;
-        }
+    .section-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--dark);
+      margin-bottom: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .step-number {
+      background: var(--blue);
+      color: white;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 0.65rem;
+      font-weight: 700;
+    }
 
-        .option-section {
-            padding: 0 20px;
-        }
+    .option-section {
+      padding: 0 20px;
+    }
 
-        /* Marcas con doble tipo de agua */
-        .brand-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .brand-item {
-            border: 2px solid var(--border);
-            border-radius: var(--radius-sm);
-            background: var(--bg-secondary);
-            transition: all 0.2s;
-            overflow: hidden;
-        }
-        .brand-item.active-brand {
-            border-color: var(--blue);
-            background: #e8f4fd;
-        }
-        .brand-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 16px;
-            cursor: pointer;
-            user-select: none;
-        }
-        .brand-name {
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .check-icon {
-            opacity: 0;
-            transition: opacity 0.2s;
-            font-size: 1.2rem;
-            color: var(--blue);
-        }
-        .brand-item.active-brand .check-icon {
-            opacity: 1;
-        }
-        .brand-qty-badge {
-            background: var(--blue);
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 20px;
-            display: none;
-        }
-        .brand-item.active-brand .brand-qty-badge {
-            display: inline-block;
-        }
-        .brand-details {
-            display: none;
-            padding: 0 16px 16px;
-            flex-direction: column;
-            gap: 14px;
-        }
-        .brand-item.active-brand .brand-details {
-            display: flex;
-        }
-        .water-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: white;
-            border-radius: var(--radius-sm);
-            padding: 12px;
-            border: 1px solid var(--border);
-        }
-        .water-info {
-            display: flex;
-            flex-direction: column;
-            font-size: 0.8rem;
-        }
-        .water-type-name {
-            font-weight: 700;
-            color: var(--dark);
-        }
-        .water-price {
-            font-size: 0.7rem;
-            color: var(--muted);
-        }
-        .qty-control-sm {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .qty-btn-sm {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 2px solid var(--blue);
-            background: white;
-            color: var(--blue);
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.15s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .qty-btn-sm:hover {
-            background: var(--blue);
-            color: white;
-        }
-        .qty-display-sm {
-            font-weight: 700;
-            font-size: 1rem;
-            min-width: 22px;
-            text-align: center;
-        }
+    .brand-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .brand-item {
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-secondary);
+      transition: all 0.2s;
+      overflow: hidden;
+    }
+    .brand-item.active-brand {
+      border-color: var(--blue);
+      background: #e8f4fd;
+    }
+    .brand-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .brand-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .check-icon {
+      opacity: 0;
+      transition: opacity 0.2s;
+      font-size: 1.2rem;
+      color: var(--blue);
+    }
+    .brand-item.active-brand .check-icon {
+      opacity: 1;
+    }
+    .brand-qty-badge {
+      background: var(--blue);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      display: none;
+    }
+    .brand-item.active-brand .brand-qty-badge {
+      display: inline-block;
+    }
+    .brand-details {
+      display: none;
+      padding: 0 16px 16px;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .brand-item.active-brand .brand-details {
+      display: flex;
+    }
+    .water-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      border: 1px solid var(--border);
+    }
+    .water-info {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.8rem;
+    }
+    .water-type-name {
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .water-price {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+    .qty-control-sm {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .qty-btn-sm {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--blue);
+      background: white;
+      color: var(--blue);
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qty-btn-sm:hover {
+      background: var(--blue);
+      color: white;
+    }
+    .qty-display-sm {
+      font-weight: 700;
+      font-size: 1rem;
+      min-width: 22px;
+      text-align: center;
+    }
 
-        .address-form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .address-form input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-sm);
-            background: var(--bg-secondary);
-            font-family: 'Nunito Sans', sans-serif;
-            font-size: 0.9rem;
-            color: var(--dark);
-            outline: none;
-            transition: border-color 0.2s, background 0.2s;
-        }
-        .address-form input:focus {
-            border-color: var(--blue);
-            background: var(--bg-main);
-        }
-        .address-row {
-            display: flex;
-            gap: 10px;
-        }
-        .address-row input {
-            flex: 1;
-        }
+    .address-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .address-form input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-secondary);
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--dark);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .address-form input:focus {
+      border-color: var(--blue);
+      background: var(--bg-main);
+    }
+    .address-row {
+      display: flex;
+      gap: 10px;
+    }
+    .address-row input {
+      flex: 1;
+    }
 
-        .coupon-section {
-            padding: 0 20px;
-        }
-        .coupon-wrap {
-            display: flex;
-            gap: 8px;
-            align-items: stretch;
-        }
-        .coupon-wrap input {
-            flex: 1;
-            padding: 14px 16px;
-            border: 2px solid var(--border);
-            border-radius: var(--radius-sm);
-            background: var(--bg-secondary);
-            font-family: 'Nunito Sans', sans-serif;
-            font-size: 0.9rem;
-            color: var(--dark);
-            outline: none;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-        .btn-apply-coupon {
-            padding: 14px 18px;
-            background: var(--blue-dark);
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-family: 'Nunito Sans', sans-serif;
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        .coupon-feedback {
-            margin-top: 10px;
-            padding: 10px 14px;
-            border-radius: var(--radius-sm);
-            font-size: 0.8rem;
-            display: none;
-            align-items: center;
-            gap: 10px;
-        }
-        .coupon-feedback.success {
-            display: flex;
-            background: #eafaf1;
-            border: 1px solid #a3e4bc;
-            color: #1a6638;
-        }
-        .coupon-feedback.error {
-            display: flex;
-            background: #fff5f5;
-            border: 1px solid #f5c0c0;
-            color: #a33;
-        }
+    .coupon-section {
+      padding: 0 20px;
+    }
+    .coupon-wrap {
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+    }
+    .coupon-wrap input {
+      flex: 1;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-secondary);
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--dark);
+      outline: none;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .btn-apply-coupon {
+      padding: 14px 18px;
+      background: var(--blue-dark);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .coupon-feedback {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+    .coupon-feedback.success {
+      display: flex;
+      background: #eafaf1;
+      border: 1px solid #a3e4bc;
+      color: #1a6638;
+    }
+    .coupon-feedback.error {
+      display: flex;
+      background: #fff5f5;
+      border: 1px solid #f5c0c0;
+      color: #a33;
+    }
 
-        /* Especificaciones */
-        .specs-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        .spec-item {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--dark);
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-        .spec-item:hover {
-            border-color: var(--blue);
-        }
-        .info-btn {
-            background: none;
-            border: 1.5px solid var(--blue);
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--blue);
-            cursor: pointer;
-            flex-shrink: 0;
-            transition: all 0.2s;
-        }
-        .info-btn.unseen {
-            animation: infoPulse 1.5s ease-in-out infinite;
-            border-color: #00aaff;
-            color: #00aaff;
-            box-shadow: 0 0 8px rgba(0,170,255,0.5);
-        }
-        @keyframes infoPulse {
-            0%,
-            100% {
-                box-shadow: 0 0 4px rgba(0, 170, 255, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 14px rgba(0, 170, 255, 0.9);
-            }
-        }
-        .spec-modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-        .spec-modal-overlay.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .spec-modal {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            width: 100%;
-            max-width: 480px;
-            background: white;
-            border-radius: 20px 20px 0 0;
-            padding: 24px;
-            z-index: 2001;
-            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        .spec-modal-overlay.open .spec-modal {
-            transform: translateX(-50%) translateY(0);
-        }
-        .spec-modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        .spec-modal-title {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-        .spec-modal-close {
-            background: none;
-            border: none;
-            font-size: 1.4rem;
-            cursor: pointer;
-            color: var(--muted);
-        }
-        .spec-modal-body {
-            font-size: 0.85rem;
-            line-height: 1.6;
-            color: var(--muted);
-        }
+    .specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .spec-item {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--dark);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .spec-item:hover {
+      border-color: var(--blue);
+    }
+    .info-btn {
+      background: none;
+      border: 1.5px solid var(--blue);
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--blue);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .info-btn.unseen {
+      animation: infoPulse 1.5s ease-in-out infinite;
+      border-color: #00aaff;
+      color: #00aaff;
+      box-shadow: 0 0 8px rgba(0, 170, 255, 0.5);
+    }
+    @keyframes infoPulse {
+      0%, 100% { box-shadow: 0 0 4px rgba(0, 170, 255, 0.4); }
+      50% { box-shadow: 0 0 14px rgba(0, 170, 255, 0.9); }
+    }
+    .spec-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .spec-modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .spec-modal {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      width: 100%;
+      max-width: 480px;
+      background: white;
+      border-radius: 20px 20px 0 0;
+      padding: 24px;
+      z-index: 2001;
+      box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .spec-modal-overlay.open .spec-modal {
+      transform: translateX(-50%) translateY(0);
+    }
+    .spec-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .spec-modal-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+    .spec-modal-close {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+    .spec-modal-body {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
 
-        /* Drawer y demás */
-        .cart-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0);
-            z-index: 200;
-            pointer-events: none;
-            transition: background 0.35s;
-        }
-        .cart-overlay.open {
-            background: rgba(0, 0, 0, 0.5);
-            pointer-events: auto;
-        }
-        .cart-drawer {
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: var(--drawer-w);
-            max-width: 100vw;
-            background: var(--bg-main);
-            z-index: 201;
-            display: flex;
-            flex-direction: column;
-            transform: translateX(100%);
-            transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: -12px 0 48px rgba(0, 0, 0, 0.15);
-        }
-        .cart-drawer.open {
-            transform: translateX(0);
-        }
-        .drawer-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 22px 24px 18px;
-            border-bottom: 1px solid var(--border);
-        }
-        .drawer-title {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--blue-dark);
-        }
-        .drawer-close {
-            background: var(--bg-secondary);
-            border: none;
-            border-radius: 50%;
-            width: 34px;
-            height: 34px;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-        .drawer-body {
-            flex: 1;
-            overflow-y: auto;
-            padding: 0 20px;
-        }
-        .drawer-cart-item {
-            border-bottom: 1px solid var(--border);
-            padding: 18px 0;
-        }
-        .drawer-item-name {
-            font-weight: 600;
-        }
-        .drawer-item-sub {
-            font-size: 0.72rem;
-            color: var(--muted);
-        }
-        .drawer-item-price {
-            font-weight: 700;
-            color: var(--blue-dark);
-        }
-        .drawer-footer {
-            border-top: 1px solid var(--border);
-            padding: 20px 24px 28px;
-        }
-        .drawer-grand-total .amount {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-        .drawer-btn-wa {
-            background: var(--green-wa);
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            padding: 16px;
-            width: 100%;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-        }
-        .cart-fab {
-            position: fixed;
-            top: 70px;
-            right: 20px;
-            z-index: 190;
-            background: var(--blue-dark);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 14px 22px;
-            font-weight: 600;
-            cursor: pointer;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-        .cart-fab.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .action-buttons {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 480px;
-            padding: 16px 20px 24px;
-            background: linear-gradient(to top, white 70%, transparent);
-            display: flex;
-            z-index: 90;
-        }
-        .btn-add {
-            flex: 1;
-            background: var(--blue);
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            padding: 16px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            cursor: pointer;
-        }
-        .toast {
-            position: fixed;
-            top: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--dark);
-            color: white;
-            padding: 14px 24px;
-            border-radius: 30px;
-            opacity: 0;
-            z-index: 1200;
-            transition: opacity 0.3s;
-        }
-        .toast.show {
-            opacity: 1;
-        }
+    /* CART DRAWER */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0);
+      z-index: 200;
+      pointer-events: none;
+      transition: background 0.35s ease;
+    }
+    .cart-overlay.open {
+      background: rgba(0, 0, 0, 0.5);
+      pointer-events: auto;
+    }
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: var(--drawer-w);
+      max-width: 100vw;
+      background: var(--bg-main);
+      z-index: 201;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -12px 0 48px rgba(0, 0, 0, 0.15);
+    }
+    .cart-drawer.open {
+      transform: translateX(0);
+    }
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 24px 18px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .drawer-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .drawer-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--blue-dark);
+    }
+    .drawer-item-count {
+      background: var(--blue);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      min-width: 22px;
+      height: 22px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 6px;
+    }
+    .drawer-close {
+      background: var(--bg-secondary);
+      border: none;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background 0.15s;
+      flex-shrink: 0;
+    }
+    .drawer-close:hover {
+      background: var(--border);
+      color: var(--dark);
+    }
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .drawer-body::-webkit-scrollbar {
+      width: 4px;
+    }
+    .drawer-body::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+    .drawer-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 30px;
+      text-align: center;
+      height: 100%;
+      color: var(--muted);
+    }
+    .drawer-empty-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      opacity: 0.3;
+    }
+    .drawer-empty-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--dark);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .drawer-items {
+      padding: 0 20px;
+    }
+    .drawer-cart-item {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+      animation: slideIn 0.25s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .drawer-item-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .drawer-item-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: #e8f4fd;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .drawer-item-meta {
+      flex: 1;
+      min-width: 0;
+    }
+    .drawer-item-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      line-height: 1.3;
+      margin-bottom: 3px;
+    }
+    .drawer-item-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.4px;
+      line-height: 1.5;
+    }
+    .drawer-item-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+    }
+    .drawer-item-price {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--blue-dark);
+    }
+    .drawer-remove-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 5px 12px;
+      font-size: 0.7rem;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: 'Nunito Sans', sans-serif;
+      letter-spacing: 0.5px;
+      transition: all 0.15s;
+    }
+    .drawer-remove-btn:hover {
+      border-color: #c00;
+      color: #c00;
+      background: #fff5f5;
+    }
+    .drawer-footer {
+      border-top: 1px solid var(--border);
+      padding: 20px 24px 28px;
+      background: var(--bg-main);
+      flex-shrink: 0;
+    }
+    .drawer-totals {
+      margin-bottom: 18px;
+    }
+    .drawer-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      padding: 5px 0;
+      color: var(--muted);
+    }
+    .drawer-total-row.subtotal {
+      color: var(--dark);
+      font-weight: 500;
+    }
+    .drawer-total-row.discount {
+      color: #1a6638;
+      font-weight: 600;
+    }
+    .drawer-total-row.shipping-free {
+      color: #1a6638;
+      font-weight: 500;
+    }
+    .drawer-grand-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0 0;
+      margin-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+    .drawer-grand-total .label {
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .drawer-grand-total .amount {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--blue-dark);
+    }
+    .drawer-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .drawer-btn-wa {
+      background: var(--green-wa);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .drawer-btn-wa:hover {
+      background: var(--green-wa-dark);
+    }
+    .drawer-btn-clear {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 11px 16px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+    }
+    .drawer-btn-clear:hover {
+      background: var(--bg-secondary);
+      color: var(--dark);
+      border-color: var(--dark);
+    }
 
-        /* Tour */
-        .tour-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 1000;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .tour-overlay.active {
-            pointer-events: auto;
-            opacity: 1;
-        }
-        .tour-highlight {
-            position: fixed;
-            border-radius: 10px;
-            z-index: 1001;
-            pointer-events: none;
-            transition: all 0.35s;
-        }
-        .tour-highlight.active {
-            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
-        }
-        .tour-tooltip {
-            position: fixed;
-            z-index: 1003;
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            max-width: 300px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-        .tour-tooltip.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .tour-step-label {
-            font-size: 0.65rem;
-            letter-spacing: 2px;
-            color: var(--blue);
-            font-weight: 700;
-        }
-        .tour-title {
-            font-family: 'Quicksand', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-        .tour-btn-next {
-            background: var(--blue);
-            border: none;
-            border-radius: var(--radius-sm);
-            padding: 8px 18px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-        }
-    </style>
+    .cart-fab {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      z-index: 190;
+      background: var(--blue-dark);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 22px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+      transition: opacity 0.3s ease, background 0.2s;
+      opacity: 0;
+      pointer-events: none;
+      width: fit-content;
+    }
+    .cart-fab.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .cart-fab:hover {
+      background: #004a70;
+    }
+    .cart-fab:active {
+      transform: scale(0.97);
+    }
+    .cart-fab-count {
+      background: var(--blue-light);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 700;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+      letter-spacing: 0;
+    }
+    .cart-fab.pulse {
+      animation: fabPulse 0.4s ease;
+    }
+    @keyframes fabPulse {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    .action-buttons {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      padding: 16px 20px 24px;
+      background: linear-gradient(to top, rgba(255, 255, 255, 1) 70%, rgba(255, 255, 255, 0));
+      display: flex;
+      gap: 12px;
+      z-index: 90;
+    }
+    .btn-add {
+      flex: 1;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--blue);
+      color: #ffffff;
+      box-shadow: 0 4px 18px rgba(0, 119, 190, 0.3);
+      transition: transform 0.1s, opacity 0.2s;
+    }
+    .btn-add:hover {
+      opacity: 0.9;
+    }
+    .btn-add:active {
+      transform: scale(0.98);
+    }
+
+    .toast {
+      position: fixed;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-10px);
+      background: var(--dark);
+      color: #ffffff;
+      padding: 14px 24px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s;
+      z-index: 1200;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Tour */
+    .tour-overlay {
+      position: fixed;
+      inset: 0;
+      background: transparent;
+      z-index: 1000;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .tour-overlay.active {
+      pointer-events: auto;
+      opacity: 1;
+    }
+    .tour-highlight {
+      position: fixed;
+      border-radius: 10px;
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+      z-index: 1001;
+      pointer-events: none;
+      transition: all 0.35s cubic-bezier(.4, 0, .2, 1), box-shadow 0.3s ease;
+    }
+    .tour-highlight.active {
+      box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.55);
+    }
+    .tour-tooltip {
+      position: fixed;
+      z-index: 1003;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px 22px;
+      max-width: 300px;
+      width: calc(100vw - 40px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, top 0.35s cubic-bezier(.4, 0, .2, 1), left 0.35s cubic-bezier(.4, 0, .2, 1);
+    }
+    .tour-tooltip.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .tour-tooltip::before {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #ffffff;
+      transform: rotate(45deg);
+    }
+    .tour-tooltip.arrow-top::before {
+      top: -6px;
+      left: 24px;
+    }
+    .tour-tooltip.arrow-bottom::before {
+      bottom: -6px;
+      left: 24px;
+    }
+    .tour-step-label {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .tour-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .tour-body {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+    .tour-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .tour-dots {
+      display: flex;
+      gap: 5px;
+    }
+    .tour-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.2s;
+    }
+    .tour-dot.active {
+      background: var(--blue);
+    }
+    .tour-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .tour-btn-skip {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px 14px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: border-color 0.2s;
+    }
+    .tour-btn-skip:hover {
+      border-color: var(--muted);
+    }
+    .tour-btn-next {
+      background: var(--blue);
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 8px 18px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .tour-btn-next:hover {
+      background: var(--blue-dark);
+    }
+
+    /* Aviso de privacidad */
+    .privacy-section {
+      padding: 0 20px;
+      margin-top: 10px;
+    }
+    .privacy-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .privacy-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue-dark);
+    }
+
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+      input[type="text"],
+      input[type="search"],
+      input[type="tel"],
+      textarea,
+      select {
+        font-size: 16px !important;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="announcement-bar">
-        <div class="marquee-track">
-            <span>💧 AGUA PURIFICADA A DOMICILIO · ENTREGA RÁPIDA <span class="marquee-sep">◆</span></span>
-            <span>✨ AGUA PLUS CON PERLAS DE PLATA <span class="marquee-sep">◆</span></span>
-            <span>🚚 ENVÍO GRATIS EN 6+ GARRAFONES <span class="marquee-sep">◆</span></span>
-        </div>
+  <div class="announcement-bar" role="marquee">
+    <div class="marquee-track">
+      <span>💧 AGUA PURIFICADA A DOMICILIO · ENTREGA RÁPIDA <span class="marquee-sep">◆</span></span>
+      <span>✨ AGUA PLUS CON PERLAS DE PLATA · MAYOR PUREZA <span class="marquee-sep">◆</span></span>
+      <span>🚚 ENVÍO GRATIS EN PEDIDOS DE 6 O MÁS GARRAFONES <span class="marquee-sep">◆</span></span>
+      <span>💧 AGUA PURIFICADA A DOMICILIO · ENTREGA RÁPIDA <span class="marquee-sep">◆</span></span>
+      <span>✨ AGUA PLUS CON PERLAS DE PLATA · MAYOR PUREZA <span class="marquee-sep">◆</span></span>
+      <span>🚚 ENVÍO GRATIS EN PEDIDOS DE 6 O MÁS GARRAFONES <span class="marquee-sep">◆</span></span>
     </div>
-    <div class="toast" id="toast"></div>
+  </div>
 
-    <div class="tour-overlay" id="tour-overlay" onclick="tourSkip()"></div>
-    <div class="tour-highlight" id="tour-highlight"></div>
-    <div class="tour-tooltip" id="tour-tooltip">
-        <div class="tour-step-label" id="tour-step-label"></div>
-        <div class="tour-title" id="tour-title"></div>
-        <div class="tour-body" id="tour-body" style="margin: 12px 0;"></div>
-        <div class="tour-footer" style="display:flex; justify-content:space-between;">
-            <button class="tour-btn-skip" onclick="tourSkip()" style="background:none;border:1px solid var(--border);padding:8px 14px;border-radius:8px;">Omitir</button>
-            <button class="tour-btn-next" id="tour-btn-next" onclick="tourNext()">Siguiente →</button>
+  <div class="toast" id="toast"></div>
+
+  <!-- TOUR ELEMENTS -->
+  <div class="tour-overlay" id="tour-overlay" onclick="tourSkip()"></div>
+  <div class="tour-highlight" id="tour-highlight"></div>
+  <div class="tour-tooltip" id="tour-tooltip">
+    <div class="tour-step-label" id="tour-step-label"></div>
+    <div class="tour-title" id="tour-title"></div>
+    <div class="tour-body" id="tour-body"></div>
+    <div class="tour-footer">
+      <div class="tour-dots" id="tour-dots"></div>
+      <div class="tour-actions">
+        <button class="tour-btn-skip" onclick="tourSkip()">Omitir</button>
+        <button class="tour-btn-next" id="tour-btn-next" onclick="tourNext()">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="drawer-header">
+      <div class="drawer-header-left">
+        <span class="drawer-title">Carrito</span>
+        <span class="drawer-item-count" id="drawer-item-count">0</span>
+      </div>
+      <button class="drawer-close" onclick="closeCart()" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <div class="drawer-body" id="drawer-body">
+      <div class="drawer-empty" id="drawer-empty">
+        <div class="drawer-empty-icon">💧</div>
+        <div class="drawer-empty-title">Tu carrito está vacío</div>
+        <div class="drawer-empty-sub">Selecciona tipo de agua, envases y cantidad<br>para comenzar tu pedido.</div>
+      </div>
+      <div class="drawer-items" id="drawer-items" style="display:none;"></div>
+    </div>
+    <div class="drawer-footer" id="drawer-footer" style="display:none;">
+      <div class="drawer-totals" id="drawer-totals"></div>
+      <div class="drawer-actions">
+        <button class="drawer-btn-wa" onclick="sendToWhatsApp()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Finalizar por WhatsApp
+        </button>
+        <button class="drawer-btn-clear" onclick="clearCart()">Vaciar carrito</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- FAB del carrito -->
+  <button class="cart-fab" id="cart-fab" onclick="openCart()" aria-label="Ver carrito">
+    🛒 Ver Carrito
+    <span class="cart-fab-count" id="cart-fab-count">0</span>
+  </button>
+
+  <div class="header">
+    <img src="https://gluglu.mx/images/logo%20gota.png?crc=3931633593" alt="Gota Glú" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+    <h1 style="display:none;">Gota Glú</h1>
+    <h1>Gota Glú</h1>
+  </div>
+
+  <div class="container">
+    <div class="product-image-wrap">
+      <img src="https://gluglu.mx/images/garrafon%20glu.png?crc=3958356213" alt="Garrafón" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect fill=%22%23e8f4fd%22 width=%22300%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%230077be%22 font-size=%2248%22>💧</text></svg>';">
+      <div class="rating-badge">⭐ 4.9 · Entrega hoy</div>
+    </div>
+    <div class="product-info">
+      <h2>Agua Purificada</h2>
+      <div class="product-subtitle">Elige envase, tipo y cantidad</div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="option-section" id="tour-anchor-brands">
+      <div class="section-label"><span class="step-number">1</span> Envases y tipo de agua</div>
+      <div class="brand-grid" id="brand-grid"></div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="option-section" id="tour-anchor-address">
+      <div class="section-label"><span class="step-number">2</span> Dirección de Entrega</div>
+      <div class="address-form">
+        <input type="text" id="addr-nombre" placeholder="Nombre de quien recibe *" required>
+        <div class="address-row">
+          <input type="text" id="addr-calle" placeholder="Calle *" required style="flex:2;">
+          <input type="text" id="addr-numero" placeholder="Número *" required style="flex:1;">
         </div>
+        <div class="address-row">
+          <input type="text" id="addr-colonia" placeholder="Colonia *" required style="flex:1;">
+          <input type="text" id="addr-cp" placeholder="Código Postal *" required style="flex:1; max-width:140px;">
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="coupon-section" id="tour-anchor-coupon">
+      <div class="section-label"><span class="step-number">3</span> Código Promocional (Opcional)</div>
+      <div class="coupon-wrap">
+        <input type="text" id="coupon-input" placeholder="Ingresa tu código" maxlength="20">
+        <button class="btn-apply-coupon" onclick="applyCoupon()">Aplicar</button>
+      </div>
+      <div class="coupon-feedback" id="coupon-feedback">
+        <span class="coupon-feedback-icon" id="coupon-icon"></span>
+        <span class="coupon-feedback-text" id="coupon-text"></span>
+        <button class="btn-remove-coupon" id="btn-remove-coupon" onclick="removeCoupon()" style="display:none;">✕</button>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="option-section" id="tour-anchor-specs">
+      <div class="section-label"><span class="step-number">i</span> Especificaciones del Servicio</div>
+      <div class="specs-grid" id="specs-grid"></div>
     </div>
 
-    <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-    <aside class="cart-drawer" id="cart-drawer">
-        <div class="drawer-header">
-            <span class="drawer-title">Carrito</span>
-            <span class="drawer-item-count" id="drawer-item-count">0</span>
-            <button class="drawer-close" onclick="closeCart()">✕</button>
-        </div>
-        <div class="drawer-body" id="drawer-body">
-            <div class="drawer-empty" id="drawer-empty">💧 Tu carrito está vacío</div>
-            <div class="drawer-items" id="drawer-items" style="display:none;"></div>
-        </div>
-        <div class="drawer-footer" id="drawer-footer" style="display:none;">
-            <div class="drawer-totals" id="drawer-totals"></div>
-            <button class="drawer-btn-wa" onclick="sendToWhatsApp()">Finalizar por WhatsApp</button>
-            <button class="drawer-btn-clear" onclick="clearCart()" style="margin-top:8px;width:100%;background:none;border:1px solid var(--border);padding:10px;border-radius:8px;">Vaciar carrito</button>
-        </div>
-    </aside>
-
-    <button class="cart-fab" id="cart-fab" onclick="openCart()">🛒 Ver Carrito <span id="cart-fab-count">0</span></button>
-
-    <div class="header">
-        <img src="https://gluglu.mx/images/logo%20gota.png?crc=3931633593" alt="Gota Glú">
-        <h1>Gota Glú</h1>
+    <div class="privacy-section">
+      <button class="privacy-btn" onclick="openSpecModal('privacidad')">
+        📜 Aviso de Privacidad
+        <span class="info-btn unseen" id="spec-btn-privacidad" style="margin-left:8px;">i</span>
+      </button>
     </div>
+  </div>
 
-    <div class="container">
-        <div class="product-image-wrap">
-            <img src="https://gluglu.mx/images/garrafon%20glu.png?crc=3958356213" alt="Garrafón">
-            <div class="rating-badge">⭐ 4.9 · Entrega hoy</div>
-        </div>
-        <div class="product-info">
-            <h2>Agua Purificada</h2>
-            <div class="product-subtitle">Elige envase, tipo y cantidad</div>
-        </div>
-        <div class="divider"></div>
+  <div class="action-buttons" id="tour-anchor-actions">
+    <button class="btn-add" onclick="addToCart()">💧 Añadir al carrito</button>
+  </div>
 
-        <div class="option-section" id="tour-anchor-brands">
-            <div class="section-label"><span class="step-number">1</span> Envases y tipo de agua</div>
-            <div class="brand-grid" id="brand-grid"></div>
-        </div>
-        <div class="divider"></div>
+  <div class="spec-modal-overlay" id="spec-modal-overlay" onclick="closeSpecModal()">
+    <div class="spec-modal" onclick="event.stopPropagation()">
+      <div class="spec-modal-header">
+        <span class="spec-modal-title" id="spec-modal-title"></span>
+        <button class="spec-modal-close" onclick="closeSpecModal()">✕</button>
+      </div>
+      <div class="spec-modal-body" id="spec-modal-body"></div>
+    </div>
+  </div>
 
-        <div class="option-section" id="tour-anchor-address">
-            <div class="section-label"><span class="step-number">2</span> Dirección de Entrega</div>
-            <div class="address-form">
-                <input type="text" id="addr-nombre" placeholder="Nombre de quien recibe *">
-                <div class="address-row">
-                    <input type="text" id="addr-calle" placeholder="Calle *" style="flex:2;">
-                    <input type="text" id="addr-numero" placeholder="Número *" style="flex:1;">
-                </div>
-                <div class="address-row">
-                    <input type="text" id="addr-colonia" placeholder="Colonia *" style="flex:1;">
-                    <input type="text" id="addr-cp" placeholder="C.P. *" style="flex:1; max-width:140px;">
-                </div>
+  <script>
+    const WA_NUMBER = "5215560909630";
+    const WATER_PRICES = { tradicional: 35.00, plus: 50.00 };
+    const BRANDS = ["Bonafont", "Bonafont chico", "Electropura", "E-pura", "Ciel", "Genérico"];
+
+    const SPECS = [
+      { id: "express", title: "Servicio Express", text: "Modalidad de entrega con preferencia y rapidez, teniendo un rango de entre 20 minutos a hora y media, siendo 25 minutos el promedio. Estos pueden verse afectados y variar conforme a la demanda, tráfico vehicular en la zona, condiciones climáticas adversas como lluvia, etc." },
+      { id: "lluvia", title: "Consideración Especial", text: "Nuestros repartidores realizan su trabajo de manera preventiva, son capacitados para manejar con todas las precauciones posibles, es por ello que en condiciones de lluvia el tiempo de espera puede ser altamente elevado, ya que tratamos de reducir accidentes, te agradecemos la espera. En tiempos así, prevén tu pedido, para no quedarte sin agua." },
+      { id: "distancia", title: "Petición a Distancia", text: "Significa que su petición está fuera del rango Express, pero dentro de nuestra zona de cobertura, es decir, podemos brindarle el servicio, pero nos tomará más tiempo de lo habitual. El administrador le mencionará un tiempo estimado de entrega y el costo por su servicio." },
+      { id: "personalizado", title: "Servicio Personalizado", text: "¿Quieres que tus envases permanezcan personalizados y que continúen con ciertos rasgos? Es decir, lo has marcado y no quieres que los despinten, son muy nuevos, o es un modelo único o simplemente son muy especiales para ti. No te preocupes, así seguirá siendo, solo debes notificarlo a tu Washtender (jefe de sucursal) y él te dará la opción que más se ajuste a ti. Como disposición oficial ya no podremos brindarte este servicio a domicilio en garrafones de cristal debido al peligro latente que siempre existe por estos materiales." },
+      { id: "programado", title: "Atención Programada", text: "Para ti, que necesitas el agua de forma muy recurrente, tenemos la opción de programar el día y la hora de entrega de tu servicio de agua. Siempre atentos a tus necesidades, realizamos llamada previa o mensaje vía Whatsapp para asegurar la entrega. Sujeto a disponibilidad de horario." },
+      { id: "dtox", title: "D-TOX", text: "Es un servicio de desintoxicación del botellón que puede ser preventivo, o resolutivo, en caso de eliminación de olores o sabores muy penetrantes (Cloro - Jamaica - presencia de hongo por exposición al sol - Etc)." },
+      { id: "botellones", title: "Uso de Botellones", text: "Los botellones o garrafones de intercambio en ocasiones serán nuevos, y a veces de media vida, debido a que los botellones van cumpliendo su función, van obteniendo un desgaste natural, sin embargo contamos con la política de eliminación de inventario de garrafones que ya no están en condiciones adecuadas de uso. Nosotros preguntaremos por el color y características del garrafón, para llevarte uno de mismas características." },
+      { id: "garantia", title: "Garantía de Servicio Glu Glú", text: "Si una vez que has hecho tu pedido y el garrafón que te fue entregado cuenta con una anomalía o fuga, no te preocupes, cuentas con un periodo máximo de 2 días para notificarlo y este será cambiado por nuestro personal a la brevedad posible sin costo." },
+      { id: "precio", title: "Precio", text: "El precio del servicio y el agua puede variar de acuerdo a la sucursal, debido a diversos factores como puede ser, la competitividad, la oferta y demanda habitual y especifica como en momentos de contingencia, inflación o factores externos como el incremento de algún insumo, sin embargo, habrá mensajes de difusión para tratar de mandar aviso a la mayor gente posible, de esta manera puede contar con la mejor calidad del agua, el mejor servicio y siempre al precio justo." },
+      { id: "precio-especial", title: "Precio Especial Glu Glú", text: "Debido a que Glu Glú maneja tiempos de entrega en la modalidad 'Servicio o Entrega Express' hay un precio especial para pedir 1 (uno) y hasta máximo 2 (dos) garrafones/botellones, esto para el costo de servicio por envío, precio que siempre vendrá en el flyer de la 'Sucursal Gota Glú' o 'Punto de Venta Móvil' u 'Online' de Glu Glú." },
+      { id: "precio-lista", title: "Precio de Lista", text: "El precio de lista suele ser mayor y será cobrado a cada garrafón en caso de que su petición sea de 3 (tres) o más garrafones. En todo momento es válido pedir 2 garrafones varias veces al día para obtener el 'Precio Especial Glu Glú' siempre y cuando estas veces estén espaciadas de al menos 4 horas y sean peticiones dentro de nuestros horarios de atención y zona de cobertura." },
+      { id: "mas", title: "Servicio Glu Glú Más", text: "Pídenos lo que quieras de la tienda junto con el pedido de tu servicio de agua." },
+      { id: "mas-ex", title: "Servicio Glu Glú Más EX", text: "Es un servicio exclusivo de tienda, sin depender de un pedido de servicio de agua." },
+      { id: "peticion-especial", title: "Petición Especial Glu Glú", text: "Pídenos lo que se te ocurra, nuestros expertos en logística te dirán si es viable y el costo justo y adecuado por el servicio. Una pizza o un café por ejemplo. Nota: Hay servicios que pueden llegar a juntarse como una petición especial con una petición a distancia, en cuyo caso se te hará un precio derivado de ambos. Estos servicios no están disponibles en todas las sucursales Gota Glú del país, así mismo podrían llegar a ser negados debido a la alta demanda o inviabilidad de la petición. En todo momento aplican restricciones." },
+      { id: "nota-general", title: "Nota General del Servicio Glu Glú Más", text: "Debido a la gran petición de nuestros clientes, es posible que puedas pedir en nuestros servicios como Petición Especial Glu Glú alcohol o cigarros, siempre y cuando estos sean adquiribles de forma legal y por marcas reconocidas en tiendas con la autorización correspondiente. Siendo el mayor requisito solicitar estos servicios junto con el producto deseado única y exclusivamente vía Whatsapp, donde se tiene un registro previo suyo como cliente habitual de Glu Glú, así mismo deberá enviar una fotografía legible con su credencial INE, para autentificar la mayoría de edad, del mismo modo sírvase de saber que deberá ser la misma persona que recibe el servicio autentificando con la misma identificación al momento de recibir el servicio y producto, de lo contrario el servicio no podrá ser completado y será devuelto a su entidad origen, aunado a que primero se pasará por el dinero a su domicilio para concretar la compra. Del mismo modo, merece la pena aclarar que el 'Servicio de Tienda' se refiere en todo momento a artículos que pueden adquirirse en una tienda de abarrotes, como la usual tiendita de la esquina, y no un servicio de tienda departamental o autoservicios. El máximo de artículos permitidos en una petición Servicio de Tienda Glu Glú Más es de 7 (siete). Aplican Restricciones." },
+      { id: "repartidor", title: "Repartidor", text: "El repartidor no lleva más de $50 (cincuenta pesos) moneda local, en cambio." },
+      { id: "negocio", title: "Negocio", text: "Todo el servicio de Glu Glú Negocio suele ir de la mano con un previo acuerdo entre Glu Glú y el responsable, encargado o dueño de la empresa o negocio a surtir. Estamos deseosos de atenderte." },
+      { id: "facturacion", title: "Facturación", text: "La factura por tu servicio suele ser inmediata, esto puede cambiar por disposición de horario o factores diversos como una falla en el sistema o la web, sin embargo siempre contarás con ella." },
+      { id: "datos", title: "Protección de Datos Personales", text: "No te preocupes por toda la información que llegues a proporcionar, como tu nombre, dirección o teléfono celular por mencionar algunos, Glu Glú cuida de ellos en todo momento. Puedes consultar nuestro aviso de privacidad aquí mismo. Si en cualquier momento desconfías del uso de tus datos personales lo mejor sería siempre acudir a nuestras sucursales y concretar la compra del agua Glu Glú en nuestras instalaciones." },
+      { id: "promociones", title: "Promociones", text: "La mayoría de nuestras promociones son vía Whatsapp, así mismo también contamos con promociones exclusivas para esta red social, guarda nuestro número y quédate atento para que logres tener acceso a todas ellas. Son increíbles." }
+    ];
+
+    const PRIVACIDAD_TEXT = `AVISO DE PRIVACIDAD
+
+ELTHON JAEL TAPIA LEYVA (en lo sucesivo "GLU GLÚ"), con domicilio en Rincón del Río 103, Colonia Bosque Residencial del Sur. Xochimilco, Ciudad de México, 16010, México y de conformidad con lo dispuesto en la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y en su reglamento, hace de su conocimiento que es responsable de recabar sus datos personales, del uso que se les dé a los mismos y de su protección.
+
+FINALIDAD EN EL TRATAMIENTO DE SUS DATOS PERSONALES
+Recopilamos sus datos personales, por lo que solicitamos su consentimiento a través del presente Aviso de Privacidad con el objeto de utilizarlos para los siguientes fines: Comprar productos de GLU GLÚ. Recibir información sobre productos y servicios de GLU GLÚ. Participar en las comunidades en línea de GLU GLÚ, incluidos nuestros canales, páginas en las redes sociales y blogs. Almacenar sus preferencias para futuras interacciones y comunicaciones de GLU GLÚ. Ayudarnos a desarrollar productos y crear campañas diseñadas teniendo en cuenta sus intereses, optimizar los servicios al cliente y mejorar continuamente nuestros sitios web. Ayudarnos a mejorar los productos y servicios y permitir que GLU GLÚ le mantenga informado y le invite a participar en las pruebas de nuevos productos y servicios. Resolver problemas relacionados con el consumidor o los productos. Recibir mensajes personalizados, ofertas especiales y anuncios relevantes para sus intereses personales, en función de la información que ha compartido con nosotros y la que hemos recopilado a través de las cookies o técnicas similares en relación con su uso de los sitios web, las redes sociales y los blogs de GLU GLÚ.
+
+TIPO DE DATOS
+Para las finalidades antes mencionadas requerimos obtener sus siguientes datos personales: Su nombre completo. Su dirección de correo electrónico. Su dirección postal. Su número de teléfono. Su perfil en las redes sociales. Su edad. Información sobre los productos que ha adquirido. Sus intereses relacionados con GLU GLÚ. El uso y las actividades que realiza en nuestras páginas de GLU GLÚ. Sus datos bancarios para el procesamiento de pagos de productos o servicios de GLU GLÚ.
+
+FUENTE DE OBTENCIÓN DE LOS DATOS
+Los datos personales y/o sensibles pueden ser recabados de distintas formas: A través de la página de Internet gluglu.mx, de correo electrónico, redes sociales, personalmente, por teléfono o por escrito.
+
+MEDIOS PARA LIMITAR EL USO O DIVULGACIÓN DE SUS DATOS PERSONALES
+Hacemos de su conocimiento que sus datos personales serán tratados y resguardados con base en los principios de licitud, calidad, consentimiento, información, finalidad, lealtad, proporcionalidad y responsabilidad, consagrados en la Ley Federal de Protección de Datos Personales en Posesión de Particulares y su reglamento. De igual forma, le reiteramos que sus datos personales serán resguardados bajo estrictas medidas de seguridad administrativas, técnicas y físicas las cuales han sido implementadas con el objeto de proteger sus datos personales contra daño, pérdida, alteración, destrucción o el uso, acceso o tratamiento no autorizados.
+
+MEDIOS PARA EL EJERCICIO DE SUS DERECHOS COMO TITULAR DE LOS DATOS PERSONALES
+Como titular de los datos personales objeto del presente Aviso de Privacidad usted podrá ejercitar sus derechos de acceso, rectificación, cancelación u oposición (Derechos ARCO), mismos que se consagran en la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y en su reglamento. Así mismo podrá revocar el consentimiento otorgado para el uso de sus datos personales en cualquier momento. En cualquiera de estos supuestos, puede realizar su solicitud mediante el envío de un correo electrónico a la dirección GotaGlu@hotmail.com o personalmente en el domicilio ubicado en Residencial Prados Coapa 3ra Sección, Calle Acequia numero 25-C, delegacion Tlalpan, Ciudad de México. poniéndose en contacto con nuestro departamento de datos personales, con MARTÍN TAPIA GONZALEZ, en el teléfono 0445518054385. Usted recibirá una respuesta en un plazo de 5 días hábiles en relación a dicha solicitud y la manera en que está siendo atendida. Con la finalidad de poder atender su solicitud, ésta deberá satisfacer todos los requisitos estipulados en la Ley Federal de Protección de Datos Personales en Posesión de los particulares y en su reglamento.
+
+UTILIZACIÓN DE COOKIES
+Las "Cookies" son archivos o piezas de información que se almacenan por su buscador en el disco duro de su computadora. GLU GLÚ podría usar "Cookies" para recabar información adicional sobre usted durante su visita a cualquiera de nuestras páginas de Internet. Recolectamos esta información con la finalidad de poder ajustar nuestra página y nuestros productos a sus intereses y necesidades. Las "Cookies" también podrían ser utilizadas para acelerar la velocidad de sus futuras actividades en nuestras páginas. La mayoría de los buscadores se encuentran programados para aceptar "Cookies". Si usted prefiere, usted puede programar el suyo con la finalidad de rechazar "Cookies" o de alertarlo cuando las "Cookies" se estén enviando. La restricción de las "Cookies" al momento de entrar a una página de Internet podría resultar en la inhabilidad para visitar ciertas áreas de la página o recibir información personalizada durante su visita a la misma. Asimismo, en caso de utilizar cookies, o cualquier otro mecanismo o tecnología similar que permita acceder a sus datos personales, éstos podrán ser deshabilitados si usted así lo solicita a la siguiente dirección electrónica: GotaGlu@hotmail.com
+
+CAMBIOS AL PRESENTE AVISO DE PRIVACIDAD
+GLU GLÚ se reserva el derecho de cambiar, modificar o actualizar en cualquier momento el presente Aviso de Privacidad en virtud de cambios en los requerimientos legales, o bien cambios en las políticas o procesos internos. Dichas modificaciones se harán de su conocimiento mediante el envío de un correo electrónico a la cuenta que usted nos proporcionó inicialmente para hacer de su conocimiento el presente Aviso de Privacidad y/o mediante la publicación del mismo en la siguiente página web: GluGlu.mx. No seremos responsables en caso de que usted no reciba la referida notificación de cambio en el Aviso de Privacidad por causa de algún problema con su cuenta de correo electrónico o de transmisión de datos por internet. Sin embargo, por su seguridad, el Aviso de Privacidad vigente estará disponible en todo momento en la página web antes señalada.
+
+Fecha de última actualización 25 DE SEPTIEMBRE DEL 2017.`;
+
+    let state = {
+      brandOrders: {},
+      cartItems: [],
+      appliedCoupon: null,
+      addressData: {}
+    };
+    let readSpecs = JSON.parse(localStorage.getItem('gg_read_specs') || '[]');
+
+    function buildBrandGrid() {
+      const grid = document.getElementById('brand-grid');
+      grid.innerHTML = BRANDS.map(brand => {
+        const key = brand.replace(/\s/g, '');
+        return `
+        <div class="brand-item" id="brand-item-${key}">
+          <div class="brand-header" onclick="toggleBrandDetails('${brand}')">
+            <span class="brand-name"><span class="check-icon">✓</span> ${brand}</span>
+            <span class="brand-qty-badge" id="badge-${key}">0</span>
+          </div>
+          <div class="brand-details" id="details-${key}">
+            <div class="water-row">
+              <div class="water-info"><span class="water-type-name">💧 Tradicional</span><span class="water-price">$35.00 c/u</span></div>
+              <div class="qty-control-sm">
+                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','tradicional',-1)">−</button>
+                <span class="qty-display-sm" id="qty-trad-${key}">0</span>
+                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','tradicional',1)">+</button>
+              </div>
             </div>
-        </div>
-        <div class="divider"></div>
-
-        <div class="coupon-section" id="tour-anchor-coupon">
-            <div class="section-label"><span class="step-number">3</span> Código Promocional</div>
-            <div class="coupon-wrap">
-                <input type="text" id="coupon-input" placeholder="Ingresa tu código">
-                <button class="btn-apply-coupon" onclick="applyCoupon()">Aplicar</button>
+            <div class="water-row">
+              <div class="water-info"><span class="water-type-name">✨ Plus</span><span class="water-price">$50.00 c/u</span></div>
+              <div class="qty-control-sm">
+                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','plus',-1)">−</button>
+                <span class="qty-display-sm" id="qty-plus-${key}">0</span>
+                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','plus',1)">+</button>
+              </div>
             </div>
-            <div class="coupon-feedback" id="coupon-feedback"><span id="coupon-icon"></span><span id="coupon-text"></span></div>
-        </div>
-        <div class="divider"></div>
+          </div>
+        </div>`;
+      }).join('');
+    }
 
-        <div class="option-section" id="tour-anchor-specs">
-            <div class="section-label"><span class="step-number">i</span> Especificaciones del Servicio</div>
-            <div class="specs-grid" id="specs-grid"></div>
-        </div>
-    </div>
+    function toggleBrandDetails(brand) {
+      const key = brand.replace(/\s/g, '');
+      const item = document.getElementById(`brand-item-${key}`);
+      const details = document.getElementById(`details-${key}`);
+      if (details.style.display === 'flex') {
+        details.style.display = 'none';
+        item.classList.remove('active-brand');
+      } else {
+        details.style.display = 'flex';
+        item.classList.add('active-brand');
+      }
+    }
 
-    <div class="action-buttons" id="tour-anchor-actions">
-        <button class="btn-add" onclick="addToCart()">💧 Añadir al carrito</button>
-    </div>
+    function changeWaterQty(brand, type, delta) {
+      if (!state.brandOrders[brand]) state.brandOrders[brand] = { tradicional: 0, plus: 0 };
+      state.brandOrders[brand][type] = Math.max(0, state.brandOrders[brand][type] + delta);
+      const key = brand.replace(/\s/g, '');
+      document.getElementById(`qty-${type === 'tradicional' ? 'trad' : 'plus'}-${key}`).textContent = state.brandOrders[brand][type];
+      const total = state.brandOrders[brand].tradicional + state.brandOrders[brand].plus;
+      document.getElementById(`badge-${key}`).textContent = total;
+      if (total === 0) {
+        document.getElementById(`brand-item-${key}`).classList.remove('active-brand');
+        document.getElementById(`details-${key}`).style.display = 'none';
+      }
+    }
 
-    <div class="spec-modal-overlay" id="spec-modal-overlay" onclick="closeSpecModal()">
-        <div class="spec-modal" onclick="event.stopPropagation()">
-            <div class="spec-modal-header">
-                <span class="spec-modal-title" id="spec-modal-title"></span>
-                <button class="spec-modal-close" onclick="closeSpecModal()">✕</button>
+    function buildSpecsGrid() {
+      const grid = document.getElementById('specs-grid');
+      grid.innerHTML = SPECS.map(spec => {
+        const isRead = readSpecs.includes(spec.id);
+        return `
+        <div class="spec-item" onclick="openSpecModal('${spec.id}')">
+          <span>${spec.title}</span>
+          <button class="info-btn ${isRead ? '' : 'unseen'}" id="spec-btn-${spec.id}">i</button>
+        </div>`;
+      }).join('');
+    }
+
+    function openSpecModal(id) {
+      if (id === 'privacidad') {
+        document.getElementById('spec-modal-title').textContent = 'Aviso de Privacidad';
+        document.getElementById('spec-modal-body').innerHTML = PRIVACIDAD_TEXT.replace(/\n/g, '<br>');
+        document.getElementById('spec-modal-overlay').classList.add('open');
+        if (!readSpecs.includes('privacidad')) {
+          readSpecs.push('privacidad');
+          localStorage.setItem('gg_read_specs', JSON.stringify(readSpecs));
+          const btn = document.getElementById('spec-btn-privacidad');
+          if (btn) btn.classList.remove('unseen');
+        }
+        return;
+      }
+      const spec = SPECS.find(s => s.id === id);
+      if (!spec) return;
+      document.getElementById('spec-modal-title').textContent = spec.title;
+      document.getElementById('spec-modal-body').textContent = spec.text;
+      document.getElementById('spec-modal-overlay').classList.add('open');
+      if (!readSpecs.includes(id)) {
+        readSpecs.push(id);
+        localStorage.setItem('gg_read_specs', JSON.stringify(readSpecs));
+        const btn = document.getElementById(`spec-btn-${id}`);
+        if (btn) btn.classList.remove('unseen');
+      }
+    }
+
+    function closeSpecModal() {
+      document.getElementById('spec-modal-overlay').classList.remove('open');
+    }
+
+    function applyCoupon() {
+      const input = document.getElementById('coupon-input').value.trim().toUpperCase();
+      if (!input) return showToast('Ingresa un código');
+      if (state.appliedCoupon) return showToast('Ya tienes un código aplicado');
+      const promo = { "GOTA10": { discount: 10, type: "percent", description: "10% de descuento" }, "AGUA5": { discount: 5, type: "fixed", description: "$5 MXN de descuento por garrafón" }, "PLUS15": { discount: 15, type: "percent", description: "15% de descuento en agua Plus" } }[input];
+      if (!promo) { showCouponFeedback('error', '✕', `Código "${input}" no válido.`); return; }
+      state.appliedCoupon = { code: input, ...promo };
+      document.getElementById('coupon-input').value = '';
+      document.getElementById('coupon-input').disabled = true;
+      showCouponFeedback('success', '✓', `Código <strong>${input}</strong> aplicado — ${promo.description}`, true);
+      updateCartDrawer();
+      showToast(`¡Código ${input} aplicado!`);
+    }
+
+    function removeCoupon() {
+      state.appliedCoupon = null;
+      document.getElementById('coupon-input').disabled = false;
+      document.getElementById('coupon-input').value = '';
+      const fb = document.getElementById('coupon-feedback');
+      fb.className = 'coupon-feedback';
+      fb.style.display = 'none';
+      updateCartDrawer();
+      showToast('Código eliminado');
+    }
+
+    function showCouponFeedback(type, icon, msg, showRemove = false) {
+      const fb = document.getElementById('coupon-feedback');
+      document.getElementById('coupon-icon').textContent = icon;
+      document.getElementById('coupon-text').innerHTML = msg;
+      document.getElementById('btn-remove-coupon').style.display = showRemove ? 'inline-block' : 'none';
+      fb.className = `coupon-feedback ${type}`;
+    }
+
+    function calculateDiscount(subtotal, qty) {
+      if (!state.appliedCoupon) return 0;
+      const { discount, type } = state.appliedCoupon;
+      if (type === 'percent') return subtotal * (discount / 100);
+      if (type === 'fixed') return Math.min(discount * qty, subtotal);
+      return 0;
+    }
+
+    function addToCart() {
+      const orders = Object.entries(state.brandOrders).filter(([b, o]) => o.tradicional + o.plus > 0);
+      if (orders.length === 0) return showToast('Selecciona al menos un envase con cantidad');
+      const items = orders.map(([brand, order]) => {
+        const totalQty = order.tradicional + order.plus;
+        const totalPrice = order.tradicional * WATER_PRICES.tradicional + order.plus * WATER_PRICES.plus;
+        return { brand, tradicional: order.tradicional, plus: order.plus, totalQty, total: totalPrice };
+      });
+      state.cartItems.push(...items);
+      updateCartDrawer();
+      showToast(`${items.length} producto(s) añadido(s)`);
+      setTimeout(() => openCart(), 500);
+      state.brandOrders = {};
+      document.querySelectorAll('.brand-item').forEach(el => el.classList.remove('active-brand'));
+      document.querySelectorAll('.brand-details').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.qty-display-sm').forEach(el => el.textContent = '0');
+      document.querySelectorAll('.brand-qty-badge').forEach(el => el.textContent = '0');
+    }
+
+    function removeCartItem(index) {
+      state.cartItems.splice(index, 1);
+      updateCartDrawer();
+      if (state.cartItems.length === 0) closeCart();
+    }
+
+    function clearCart() {
+      state.cartItems = [];
+      updateCartDrawer();
+      closeCart();
+      showToast('Carrito vaciado');
+    }
+
+    function updateCartDrawer() {
+      const items = state.cartItems;
+      const count = items.length;
+      const fab = document.getElementById('cart-fab');
+      const fabCount = document.getElementById('cart-fab-count');
+      fabCount.textContent = count;
+      if (count > 0) fab.classList.add('visible');
+      else fab.classList.remove('visible');
+      document.getElementById('drawer-item-count').textContent = count;
+      const emptyEl = document.getElementById('drawer-empty');
+      const itemsEl = document.getElementById('drawer-items');
+      const footerEl = document.getElementById('drawer-footer');
+      if (count === 0) {
+        emptyEl.style.display = 'flex';
+        itemsEl.style.display = 'none';
+        footerEl.style.display = 'none';
+        return;
+      }
+      emptyEl.style.display = 'none';
+      itemsEl.style.display = 'block';
+      footerEl.style.display = 'block';
+      let html = '';
+      items.forEach((item, i) => {
+        const parts = [];
+        if (item.tradicional > 0) parts.push(`Tradicional x${item.tradicional}`);
+        if (item.plus > 0) parts.push(`Plus x${item.plus}`);
+        html += `
+        <div class="drawer-cart-item">
+          <div class="drawer-item-header">
+            <div class="drawer-item-icon">💧</div>
+            <div class="drawer-item-meta">
+              <div class="drawer-item-name">${item.brand}</div>
+              <div class="drawer-item-sub">${parts.join(', ')} · Total ${item.totalQty} garrafón(es)</div>
             </div>
-            <div class="spec-modal-body" id="spec-modal-body"></div>
-        </div>
-    </div>
+          </div>
+          <div class="drawer-item-price-row">
+            <span class="drawer-item-price">$${item.total.toFixed(2)} MXN</span>
+            <button class="drawer-remove-btn" onclick="removeCartItem(${i})">Eliminar</button>
+          </div>
+        </div>`;
+      });
+      itemsEl.innerHTML = html;
+      const subtotal = items.reduce((s, i) => s + i.total, 0);
+      const totalQty = items.reduce((s, i) => s + i.totalQty, 0);
+      const discount = calculateDiscount(subtotal, totalQty);
+      const freeShip = totalQty >= 6;
+      const shipping = freeShip ? 0 : 49;
+      const grand = subtotal - discount + shipping;
+      document.getElementById('drawer-totals').innerHTML = `
+        <div class="drawer-total-row subtotal"><span>Subtotal (${totalQty} garrafón${totalQty !== 1 ? 'es' : ''})</span><span>$${subtotal.toFixed(2)}</span></div>
+        ${discount > 0 ? `<div class="drawer-total-row discount"><span>🏷️ Descuento</span><span>−$${discount.toFixed(2)}</span></div>` : ''}
+        <div class="drawer-total-row ${freeShip ? 'shipping-free' : ''}"><span>🚚 Envío</span><span>${freeShip ? '✓ Gratis' : '$49.00 MXN'}</span></div>
+        <div class="drawer-grand-total"><span class="label">Total</span><span class="amount">$${grand.toFixed(2)}</span></div>`;
+    }
 
-    <script>
-        const WA_NUMBER = "5215560909630";
-        const WATER_PRICES = { tradicional: 35.00, plus: 50.00 };
-        const BRANDS = ["Bonafont", "Bonafont chico", "Electropura", "E-pura", "Ciel", "Genérico"];
+    function openCart() {
+      document.getElementById('cart-overlay').classList.add('open');
+      document.getElementById('cart-drawer').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
 
-        const SPECS = [
-            { id: "express", title: "Servicio Express", text: "Modalidad de entrega con preferencia y rapidez, rango de 20 min a 1.5 h, promedio 25 min. Puede variar por demanda, tráfico o clima." },
-            { id: "lluvia", title: "Consideración Especial", text: "En lluvia el tiempo de espera puede elevarse para reducir accidentes. Prevén tu pedido." },
-            { id: "distancia", title: "Petición a Distancia", text: "Fuera del rango Express pero dentro de cobertura. El administrador dará tiempo estimado y costo." },
-            { id: "personalizado", title: "Servicio Personalizado", text: "Si tus envases son especiales, notifícalo. No se entregan garrafones de cristal a domicilio." },
-            { id: "programado", title: "Atención Programada", text: "Programa día y hora de entrega. Sujeto a disponibilidad. Llamada o Whatsapp previo." },
-            { id: "dtox", title: "D-TOX", text: "Desintoxicación de botellón (olores/sabores penetrantes). Servicio preventivo o resolutivo." },
-            { id: "botellones", title: "Uso de Botellones", text: "Garrafones nuevos o de media vida. Eliminamos los que no estén en condiciones. Preguntamos color." },
-            { id: "garantia", title: "Garantía Glu Glú", text: "Si hay anomalía o fuga, tienes 2 días para notificarlo y se cambia sin costo." },
-            { id: "precio", title: "Precio", text: "Puede variar por sucursal, competitividad, inflación. Siempre al precio justo." },
-            { id: "precio-especial", title: "Precio Especial", text: "Para 1 o 2 garrafones en Express. El precio de lista aplica para 3 o más." },
-            { id: "mas", title: "Glu Glú Más", text: "Pide productos de tienda junto con tu agua. Máximo 7 artículos." },
-            { id: "facturacion", title: "Facturación", text: "Factura inmediata, sujeta a disposición de horario o fallas del sistema." },
-            { id: "datos", title: "Protección de Datos", text: "Cuidamos tu información. Consulta nuestro aviso de privacidad." }
-        ];
+    function closeCart() {
+      document.getElementById('cart-overlay').classList.remove('open');
+      document.getElementById('cart-drawer').classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
-        let state = {
-            brandOrders: {}, // { "Bonafont": { tradicional: qty, plus: qty } }
-            cartItems: [],
-            appliedCoupon: null,
-            addressData: {}
-        };
-        let readSpecs = JSON.parse(localStorage.getItem('gg_read_specs') || '[]');
+    function sendToWhatsApp() {
+      if (state.cartItems.length === 0) return showToast('Carrito vacío');
+      const nombre = document.getElementById('addr-nombre').value.trim();
+      const calle = document.getElementById('addr-calle').value.trim();
+      const numero = document.getElementById('addr-numero').value.trim();
+      const colonia = document.getElementById('addr-colonia').value.trim();
+      const cp = document.getElementById('addr-cp').value.trim();
+      if (!nombre || !calle || !numero || !colonia || !cp) return showToast('Completa todos los campos de dirección');
+      state.addressData = { nombre, calle, numero, colonia, cp };
+      const subtotal = state.cartItems.reduce((s, i) => s + i.total, 0);
+      const totalQty = state.cartItems.reduce((s, i) => s + i.totalQty, 0);
+      const discount = calculateDiscount(subtotal, totalQty);
+      const shipping = totalQty >= 6 ? 0 : 49;
+      const grand = subtotal - discount + shipping;
+      const fecha = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      const hora = new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+      let msg = `💧 *NUEVO PEDIDO — Gota Glú* 💧\n📅 ${fecha} a las ${hora}\n━━━━━━━━━━━━━━━━━━━━━\n\n`;
+      state.cartItems.forEach((item, i) => {
+        const parts = [];
+        if (item.tradicional > 0) parts.push(`Tradicional x${item.tradicional}`);
+        if (item.plus > 0) parts.push(`Plus x${item.plus}`);
+        msg += `*${i + 1}. ${item.brand}*\n   ${parts.join(', ')} · Total: ${item.totalQty} garrafón(es)\n   💵 $${item.total.toFixed(2)} MXN\n\n`;
+      });
+      msg += `━━━━━━━━━━━━━━━━━━━━━\n`;
+      if (state.appliedCoupon && discount > 0) msg += `🏷️ Código: ${state.appliedCoupon.code} → −$${discount.toFixed(2)} MXN\n`;
+      msg += shipping === 0 ? `🚚 Envío: *GRATIS*\n` : `🚚 Envío: *$${shipping.toFixed(2)} MXN*\n`;
+      msg += `💰 *TOTAL: $${grand.toFixed(2)} MXN*\n━━━━━━━━━━━━━━━━━━━━━\n\n`;
+      msg += `📋 *DATOS DE ENTREGA:*\n👤 Nombre: ${nombre}\n📍 Calle: ${calle} #${numero}\n🏘️ Colonia: ${colonia}\n📮 C.P.: ${cp}\n\n_Por favor confirma disponibilidad y total. ¡Gracias! 🙏_`;
+      const url = `https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(msg)}`;
+      showToast('Abriendo WhatsApp...');
+      setTimeout(() => window.open(url, '_blank'), 500);
+    }
 
-        function buildBrandGrid() {
-            const grid = document.getElementById('brand-grid');
-            grid.innerHTML = BRANDS.map(brand => {
-                const key = brand.replace(/\s/g, '');
-                return `
-                <div class="brand-item" id="brand-item-${key}">
-                    <div class="brand-header" onclick="toggleBrandDetails('${brand}')">
-                        <span class="brand-name"><span class="check-icon">✓</span> ${brand}</span>
-                        <span class="brand-qty-badge" id="badge-${key}">0</span>
-                    </div>
-                    <div class="brand-details" id="details-${key}">
-                        <div class="water-row">
-                            <div class="water-info"><span class="water-type-name">💧 Tradicional</span><span class="water-price">$35.00 c/u</span></div>
-                            <div class="qty-control-sm">
-                                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','tradicional',-1)">−</button>
-                                <span class="qty-display-sm" id="qty-trad-${key}">0</span>
-                                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','tradicional',1)">+</button>
-                            </div>
-                        </div>
-                        <div class="water-row">
-                            <div class="water-info"><span class="water-type-name">✨ Plus</span><span class="water-price">$50.00 c/u</span></div>
-                            <div class="qty-control-sm">
-                                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','plus',-1)">−</button>
-                                <span class="qty-display-sm" id="qty-plus-${key}">0</span>
-                                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','plus',1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
-            }).join('');
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    // ══ SWIPE GESTURES — Abrir/Cerrar carrito ══
+    (function initSwipeGestures() {
+      let touchStartX = 0, touchStartY = 0;
+      const SWIPE_THRESHOLD = 60;
+      const SWIPE_MAX_Y = 80;
+
+      document.addEventListener('touchstart', function (e) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      document.addEventListener('touchend', function (e) {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+        const drawer = document.getElementById('cart-drawer');
+        const isOpen = drawer.classList.contains('open');
+        if (e.target.closest('.cart-drawer') || e.target.closest('.cart-fab')) return;
+        if (dy > SWIPE_MAX_Y) return;
+        if (!isOpen && dx < -SWIPE_THRESHOLD && touchStartX > window.innerWidth - 80) {
+          openCart();
         }
+      }, { passive: true });
 
-        function toggleBrandDetails(brand) {
-            const key = brand.replace(/\s/g, '');
-            const item = document.getElementById(`brand-item-${key}`);
-            const details = document.getElementById(`details-${key}`);
-            if (details.style.display === 'flex') {
-                details.style.display = 'none';
-                item.classList.remove('active-brand');
-            } else {
-                details.style.display = 'flex';
-                item.classList.add('active-brand');
-            }
+      const drawer = document.getElementById('cart-drawer');
+      let drawerTouchStartX = 0, drawerTouchStartY = 0;
+
+      drawer.addEventListener('touchstart', function (e) {
+        drawerTouchStartX = e.touches[0].clientX;
+        drawerTouchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      drawer.addEventListener('touchmove', function (e) {
+        const dx = e.touches[0].clientX - drawerTouchStartX;
+        const dy = Math.abs(e.touches[0].clientY - drawerTouchStartY);
+        if (dx > 0 && dy < SWIPE_MAX_Y) {
+          drawer.style.transition = 'none';
+          drawer.style.transform = `translateX(${dx}px)`;
         }
+      }, { passive: true });
 
-        function changeWaterQty(brand, type, delta) {
-            if (!state.brandOrders[brand]) state.brandOrders[brand] = { tradicional: 0, plus: 0 };
-            state.brandOrders[brand][type] = Math.max(0, state.brandOrders[brand][type] + delta);
-            const key = brand.replace(/\s/g, '');
-            document.getElementById(`qty-${type === 'tradicional' ? 'trad' : 'plus'}-${key}`).textContent = state.brandOrders[
-                brand][type];
-            const total = state.brandOrders[brand].tradicional + state.brandOrders[brand].plus;
-            document.getElementById(`badge-${key}`).textContent = total;
-            if (total === 0) {
-                document.getElementById(`brand-item-${key}`).classList.remove('active-brand');
-                document.getElementById(`details-${key}`).style.display = 'none';
-            }
+      drawer.addEventListener('touchend', function (e) {
+        const dx = e.changedTouches[0].clientX - drawerTouchStartX;
+        const dy = Math.abs(e.changedTouches[0].clientY - drawerTouchStartY);
+        drawer.style.transition = '';
+        drawer.style.transform = '';
+        if (dx > SWIPE_THRESHOLD && dy < SWIPE_MAX_Y) {
+          closeCart();
         }
+      }, { passive: true });
+    })();
 
-        function buildSpecsGrid() {
-            const grid = document.getElementById('specs-grid');
-            grid.innerHTML = SPECS.map(spec => {
-                const isRead = readSpecs.includes(spec.id);
-                return `
-                <div class="spec-item" onclick="openSpecModal('${spec.id}')">
-                    <span>${spec.title}</span>
-                    <button class="info-btn ${isRead ? '' : 'unseen'}" id="spec-btn-${spec.id}">i</button>
-                </div>`;
-            }).join('');
+    // ══ FAB DRAGGABLE ══
+    (function initDraggableFab() {
+      const fab = document.getElementById('cart-fab');
+      let isDragging = false, wasDragged = false, startX, startY, origLeft, origTop;
+      fab.style.top = '70px';
+      fab.style.right = '20px';
+
+      function getPos() { const rect = fab.getBoundingClientRect(); return { left: rect.left, top: rect.top }; }
+      function applyPos(left, top) {
+        const maxX = window.innerWidth - fab.offsetWidth - 8;
+        const maxY = window.innerHeight - fab.offsetHeight - 8;
+        left = Math.max(8, Math.min(left, maxX));
+        top = Math.max(8, Math.min(top, maxY));
+        fab.style.right = 'auto';
+        fab.style.bottom = 'auto';
+        fab.style.left = left + 'px';
+        fab.style.top = top + 'px';
+      }
+      fab.addEventListener('mousedown', function (e) {
+        if (e.button !== 0) return;
+        isDragging = true; wasDragged = false;
+        const pos = getPos();
+        startX = e.clientX; startY = e.clientY; origLeft = pos.left; origTop = pos.top;
+        fab.classList.add('dragging');
+        e.preventDefault();
+      });
+      document.addEventListener('mousemove', function (e) {
+        if (!isDragging) return;
+        if (Math.abs(e.clientX - startX) > 4 || Math.abs(e.clientY - startY) > 4) wasDragged = true;
+        applyPos(origLeft + e.clientX - startX, origTop + e.clientY - startY);
+      });
+      document.addEventListener('mouseup', function () {
+        if (!isDragging) return;
+        isDragging = false; fab.classList.remove('dragging');
+        if (!wasDragged) openCart();
+      });
+      fab.addEventListener('touchstart', function (e) {
+        isDragging = true; wasDragged = false;
+        const touch = e.touches[0], pos = getPos();
+        startX = touch.clientX; startY = touch.clientY; origLeft = pos.left; origTop = pos.top;
+        fab.classList.add('dragging');
+        e.stopPropagation();
+      }, { passive: true });
+      fab.addEventListener('touchmove', function (e) {
+        if (!isDragging) return;
+        const touch = e.touches[0];
+        if (Math.abs(touch.clientX - startX) > 4 || Math.abs(touch.clientY - startY) > 4) wasDragged = true;
+        applyPos(origLeft + touch.clientX - startX, origTop + touch.clientY - startY);
+        e.preventDefault();
+      }, { passive: false });
+      fab.addEventListener('touchend', function () {
+        if (!isDragging) return;
+        isDragging = false; fab.classList.remove('dragging');
+        if (!wasDragged) openCart();
+      });
+    })();
+
+    // ══ ONBOARDING TOUR ══
+    const TOUR_STEPS = [
+      { anchor: 'tour-anchor-brands', title: 'Envases y tipo de agua', body: 'Selecciona una marca, luego elige cantidad de agua Tradicional y/o Plus. Puedes combinar ambos tipos.', arrow: 'arrow-top', position: 'below' },
+      { anchor: 'tour-anchor-address', title: 'Dirección de Entrega', body: 'Completa todos los campos para que podamos entregar tu pedido.', arrow: 'arrow-top', position: 'below' },
+      { anchor: 'tour-anchor-coupon', title: 'Código Promocional', body: 'Si tienes un cupón de descuento, ingrésalo aquí y presiona "Aplicar".', arrow: 'arrow-top', position: 'below' },
+      { anchor: 'tour-anchor-specs', title: 'Especificaciones del Servicio', body: 'Revisa los detalles importantes del servicio. Los íconos brillan hasta que los lees.', arrow: 'arrow-top', position: 'below' },
+      { anchor: 'tour-anchor-actions', title: '¡Listo para pedir!', body: 'Presiona "Añadir al carrito" para acumular productos. Luego abre el carrito y finaliza por WhatsApp.', arrow: 'arrow-bottom', position: 'above' }
+    ];
+    let tourStep = 0, tourActive = false;
+
+    function tourStart() {
+      if (localStorage.getItem('gg_tour_done') === '1') return;
+      tourActive = true;
+      tourStep = 0;
+      tourRender();
+    }
+
+    function tourRender() {
+      const step = TOUR_STEPS[tourStep];
+      const anchor = document.getElementById(step.anchor);
+      const overlay = document.getElementById('tour-overlay');
+      const highlight = document.getElementById('tour-highlight');
+      const tooltip = document.getElementById('tour-tooltip');
+      const nextBtn = document.getElementById('tour-btn-next');
+      overlay.classList.add('active');
+      tooltip.classList.remove('active');
+      highlight.classList.remove('active');
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => {
+        const r = anchor.getBoundingClientRect(), pad = 8;
+        highlight.style.left = (r.left - pad) + 'px';
+        highlight.style.top = (r.top - pad) + 'px';
+        highlight.style.width = (r.width + pad * 2) + 'px';
+        highlight.style.height = (r.height + pad * 2) + 'px';
+        highlight.classList.add('active');
+        tooltip.className = 'tour-tooltip ' + step.arrow;
+        const tw = Math.min(300, window.innerWidth - 40);
+        let left = r.left;
+        if (left + tw > window.innerWidth - 10) left = window.innerWidth - tw - 10;
+        if (left < 10) left = 10;
+        tooltip.style.left = left + 'px';
+        tooltip.style.width = tw + 'px';
+        if (step.position === 'below') {
+          tooltip.style.top = (r.bottom + pad + 14) + 'px';
+          tooltip.style.bottom = 'auto';
+        } else {
+          tooltip.style.bottom = (window.innerHeight - r.top + pad + 14) + 'px';
+          tooltip.style.top = 'auto';
         }
+        document.getElementById('tour-step-label').textContent = `Paso ${tourStep + 1} de ${TOUR_STEPS.length}`;
+        document.getElementById('tour-title').textContent = step.title;
+        document.getElementById('tour-body').textContent = step.body;
+        document.getElementById('tour-dots').innerHTML = TOUR_STEPS.map((_, i) => `<div class="tour-dot ${i === tourStep ? 'active' : ''}"></div>`).join('');
+        nextBtn.textContent = tourStep === TOUR_STEPS.length - 1 ? '¡Entendido! ✓' : 'Siguiente →';
+        tooltip.classList.add('active');
+      }, 350);
+    }
 
-        function openSpecModal(id) {
-            const spec = SPECS.find(s => s.id === id);
-            if (!spec) return;
-            document.getElementById('spec-modal-title').textContent = spec.title;
-            document.getElementById('spec-modal-body').textContent = spec.text;
-            document.getElementById('spec-modal-overlay').classList.add('open');
-            if (!readSpecs.includes(id)) {
-                readSpecs.push(id);
-                localStorage.setItem('gg_read_specs', JSON.stringify(readSpecs));
-                const btn = document.getElementById(`spec-btn-${id}`);
-                if (btn) btn.classList.remove('unseen');
-            }
-        }
+    function tourNext() {
+      tourStep++;
+      if (tourStep >= TOUR_STEPS.length) tourEnd();
+      else tourRender();
+    }
 
-        function closeSpecModal() {
-            document.getElementById('spec-modal-overlay').classList.remove('open');
-        }
+    function tourSkip() { tourEnd(); }
 
-        function applyCoupon() {
-            const input = document.getElementById('coupon-input').value.trim().toUpperCase();
-            if (!input) return showToast('Ingresa un código');
-            if (state.appliedCoupon) return showToast('Ya tienes un código');
-            const promo = { "GOTA10": { discount: 10, type: "percent" }, "AGUA5": { discount: 5, type: "fixed" } } [input];
-            if (!promo) return showToast('Código no válido');
-            state.appliedCoupon = { code: input, ...promo };
-            document.getElementById('coupon-input').disabled = true;
-            updateCartDrawer();
-            showToast(`Código ${input} aplicado`);
-        }
+    function tourEnd() {
+      tourActive = false;
+      document.getElementById('tour-tooltip').classList.remove('active');
+      document.getElementById('tour-highlight').classList.remove('active');
+      setTimeout(() => {
+        document.getElementById('tour-overlay').classList.remove('active');
+        document.getElementById('tour-highlight').style.cssText = 'width:0;height:0;left:-9999px;top:-9999px;';
+      }, 320);
+      try { localStorage.setItem('gg_tour_done', '1'); } catch (e) { }
+    }
 
-        function removeCoupon() {
-            state.appliedCoupon = null;
-            document.getElementById('coupon-input').disabled = false;
-            updateCartDrawer();
-        }
+    window.onload = function () {
+      buildBrandGrid();
+      buildSpecsGrid();
+      updateCartDrawer();
+      setTimeout(tourStart, 800);
+    };
 
-        function calculateDiscount(subtotal, qty) {
-            if (!state.appliedCoupon) return 0;
-            const { discount, type } = state.appliedCoupon;
-            if (type === 'percent') return subtotal * (discount / 100);
-            if (type === 'fixed') return Math.min(discount * qty, subtotal);
-            return 0;
-        }
-
-        function addToCart() {
-            const orders = Object.entries(state.brandOrders).filter(([b, o]) => o.tradicional + o.plus > 0);
-            if (orders.length === 0) return showToast('Selecciona al menos un envase con cantidad');
-            const items = orders.map(([brand, order]) => {
-                const totalQty = order.tradicional + order.plus;
-                const totalPrice = order.tradicional * WATER_PRICES.tradicional + order.plus * WATER_PRICES
-                    .plus;
-                return {
-                    brand,
-                    tradicional: order.tradicional,
-                    plus: order.plus,
-                    totalQty,
-                    total: totalPrice,
-                    waterLabel: []
-                };
-            });
-            state.cartItems.push(...items);
-            updateCartDrawer();
-            showToast(`${items.length} producto(s) añadido(s)`);
-            setTimeout(() => openCart(), 500);
-            state.brandOrders = {};
-            document.querySelectorAll('.brand-item').forEach(el => el.classList.remove('active-brand'));
-            document.querySelectorAll('.brand-details').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.qty-display-sm').forEach(el => el.textContent = '0');
-            document.querySelectorAll('.brand-qty-badge').forEach(el => el.textContent = '0');
-        }
-
-        function removeCartItem(index) {
-            state.cartItems.splice(index, 1);
-            updateCartDrawer();
-            if (state.cartItems.length === 0) closeCart();
-        }
-
-        function clearCart() { state.cartItems = [];
-            updateCartDrawer();
-            closeCart();
-            showToast('Carrito vaciado'); }
-
-        function updateCartDrawer() {
-            const items = state.cartItems;
-            const count = items.length;
-            document.getElementById('cart-fab').classList.toggle('visible', count > 0);
-            document.getElementById('cart-fab-count').textContent = count;
-            document.getElementById('drawer-item-count').textContent = count;
-            document.getElementById('drawer-empty').style.display = count === 0 ? 'block' : 'none';
-            document.getElementById('drawer-items').style.display = count === 0 ? 'none' : 'block';
-            document.getElementById('drawer-footer').style.display = count === 0 ? 'none' : 'block';
-            if (count === 0) return;
-            let html = '';
-            items.forEach((item, i) => {
-                const parts = [];
-                if (item.tradicional > 0) parts.push(`Tradicional x${item.tradicional}`);
-                if (item.plus > 0) parts.push(`Plus x${item.plus}`);
-                html += `
-                <div class="drawer-cart-item">
-                    <div class="drawer-item-name">${item.brand}</div>
-                    <div class="drawer-item-sub">${parts.join(', ')} · Total ${item.totalQty} garrafón(es)</div>
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span class="drawer-item-price">$${item.total.toFixed(2)}</span>
-                        <button class="drawer-remove-btn" onclick="removeCartItem(${i})">Eliminar</button>
-                    </div>
-                </div>`;
-            });
-            document.getElementById('drawer-items').innerHTML = html;
-            const subtotal = items.reduce((s, i) => s + i.total, 0);
-            const totalQty = items.reduce((s, i) => s + i.totalQty, 0);
-            const discount = calculateDiscount(subtotal, totalQty);
-            const freeShip = totalQty >= 6;
-            const shipping = freeShip ? 0 : 49;
-            const grand = subtotal - discount + shipping;
-            document.getElementById('drawer-totals').innerHTML = `
-                <div>Subtotal: $${subtotal.toFixed(2)}</div>
-                ${discount > 0 ? `<div>Descuento: −$${discount.toFixed(2)}</div>` : ''}
-                <div>Envío: ${freeShip ? 'Gratis' : '$49.00'}</div>
-                <div class="drawer-grand-total"><span>Total</span><span class="amount">$${grand.toFixed(2)}</span></div>`;
-        }
-
-        function openCart() { document.getElementById('cart-overlay').classList.add('open');
-            document.getElementById('cart-drawer').classList.add('open'); }
-
-        function closeCart() { document.getElementById('cart-overlay').classList.remove('open');
-            document.getElementById('cart-drawer').classList.remove('open'); }
-
-        function sendToWhatsApp() {
-            if (state.cartItems.length === 0) return showToast('Carrito vacío');
-            const nombre = document.getElementById('addr-nombre').value.trim();
-            const calle = document.getElementById('addr-calle').value.trim();
-            const numero = document.getElementById('addr-numero').value.trim();
-            const colonia = document.getElementById('addr-colonia').value.trim();
-            const cp = document.getElementById('addr-cp').value.trim();
-            if (!nombre || !calle || !numero || !colonia || !cp) return showToast('Completa la dirección');
-            const subtotal = state.cartItems.reduce((s, i) => s + i.total, 0);
-            const totalQty = state.cartItems.reduce((s, i) => s + i.totalQty, 0);
-            const discount = calculateDiscount(subtotal, totalQty);
-            const shipping = totalQty >= 6 ? 0 : 49;
-            const grand = subtotal - discount + shipping;
-            let msg = `💧 *Pedido Gota Glú*\n`;
-            state.cartItems.forEach(item => {
-                const parts = [];
-                if (item.tradicional > 0) parts.push(`Tradicional x${item.tradicional}`);
-                if (item.plus > 0) parts.push(`Plus x${item.plus}`);
-                msg += `• ${item.brand}: ${parts.join(', ')} (${item.totalQty} garrafones) $${item.total.toFixed(2)}\n`;
-            });
-            msg += `\nSubtotal: $${subtotal.toFixed(2)}`;
-            if (discount > 0) msg += `\nDescuento: −$${discount.toFixed(2)}`;
-            msg += `\nEnvío: ${shipping === 0 ? 'Gratis' : '$49.00'}`;
-            msg += `\n*Total: $${grand.toFixed(2)}*\n`;
-            msg += `\n📋 Entrega: ${nombre}, ${calle} #${numero}, Col. ${colonia}, C.P. ${cp}`;
-            window.open(`https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(msg)}`, '_blank');
-        }
-
-        function showToast(msg) {
-            const t = document.getElementById('toast');
-            t.textContent = msg;
-            t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 2500);
-        }
-
-        // Tour mejorado sin salirse de pantalla
-        const TOUR_STEPS = [
-            { anchor: 'tour-anchor-brands', title: 'Envases y tipo de agua', body: 'Selecciona una marca, luego elige cantidad de agua Tradicional y/o Plus. Puedes combinar ambos tipos.' },
-            { anchor: 'tour-anchor-address', title: 'Dirección', body: 'Completa todos los campos para la entrega.' },
-            { anchor: 'tour-anchor-coupon', title: 'Código promocional', body: 'Si tienes un cupón, ingrésalo aquí.' },
-            { anchor: 'tour-anchor-specs', title: 'Especificaciones', body: 'Revisa los detalles del servicio. Los íconos brillan hasta que los lees.' },
-            { anchor: 'tour-anchor-actions', title: 'Añadir al carrito', body: 'Cuando tengas todo listo, presiona aquí y luego finaliza por WhatsApp.' }
-        ];
-        let tourStep = 0;
-
-        function tourStart() {
-            if (localStorage.getItem('gg_tour_done')) return;
-            tourStep = 0;
-            tourRender();
-        }
-
-        function tourRender() {
-            const step = TOUR_STEPS[tourStep];
-            const anchor = document.getElementById(step.anchor);
-            const overlay = document.getElementById('tour-overlay');
-            const highlight = document.getElementById('tour-highlight');
-            const tooltip = document.getElementById('tour-tooltip');
-            overlay.classList.add('active');
-            tooltip.classList.remove('active');
-            highlight.classList.remove('active');
-            anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            setTimeout(() => {
-                const rect = anchor.getBoundingClientRect();
-                highlight.style.left = rect.left + 'px';
-                highlight.style.top = rect.top + 'px';
-                highlight.style.width = rect.width + 'px';
-                highlight.style.height = rect.height + 'px';
-                highlight.classList.add('active');
-                tooltip.className = 'tour-tooltip';
-                const tooltipWidth = Math.min(300, window.innerWidth - 20);
-                let left = Math.max(10, Math.min(rect.left, window.innerWidth - tooltipWidth - 10));
-                tooltip.style.left = left + 'px';
-                tooltip.style.width = tooltipWidth + 'px';
-                let top = rect.bottom + 15;
-                if (top + 200 > window.innerHeight) top = rect.top - 210;
-                if (top < 10) top = 10;
-                tooltip.style.top = top + 'px';
-                document.getElementById('tour-step-label').textContent = `Paso ${tourStep+1}/${TOUR_STEPS.length}`;
-                document.getElementById('tour-title').textContent = step.title;
-                document.getElementById('tour-body').textContent = step.body;
-                document.getElementById('tour-btn-next').textContent = tourStep === TOUR_STEPS.length - 1 ?
-                    '¡Entendido!' : 'Siguiente →';
-                tooltip.classList.add('active');
-            }, 400);
-        }
-
-        function tourNext() {
-            tourStep++;
-            if (tourStep >= TOUR_STEPS.length) tourEnd();
-            else tourRender();
-        }
-
-        function tourSkip() { tourEnd(); }
-
-        function tourEnd() {
-            document.getElementById('tour-tooltip').classList.remove('active');
-            document.getElementById('tour-highlight').classList.remove('active');
-            document.getElementById('tour-overlay').classList.remove('active');
-            localStorage.setItem('gg_tour_done', '1');
-        }
-
-        window.onload = function() {
-            buildBrandGrid();
-            buildSpecsGrid();
-            updateCartDrawer();
-            setTimeout(tourStart, 800);
-        };
-        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
-    </script>
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeCart();
+    });
+  </script>
 </body>
 </html>
