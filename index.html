@@ -3013,10 +3013,27 @@
                     const lng = position.coords.longitude;
                     deliveryCoords = { lat, lng };
                     try {
-                        const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&zoom=18&addressdetails=1&accept-language=es`;
+                        // zoom=19 = nivel de edificio (máxima precisión de Nominatim)
+                        const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&zoom=19&addressdetails=1&accept-language=es`;
                         const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
                         const data = await res.json();
-                        deliveryAddress = buildDisplayAddress(data, '') || `Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}`;
+                        // Construir dirección legible; si sigue siendo escueta (sólo colonia)
+                        // usar display_name completo que es la dirección que devuelve Nominatim
+                        // sin filtrar campos.
+                        const built = buildDisplayAddress(data, '');
+                        const hasStreetDetail = data && data.address &&
+                            (data.address.road || data.address.house_number ||
+                             data.address.pedestrian || data.address.footway ||
+                             data.address.building);
+                        if (hasStreetDetail && built && built.length > 0) {
+                            deliveryAddress = built;
+                        } else if (data && data.display_name) {
+                            deliveryAddress = data.display_name;
+                        } else {
+                            deliveryAddress = `Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}`;
+                        }
+                        // Anexar coordenadas precisas para que el repartidor tenga referencia exacta
+                        deliveryAddress += ` (Coord: ${lat.toFixed(6)}, ${lng.toFixed(6)})`;
                     } catch (err) {
                         deliveryAddress = `Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}`;
                     }
@@ -3078,8 +3095,24 @@
                     return;
                 }
                 deliveryCoords = { lat, lng: lon };
-                const displayAddr = buildDisplayAddress(best, rawAddress);
-                deliveryAddress = displayAddr;
+
+                // ✅ FIX: Para entrada manual, preservar la dirección que escribió el usuario.
+                // El usuario escribió exactamente lo que quiere ver (con número exterior, color,
+                // referencias, etc.). El resultado de Nominatim se usa sólo para geocodificar
+                // (calcular distancia y sucursal cercana), pero NO para reemplazar el texto
+                // que el usuario introdujo, ya que Nominatim muchas veces pierde el número
+                // exterior o devuelve sólo la colonia.
+                // Si la dirección geocodificada aporta más detalle que el input del usuario
+                // (p. ej., CP o alcaldía que el usuario omitió), se usa esa como respaldo.
+                const geocodedAddr = buildDisplayAddress(best, rawAddress);
+                const userHasDetail = rawAddress.length >= 8; // input razonable
+                if (userHasDetail) {
+                    deliveryAddress = rawAddress;
+                } else {
+                    deliveryAddress = geocodedAddr || rawAddress;
+                }
+                // Anexar coordenadas precisas para referencia del repartidor
+                deliveryAddress += ` (Coord: ${lat.toFixed(6)}, ${lon.toFixed(6)})`;
                 showSelectedAddress(deliveryAddress);
                 await detectNearestBranch();
                 saveDeliveryDataSilently();
@@ -3095,15 +3128,41 @@
             if (!place) return originalQuery || '';
             const a = place.address || {};
             const parts = [];
-            if (a.road && a.house_number) parts.push(a.road + ' ' + a.house_number);
-            else if (a.road) parts.push(a.road);
-            if (a.neighbourhood) parts.push(a.neighbourhood);
-            else if (a.suburb) parts.push(a.suburb);
+
+            // Nivel calle: Nominatim usa varias claves según el tipo de vía
+            const street = a.road || a.pedestrian || a.footway || a.residential
+                || a.path || a.cycleway || a.construction || a.service || a.street;
+            if (street && a.house_number) parts.push(street + ' ' + a.house_number);
+            else if (street) parts.push(street);
+            else if (a.house_number) parts.push('No. ' + a.house_number);
+
+            // Referencias adicionales (edificio, plaza, km, etc.)
+            if (a.building && a.building !== street) parts.push(a.building);
+            if (a.place && a.place !== street) parts.push(a.place);
+
+            // Colonia / barrio (jerarquía CDMX)
+            const neighbourhood = a.neighbourhood || a.suburb || a.city_district
+                || a.borough || a.quarter || a.hamlet;
+            if (neighbourhood) parts.push(neighbourhood);
+
+            // Código postal
             if (a.postcode) parts.push('CP ' + a.postcode);
-            if (a.city || a.town || a.village) parts.push(a.city || a.town || a.village);
+
+            // Alcaldía / municipio / ciudad
+            const city = a.city || a.town || a.village || a.municipality || a.county;
+            if (city) parts.push(city);
+
+            // Estado
             if (a.state) parts.push(a.state);
-            if (parts.length > 0) return parts.join(', ');
-            return originalQuery || place.display_name || '';
+
+            // Si encontramos calle o número exterior, la dirección construida es precisa
+            if (street || a.house_number) {
+                return parts.length > 0 ? parts.join(', ') : (place.display_name || originalQuery || '');
+            }
+
+            // Sin calle ni número → Nominatim sólo devolvió info a nivel colonia.
+            // Mejor usar display_name (la dirección completa sin filtrar) para no perder detalle.
+            return place.display_name || originalQuery || '';
         }
         function showSelectedAddress(address) {
             document.getElementById('deliveryAddressText').textContent = address;
