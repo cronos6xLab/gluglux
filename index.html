@@ -1,91 +1,158 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gota Glú · Agua Purificada</title>
+    <title>Gota Glú · Agua Purificada a Domicilio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ============================================================
+           DESIGN TOKENS — shadcn/ui clinical blueprint on frosted paper
+           ============================================================ */
         :root {
-            /* Design Tokens (fenixnfc.uz) */
-            --color-ink: #10141a;
-            --color-muted: #6b7a8c;
+            /* Colors — Light theme */
+            --color-canvas: #f5f5f5;
+            --color-paper: #ffffff;
+            --color-surface-alt: #fafafa;
+            --color-ink: #0a0a0a;
+            --color-ink-soft: #171717;
+            --color-mid-gray: #737373;
+            --color-hairline: #e5e5e5;
+            --color-ember: #e7000b;
+
+            /* Typography — Font families */
+            --font-geist: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+            /* Typography — Sizes */
+            --text-caption: 12px;
+            --text-body: 14px;
+            --text-body-lg: 16px;
+            --text-subheading: 18px;
+            --text-heading-sm: 24px;
+            --text-heading: 30px;
+            --text-heading-lg: 36px;
+            --text-display: 48px;
+
+            /* Typography — Line heights */
+            --leading-caption: 1.33;
+            --leading-body: 1.43;
+            --leading-body-lg: 1.5;
+            --leading-subheading: 1.56;
+            --leading-heading-sm: 1.33;
+            --leading-heading: 1.2;
+            --leading-heading-lg: 1.11;
+            --leading-display: 1.1;
+
+            /* Typography — Letter spacing */
+            --tracking-caption: 0.6px;
+            --tracking-heading-sm: -0.6px;
+            --tracking-heading: -0.75px;
+            --tracking-heading-lg: -0.9px;
+            --tracking-display: -2.4px;
+
+            /* Typography — Weights */
+            --font-weight-regular: 400;
             --font-weight-medium: 500;
             --font-weight-semibold: 600;
-            --leading-tight: 1.15;
 
-            /* Legacy aliases (mapeados al nuevo sistema) */
-            --bg-main: #eef2f7;
-            --bg-secondary: rgba(255, 255, 255, 0.58);
-            --bg-soft: rgba(255, 255, 255, 0.5);
-            --dark: var(--color-ink);
-            --muted: var(--color-muted);
-            --border: rgba(120, 145, 175, 0.18);
-            --border-strong: rgba(120, 145, 175, 0.28);
+            /* Spacing */
+            --spacing-4: 4px;
+            --spacing-8: 8px;
+            --spacing-12: 12px;
+            --spacing-16: 16px;
+            --spacing-20: 20px;
+            --spacing-24: 24px;
+            --spacing-48: 48px;
 
-            /* Radii (solo en elementos fuente) */
-            --radius-sm: 14px;
-            --radius-md: 26px;
-            --radius-lg: 26px;
-            --radius-pill: 9999px;
+            /* Layout */
+            --page-max-width: 1280px;
+            --container-max-width: 480px;
+            --card-padding: 20px;
+            --element-gap: 8px;
             --drawer-w: 440px;
 
-            /* Shadows (valores verificados de la fuente) */
-            --shadow-sm: rgb(255, 255, 255) 0px 1px 0px 0px inset, rgba(120, 145, 175, 0.12) 0px 6px 14px 0px;
-            --shadow-md: rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(170, 190, 215, 0.12) 0px -1px 0px 0px inset, rgba(120, 145, 175, 0.16) 0px 12px 30px 0px, rgba(110, 135, 165, 0.08) 0px 3px 8px 0px;
-            --shadow-lg: rgba(255, 255, 255, 0.95) 0px 1px 0px 0px inset, rgba(170, 190, 215, 0.12) 0px -1px 0px 0px inset, rgba(120, 145, 175, 0.16) 0px 12px 30px 0px, rgba(110, 135, 165, 0.08) 0px 3px 8px 0px;
+            /* Border Radius */
+            --radius-cards: 24px;
+            --radius-small: 6px;
+            --radius-badges: 18px;
+            --radius-inputs: 18px;
+            --radius-nested: 10px;
+            --radius-buttons: 18px;
 
-            /* Backgrounds (de la fuente) */
-            --bg-page: linear-gradient(rgb(245, 248, 252) 0%, rgb(232, 238, 246) 48%, rgb(227, 234, 243) 100%);
-            --bg-glass: linear-gradient(rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.48) 55%, rgba(240, 246, 252, 0.42) 100%);
-            --bg-glass-alt: linear-gradient(rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.42) 100%);
-            --bg-halo: radial-gradient(80% 45% at 50% -5%, rgba(190, 215, 245, 0.55), rgba(0, 0, 0, 0) 60%);
-            --bg-orb: radial-gradient(circle, rgba(170, 200, 235, 0.45) 0%, rgba(190, 215, 240, 0.18) 40%, rgba(0, 0, 0, 0) 70%);
+            /* Shadows */
+            --shadow-subtle: 0 0 0 1px rgba(23,23,23,0.05), 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.08);
+            --shadow-elevated: 0 0 0 1px rgba(23,23,23,0.06), 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.06);
+            --shadow-overlay: 0 0 0 1px rgba(23,23,23,0.06), 0 12px 32px rgba(0,0,0,0.12), 0 4px 8px -2px rgba(0,0,0,0.08);
+
+            /* Transitions */
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --transition-fast: 150ms var(--ease-out);
+            --transition: 220ms var(--ease-out);
+        }
+
+        /* Dark theme overrides */
+        [data-theme="dark"] {
+            --color-canvas: #0a0a0a;
+            --color-paper: #171717;
+            --color-surface-alt: #1c1c1c;
+            --color-ink: #fafafa;
+            --color-ink-soft: #f5f5f5;
+            --color-mid-gray: #a3a3a3;
+            --color-hairline: #262626;
+
+            --shadow-subtle: 0 0 0 1px rgba(255,255,255,0.05), 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px -1px rgba(0,0,0,0.4);
+            --shadow-elevated: 0 0 0 1px rgba(255,255,255,0.07), 0 4px 12px rgba(0,0,0,0.5), 0 2px 4px -1px rgba(0,0,0,0.4);
+            --shadow-overlay: 0 0 0 1px rgba(255,255,255,0.08), 0 12px 32px rgba(0,0,0,0.6), 0 4px 8px -2px rgba(0,0,0,0.5);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         html { scroll-behavior: smooth; }
         body {
-            background: var(--bg-page);
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+            background: var(--color-canvas);
+            font-family: var(--font-geist);
             color: var(--color-ink);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            font-size: 16px;
-            font-weight: var(--font-weight-medium);
-            line-height: 1.5;
+            font-size: var(--text-body);
+            font-weight: var(--font-weight-regular);
+            line-height: var(--leading-body);
             letter-spacing: -0.01em;
-        }
-        body::before, body::after {
-            content: ''; position: fixed; pointer-events: none; z-index: 0;
-            border-radius: 50%; filter: blur(80px);
-        }
-        body::before {
-            width: 520px; height: 520px; top: -220px; right: -160px;
-            background: var(--bg-halo);
-        }
-        body::after {
-            width: 480px; height: 480px; bottom: -200px; left: -180px;
-            background: var(--bg-orb);
+            transition: background var(--transition), color var(--transition);
         }
 
         /* ============================================================
-           ANNOUNCEMENT BAR (superficie oscura — ink)
+           ANNOUNCEMENT BAR
            ============================================================ */
         .announcement-bar {
-            background: linear-gradient(90deg, #10141a, #1c2530 50%, #10141a);
-            color: #ffffff; padding: 10px 0; overflow: hidden;
-            position: sticky; top: 0; z-index: 102;
-            font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-            font-weight: var(--font-weight-semibold);
+            background: var(--color-ink);
+            color: var(--color-paper);
+            padding: var(--spacing-8) 0;
+            overflow: hidden;
+            position: sticky;
+            top: 0;
+            z-index: 102;
+            font-size: var(--text-caption);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-weight: var(--font-weight-medium);
         }
-        .marquee-track { display: flex; width: max-content; animation: marquee-smooth 26s linear infinite; }
+        [data-theme="dark"] .announcement-bar {
+            background: var(--color-paper);
+            color: var(--color-ink);
+        }
+        .marquee-track { display: flex; width: max-content; animation: marquee-smooth 30s linear infinite; }
         .announcement-bar:hover .marquee-track { animation-play-state: paused; }
-        .marquee-track span { white-space: nowrap; padding: 0 40px; display: inline-flex; align-items: center; gap: 10px; }
-        .marquee-sep { color: rgba(255,255,255,0.5); font-size: 9px; }
+        .marquee-track span {
+            white-space: nowrap;
+            padding: 0 var(--spacing-16);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-8);
+        }
+        .marquee-sep { opacity: 0.4; font-size: 9px; }
         @keyframes marquee-smooth { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
@@ -93,691 +160,1242 @@
            HEADER
            ============================================================ */
         .header {
-            background: rgba(255, 255, 255, 0.78);
+            background: color-mix(in srgb, var(--color-paper) 88%, transparent);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
-            padding: 14px 20px; display: flex; align-items: center;
-            justify-content: center; gap: 12px;
-            position: sticky; top: 32px; z-index: 100;
-            border-bottom: 1px solid rgba(120, 145, 175, 0.12);
+            padding: var(--spacing-12) var(--spacing-16);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-12);
+            position: sticky;
+            top: 34px;
+            z-index: 100;
+            border-bottom: 1px solid var(--color-hairline);
         }
-        .header img { height: 40px; width: auto; object-fit: contain; }
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-12);
+            min-width: 0;
+            flex: 1;
+        }
+        .header img {
+            height: 36px;
+            width: auto;
+            object-fit: contain;
+        }
         .header h1 {
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+            font-family: var(--font-geist);
             color: var(--color-ink);
-            font-size: 17px; font-weight: var(--font-weight-semibold);
-            letter-spacing: 0.04em;
-            line-height: 1;
+            font-size: var(--text-body-lg);
+            font-weight: var(--font-weight-semibold);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-8);
+        }
+        /* Theme toggle button — ghost icon button */
+        .theme-toggle {
+            background: var(--color-canvas);
+            border: none;
+            color: var(--color-ink);
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-buttons);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background var(--transition), transform var(--transition);
+        }
+        .theme-toggle:hover { background: var(--color-hairline); transform: translateY(-1px); }
+        .theme-toggle:active { transform: scale(0.95); }
+        .theme-toggle svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* Search trigger — command palette look */
+        .search-trigger {
+            background: var(--color-canvas);
+            border: 1px solid var(--color-hairline);
+            color: var(--color-mid-gray);
+            border-radius: var(--radius-inputs);
+            padding: var(--spacing-8) var(--spacing-12);
+            font-family: var(--font-geist);
+            font-size: var(--text-body);
+            font-weight: var(--font-weight-regular);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-8);
+            transition: border-color var(--transition);
+            min-width: 0;
+        }
+        .search-trigger:hover { border-color: var(--color-ink-soft); }
+        .search-trigger svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .search-trigger .kbd {
+            margin-left: auto;
+            font-size: var(--text-caption);
+            background: var(--color-paper);
+            border: 1px solid var(--color-hairline);
+            padding: 1px 6px;
+            border-radius: var(--radius-small);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-mid-gray);
+            letter-spacing: 0;
         }
 
-        .container { max-width: 480px; margin: 0 auto; padding: 0 0 150px; position: relative; z-index: 1; }
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 0 130px;
+            position: relative;
+            z-index: 1;
+        }
 
         /* ============================================================
-           PRODUCT IMAGE
+           PRODUCT HERO — Card with image, title, rating
            ============================================================ */
-        .product-image-wrap {
-            position: relative; width: 100%; height: 280px; overflow: hidden;
-            background: linear-gradient(rgb(245, 248, 252) 0%, rgb(232, 238, 246) 48%, rgb(227, 234, 243) 100%);
-            display: flex; align-items: center; justify-content: center;
-            margin: 16px 0 0;
+        .product-hero {
+            margin: var(--spacing-16) var(--spacing-16) 0;
+            background: var(--color-paper);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-cards);
+            box-shadow: var(--shadow-subtle);
+            overflow: hidden;
         }
-        .product-image-wrap::before {
-            content: ''; position: absolute; inset: 0;
-            background:
-                radial-gradient(80% 45% at 50% -5%, rgba(190, 215, 245, 0.55), rgba(0, 0, 0, 0) 60%),
-                radial-gradient(circle, rgba(170, 200, 235, 0.35) 0%, rgba(190, 215, 240, 0.15) 40%, rgba(0, 0, 0, 0) 70%);
-            pointer-events: none;
+        .product-image-wrap {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+            background: var(--color-canvas);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .product-image-wrap img {
-            width: 100%; height: 100%; object-fit: contain; padding: 20px;
-            filter: drop-shadow(0 18px 32px rgba(120, 145, 175, 0.28));
-            position: relative; z-index: 1;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: var(--spacing-20);
+            position: relative;
+            z-index: 1;
         }
         .rating-badge {
-            position: absolute; bottom: 16px; left: 16px;
-            background: rgba(255, 255, 255, 0.78);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.6);
-            color: var(--color-ink); padding: 7px 14px; border-radius: var(--radius-pill);
-            font-size: 11px; font-weight: var(--font-weight-semibold);
-            letter-spacing: 0.04em;
-            display: flex; align-items: center; gap: 6px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        /* ============================================================
-           PRODUCT INFO
-           ============================================================ */
-        .product-info { padding: 26px 20px 10px; text-align: center; }
-        .product-info h2 {
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 34px; font-weight: var(--font-weight-semibold);
+            position: absolute;
+            bottom: var(--spacing-16);
+            left: var(--spacing-16);
+            background: var(--color-paper);
+            border: 1px solid var(--color-hairline);
             color: var(--color-ink);
-            margin-bottom: 8px;
-            letter-spacing: -0.02em;
-            line-height: var(--leading-tight);
+            padding: var(--spacing-4) var(--spacing-12);
+            border-radius: var(--radius-badges);
+            font-size: var(--text-caption);
+            font-weight: var(--font-weight-medium);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-4);
+            box-shadow: var(--shadow-subtle);
+        }
+        .rating-badge .star { color: var(--color-ink); }
+        .rating-badge .divider-dot { color: var(--color-mid-gray); }
+
+        .product-info {
+            padding: var(--spacing-20) var(--spacing-20) var(--spacing-16);
+            text-align: center;
+        }
+        .product-info h2 {
+            font-family: var(--font-geist);
+            font-size: var(--text-heading);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-ink);
+            margin-bottom: var(--spacing-8);
+            letter-spacing: var(--tracking-heading);
+            line-height: var(--leading-heading);
         }
         .product-subtitle {
-            font-size: 11px; color: var(--color-muted);
-            letter-spacing: 0.18em; text-transform: uppercase;
-            margin-bottom: 16px; font-weight: var(--font-weight-semibold);
+            font-size: var(--text-caption);
+            color: var(--color-mid-gray);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-weight: var(--font-weight-medium);
         }
 
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(120, 145, 175, 0.28), transparent);
-            margin: 22px 20px;
+        /* Free shipping progress strip in product hero */
+        .shipping-strip {
+            background: var(--color-surface-alt);
+            padding: var(--spacing-12) var(--spacing-20);
+            border-top: 1px solid var(--color-hairline);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-8);
+            font-size: var(--text-caption);
+            color: var(--color-mid-gray);
+            font-weight: var(--font-weight-medium);
+            letter-spacing: 0;
         }
+        .shipping-strip svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 1.75; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
         /* ============================================================
-           SECTION LABELS
+           SECTION SHELL — Step cards
            ============================================================ */
+        .section-card {
+            margin: var(--spacing-16) var(--spacing-16) 0;
+            background: var(--color-paper);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-cards);
+            box-shadow: var(--shadow-subtle);
+            padding: var(--spacing-20);
+        }
+        .section-card.flush { padding: 0; overflow: hidden; }
+        .section-card.flush .section-body { padding: var(--spacing-20); }
+        .section-card.flush .section-header { padding: var(--spacing-20) var(--spacing-20) var(--spacing-12); }
+
         .section-label {
-            font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em;
-            color: var(--color-ink); margin-bottom: 16px;
+            font-size: var(--text-caption);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--color-ink);
+            margin-bottom: var(--spacing-16);
             font-weight: var(--font-weight-semibold);
-            display: flex; align-items: center; gap: 10px;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-8);
         }
         .step-number {
             background: var(--color-ink);
-            color: #ffffff; width: 26px; height: 26px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: var(--radius-pill);
-            font-size: 11px; font-weight: var(--font-weight-semibold);
+            color: var(--color-paper);
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-badges);
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
             line-height: 1;
+            flex-shrink: 0;
         }
-        .option-section { padding: 0 20px; }
 
         /* ============================================================
-           BRAND / WATER OPTIONS
+           BRAND GRID — Selectable cards
            ============================================================ */
-        .brand-grid { display: flex; flex-direction: column; gap: 12px; }
-        .brand-item {
-            border: 1px solid var(--border-strong);
-            border-radius: var(--radius-md);
-            background: var(--bg-secondary);
-            transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s, background 0.22s;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+        .brand-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-12);
         }
-        .brand-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .brand-item {
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-nested);
+            background: var(--color-paper);
+            transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+            overflow: hidden;
+        }
+        .brand-item:hover {
+            border-color: var(--color-ink-soft);
+            box-shadow: var(--shadow-subtle);
+        }
         .brand-item.active-brand {
-            border-color: rgba(16, 20, 26, 0.28);
-            background: var(--bg-glass-alt);
-            box-shadow: var(--shadow-md);
+            border-color: var(--color-ink);
+            background: var(--color-surface-alt);
+            box-shadow: var(--shadow-elevated);
         }
         .brand-header {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 16px 18px; cursor: pointer; user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-16);
+            cursor: pointer;
+            user-select: none;
+            gap: var(--spacing-12);
         }
         .brand-name {
-            font-weight: var(--font-weight-semibold);
-            font-size: 14px;
-            display: flex; align-items: center; gap: 10px;
-            letter-spacing: -0.01em;
+            font-weight: var(--font-weight-medium);
+            font-size: var(--text-body);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-8);
             color: var(--color-ink);
+            letter-spacing: -0.01em;
+        }
+        .brand-name .brand-mark {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-small);
+            background: var(--color-canvas);
+            border: 1px solid var(--color-hairline);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .brand-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-8);
         }
         .check-icon {
-            opacity: 0; transition: opacity 0.22s;
-            width: 22px; height: 22px; background: var(--color-ink); color: #ffffff;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 11px; font-weight: var(--font-weight-semibold);
+            opacity: 0;
+            transition: opacity var(--transition);
+            width: 22px;
+            height: 22px;
+            background: var(--color-ink);
+            color: var(--color-paper);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
         }
         .brand-item.active-brand .check-icon { opacity: 1; }
         .brand-qty-badge {
-            background: var(--color-ink); color: #ffffff;
-            font-size: 11px; font-weight: var(--font-weight-semibold);
-            padding: 4px 12px; border-radius: var(--radius-pill);
+            background: var(--color-ink);
+            color: var(--color-paper);
+            font-size: var(--text-caption);
+            font-weight: var(--font-weight-medium);
+            padding: var(--spacing-4) var(--spacing-12);
+            border-radius: var(--radius-badges);
             display: none;
-            letter-spacing: 0.04em;
+            min-width: 24px;
+            text-align: center;
+            justify-content: center;
+            line-height: 1.2;
         }
-        .brand-item.active-brand .brand-qty-badge { display: inline-block; }
-        .brand-details { display: none; padding: 0 18px 18px; flex-direction: column; gap: 12px; }
+        .brand-item.active-brand .brand-qty-badge { display: inline-flex; }
+        .brand-popular {
+            background: var(--color-ink-soft);
+            color: var(--color-paper);
+            font-size: 10px;
+            font-weight: var(--font-weight-medium);
+            padding: 2px 8px;
+            border-radius: var(--radius-badges);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            display: none;
+        }
+        .brand-item.popular .brand-popular { display: inline-block; }
+
+        .brand-details {
+            display: none;
+            padding: 0 var(--spacing-16) var(--spacing-16);
+            flex-direction: column;
+            gap: var(--spacing-12);
+        }
         .brand-item.active-brand .brand-details { display: flex; }
 
         .water-row {
-            display: flex; align-items: center; justify-content: space-between;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: var(--radius-sm);
-            padding: 14px;
-            border: 1px solid rgba(120, 145, 175, 0.14);
-            transition: border-color 0.22s, background 0.22s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--color-paper);
+            border-radius: var(--radius-nested);
+            padding: var(--spacing-12) var(--spacing-16);
+            border: 1px solid var(--color-hairline);
+            transition: border-color var(--transition);
+            gap: var(--spacing-12);
         }
-        .water-row:hover { border-color: rgba(16, 20, 26, 0.28); }
-        .water-info { display: flex; flex-direction: column; font-size: 13px; }
-        .water-type-name { font-weight: var(--font-weight-semibold); color: var(--color-ink); }
-        .water-price { font-size: 12px; color: var(--color-muted); margin-top: 2px; letter-spacing: 0.04em; }
-        .qty-control-sm { display: flex; align-items: center; gap: 12px; }
+        .water-row:hover { border-color: var(--color-ink-soft); }
+        .water-info {
+            display: flex;
+            flex-direction: column;
+            font-size: var(--text-body);
+            min-width: 0;
+        }
+        .water-type-name {
+            font-weight: var(--font-weight-medium);
+            color: var(--color-ink);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-8);
+            letter-spacing: -0.01em;
+        }
+        .water-price {
+            font-size: var(--text-caption);
+            color: var(--color-mid-gray);
+            margin-top: 2px;
+            letter-spacing: 0;
+            font-weight: var(--font-weight-regular);
+        }
+        .qty-control-sm {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-12);
+            flex-shrink: 0;
+        }
         .qty-btn-sm {
-            width: 34px; height: 34px; border-radius: var(--radius-sm);
-            background: #ffffff; color: var(--color-ink);
-            font-size: 16px; font-weight: var(--font-weight-semibold);
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-nested);
+            background: var(--color-canvas);
+            color: var(--color-ink);
+            font-size: var(--text-body-lg);
+            font-weight: var(--font-weight-medium);
             cursor: pointer;
-            transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s, background 0.22s;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(120, 145, 175, 0.18);
+            transition: background var(--transition), color var(--transition), transform var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--color-hairline);
+            line-height: 1;
         }
         .qty-btn-sm:hover {
-            background: var(--color-ink); color: #ffffff;
-            transform: translateY(-1px);
+            background: var(--color-ink);
+            color: var(--color-paper);
+            border-color: var(--color-ink);
         }
-        .qty-btn-sm:active { transform: scale(0.94); }
+        .qty-btn-sm:active { transform: scale(0.92); }
         .qty-display-sm {
             font-weight: var(--font-weight-semibold);
-            font-size: 16px; min-width: 24px; text-align: center;
+            font-size: var(--text-body-lg);
+            min-width: 28px;
+            text-align: center;
             color: var(--color-ink);
+            letter-spacing: -0.02em;
         }
+
+        /* Quick quantity presets — chip row */
+        .qty-presets {
+            display: flex;
+            gap: var(--spacing-4);
+            margin-top: var(--spacing-8);
+            flex-wrap: wrap;
+        }
+        .qty-preset {
+            background: transparent;
+            border: 1px solid var(--color-hairline);
+            color: var(--color-ink);
+            font-size: var(--text-caption);
+            font-weight: var(--font-weight-medium);
+            padding: var(--spacing-4) var(--spacing-12);
+            border-radius: var(--radius-badges);
+            cursor: pointer;
+            transition: background var(--transition), border-color var(--transition), transform var(--transition);
+            letter-spacing: 0;
+        }
+        .qty-preset:hover {
+            background: var(--color-canvas);
+            border-color: var(--color-ink-soft);
+        }
+        .qty-preset:active { transform: scale(0.95); }
 
         /* ============================================================
            ADDRESS FORM
            ============================================================ */
-        .address-form { display: flex; flex-direction: column; gap: 12px; }
+        .address-form {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-12);
+        }
         .address-form input,
         .address-form textarea {
-            width: 100%; padding: 15px 16px;
-            border: 1px solid rgba(120, 145, 175, 0.22);
-            border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.58);
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 14px; color: var(--color-ink); outline: none;
-            transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s, background 0.22s;
-            box-shadow: var(--shadow-sm);
+            width: 100%;
+            padding: var(--spacing-12) var(--spacing-16);
+            border: 1px solid transparent;
+            border-radius: var(--radius-inputs);
+            background: var(--color-canvas);
+            font-family: var(--font-geist);
+            font-size: var(--text-body);
+            color: var(--color-ink);
+            outline: none;
+            transition: border-color var(--transition), background var(--transition);
             letter-spacing: -0.01em;
-            font-weight: var(--font-weight-medium);
+            font-weight: var(--font-weight-regular);
         }
-        .address-form input::placeholder, .address-form textarea::placeholder { color: var(--color-muted); }
+        .address-form input::placeholder,
+        .address-form textarea::placeholder { color: var(--color-mid-gray); }
         .address-form input:focus,
         .address-form textarea:focus {
-            border-color: rgba(16, 20, 26, 0.5);
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 0 0 4px rgba(16, 20, 26, 0.06), var(--shadow-sm);
+            border-color: var(--color-hairline);
+            background: var(--color-paper);
         }
-        .address-row { display: flex; gap: 10px; }
-        .address-row input { flex: 1; }
+        .address-row {
+            display: flex;
+            gap: var(--spacing-8);
+        }
+        .address-row input { flex: 1; min-width: 0; }
 
         /* ============================================================
            SPEC TOGGLE
            ============================================================ */
-        .spec-toggle { cursor: pointer; user-select: none; transition: opacity 0.22s; }
-        .spec-toggle:hover { opacity: 0.8; }
-        .spec-toggle .toggle-arrow {
-            margin-left: auto; transition: transform 0.22s;
-            color: var(--color-muted); font-size: 12px;
+        .spec-toggle {
+            cursor: pointer;
+            user-select: none;
+            transition: opacity var(--transition);
         }
+        .spec-toggle:hover { opacity: 0.7; }
+        .spec-toggle .toggle-arrow {
+            margin-left: auto;
+            transition: transform var(--transition);
+            color: var(--color-mid-gray);
+            display: inline-flex;
+            align-items: center;
+        }
+        .spec-toggle .toggle-arrow svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
         .spec-toggle.expanded .toggle-arrow { transform: rotate(180deg); }
 
         /* ============================================================
            COUPON
            ============================================================ */
-        .coupon-section { padding: 0 20px; }
-        .coupon-wrap { display: flex; gap: 8px; align-items: stretch; }
+        .coupon-wrap {
+            display: flex;
+            gap: var(--spacing-8);
+            align-items: stretch;
+        }
         .coupon-wrap input {
-            flex: 1; padding: 15px 16px;
-            border: 1px solid rgba(120, 145, 175, 0.22);
-            border-radius: var(--radius-sm);
-            background: rgba(255, 255, 255, 0.58);
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 14px; color: var(--color-ink);
-            outline: none; text-transform: uppercase;
-            letter-spacing: 0.04em; font-weight: var(--font-weight-semibold);
-            box-shadow: var(--shadow-sm);
-            transition: border-color 0.22s, box-shadow 0.22s, background 0.22s;
+            flex: 1;
+            min-width: 0;
+            padding: var(--spacing-12) var(--spacing-16);
+            border: 1px solid transparent;
+            border-radius: var(--radius-inputs);
+            background: var(--color-canvas);
+            font-family: var(--font-geist);
+            font-size: var(--text-body);
+            color: var(--color-ink);
+            outline: none;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-weight: var(--font-weight-medium);
+            transition: border-color var(--transition), background var(--transition);
+        }
+        .coupon-wrap input::placeholder {
+            text-transform: none;
+            letter-spacing: -0.01em;
+            font-weight: var(--font-weight-regular);
+            color: var(--color-mid-gray);
         }
         .coupon-wrap input:focus {
-            border-color: rgba(16, 20, 26, 0.5);
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 0 0 4px rgba(16, 20, 26, 0.06), var(--shadow-sm);
+            border-color: var(--color-hairline);
+            background: var(--color-paper);
         }
         .btn-apply-coupon {
-            padding: 15px 20px;
+            padding: var(--spacing-12) var(--spacing-16);
             background: var(--color-ink);
-            color: #ffffff; border: none;
-            border-radius: var(--radius-sm);
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-weight: var(--font-weight-semibold);
-            letter-spacing: 0.04em; text-transform: uppercase;
-            cursor: pointer; font-size: 12px;
-            transition: transform 0.22s, box-shadow 0.22s, background 0.22s;
-            box-shadow: var(--shadow-sm);
+            color: var(--color-paper);
+            border: none;
+            border-radius: var(--radius-buttons);
+            font-family: var(--font-geist);
+            font-weight: var(--font-weight-medium);
+            letter-spacing: 0;
+            cursor: pointer;
+            font-size: var(--text-body);
+            transition: transform var(--transition), background var(--transition);
+            white-space: nowrap;
         }
-        .btn-apply-coupon:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .btn-apply-coupon:hover { transform: translateY(-1px); background: var(--color-ink-soft); }
         .btn-apply-coupon:active { transform: scale(0.97); }
+
         .coupon-feedback {
-            margin-top: 10px; padding: 12px 14px;
-            border-radius: var(--radius-sm);
-            font-size: 13px; display: none; align-items: center; gap: 10px;
-            font-weight: var(--font-weight-semibold);
+            margin-top: var(--spacing-12);
+            padding: var(--spacing-12) var(--spacing-16);
+            border-radius: var(--radius-nested);
+            font-size: var(--text-body);
+            display: none;
+            align-items: center;
+            gap: var(--spacing-8);
+            font-weight: var(--font-weight-medium);
             letter-spacing: -0.01em;
         }
         .coupon-feedback.success {
             display: flex;
-            background: rgba(31, 175, 83, 0.10);
-            border: 1px solid rgba(31, 175, 83, 0.28);
-            color: #14612f;
+            background: var(--color-canvas);
+            border: 1px solid var(--color-hairline);
+            color: var(--color-ink);
         }
         .coupon-feedback.error {
             display: flex;
-            background: rgba(200, 60, 60, 0.08);
-            border: 1px solid rgba(200, 60, 60, 0.25);
-            color: #8a2b2b;
+            background: color-mix(in srgb, var(--color-ember) 6%, var(--color-paper));
+            border: 1px solid color-mix(in srgb, var(--color-ember) 25%, transparent);
+            color: var(--color-ember);
         }
         .btn-remove-coupon {
-            background: rgba(16, 20, 26, 0.06); border: none;
-            border-radius: 50%; width: 22px; height: 22px;
-            cursor: pointer; margin-left: auto; color: inherit;
+            background: var(--color-canvas);
+            border: none;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            margin-left: auto;
+            color: var(--color-mid-gray);
             font-weight: var(--font-weight-semibold);
-            transition: background 0.22s;
+            transition: background var(--transition), color var(--transition);
         }
-        .btn-remove-coupon:hover { background: rgba(16, 20, 26, 0.12); }
+        .btn-remove-coupon:hover {
+            background: var(--color-hairline);
+            color: var(--color-ink);
+        }
 
         /* ============================================================
            SPECS GRID
            ============================================================ */
-        .specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-8);
+        }
         .spec-item {
-            background: rgba(255, 255, 255, 0.58);
-            border: 1px solid rgba(120, 145, 175, 0.22);
-            border-radius: var(--radius-sm);
-            padding: 13px;
-            display: flex; align-items: center; justify-content: space-between;
-            font-size: 12px; font-weight: var(--font-weight-semibold);
+            background: var(--color-canvas);
+            border: 1px solid transparent;
+            border-radius: var(--radius-nested);
+            padding: var(--spacing-12);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: var(--text-caption);
+            font-weight: var(--font-weight-medium);
             color: var(--color-ink);
             cursor: pointer;
-            transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s, background 0.22s;
-            box-shadow: var(--shadow-sm);
+            transition: border-color var(--transition), background var(--transition), transform var(--transition);
             letter-spacing: -0.01em;
+            line-height: 1.3;
+            gap: var(--spacing-8);
         }
         .spec-item:hover {
-            border-color: rgba(16, 20, 26, 0.4);
+            border-color: var(--color-hairline);
+            background: var(--color-paper);
             transform: translateY(-1px);
-            background: var(--bg-glass-alt);
-            box-shadow: var(--shadow-md);
         }
         .info-btn {
-            background: var(--color-ink); border: none; border-radius: 50%;
-            width: 24px; height: 24px;
-            display: inline-flex; align-items: center; justify-content: center;
-            font-size: 11px; font-weight: var(--font-weight-semibold);
-            color: #ffffff; cursor: pointer; flex-shrink: 0;
-            transition: transform 0.22s, box-shadow 0.22s;
+            background: var(--color-ink);
+            border: none;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-paper);
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: transform var(--transition);
+            font-style: italic;
+            font-family: Georgia, serif;
         }
         .info-btn.unseen {
-            animation: halo-pulse 2.2s ease-in-out infinite;
+            animation: halo-pulse 2.4s ease-in-out infinite;
         }
         @keyframes halo-pulse {
-            0%   { box-shadow: 0 0 0 0 rgba(16, 20, 26, 0.35); }
-            70%  { box-shadow: 0 0 0 12px rgba(16, 20, 26, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(16, 20, 26, 0); }
+            0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-ink) 35%, transparent); }
+            70%  { box-shadow: 0 0 0 10px transparent; }
+            100% { box-shadow: 0 0 0 0 transparent; }
         }
 
         /* ============================================================
-           ADD TO CART BUTTON
+           TRUST BADGES — Compact icon row
            ============================================================ */
-        .btn-add.glow {
-            box-shadow:
-                0 0 0 1px rgba(16, 20, 26, 0.05),
-                0 12px 30px rgba(16, 20, 26, 0.18),
-                0 3px 8px rgba(16, 20, 26, 0.10);
-            background: var(--color-ink);
+        .trust-badges {
+            margin: var(--spacing-16) var(--spacing-16) 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-8);
+        }
+        .trust-badge {
+            background: var(--color-paper);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-nested);
+            padding: var(--spacing-16) var(--spacing-8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: var(--spacing-8);
+            box-shadow: var(--shadow-subtle);
+        }
+        .trust-badge svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--color-ink);
+            stroke-width: 1.75;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .trust-badge-title {
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-ink);
+            letter-spacing: 0;
+            line-height: 1.2;
+        }
+        .trust-badge-sub {
+            font-size: 10px;
+            color: var(--color-mid-gray);
+            line-height: 1.2;
+            letter-spacing: 0;
         }
 
         /* ============================================================
-           SPEC MODAL
+           FAQ ACCORDION
            ============================================================ */
-        .spec-modal-overlay {
-            position: fixed; inset: 0;
-            background: rgba(16, 20, 26, 0.45);
-            backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-            z-index: 2000; opacity: 0; pointer-events: none;
-            transition: opacity 0.22s;
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-8);
         }
-        .spec-modal-overlay.open { opacity: 1; pointer-events: auto; }
-        .spec-modal {
-            position: fixed; bottom: 0; left: 50%;
-            transform: translateX(-50%) translateY(40px);
-            width: 100%; max-width: 480px;
-            background: var(--bg-glass-alt);
-            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            border-top-left-radius: 26px; border-top-right-radius: 26px;
-            padding: 26px;
-            z-index: 2001;
-            box-shadow: var(--shadow-md);
-            transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
-            max-height: 80vh; overflow-y: auto;
+        .faq-item {
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-nested);
+            background: var(--color-paper);
+            overflow: hidden;
+            transition: border-color var(--transition);
         }
-        .spec-modal-overlay.open .spec-modal { transform: translateX(-50%) translateY(0); }
-        .spec-modal::before {
-            content: ''; position: absolute; top: 10px; left: 50%;
-            transform: translateX(-50%);
-            width: 40px; height: 4px;
-            background: rgba(120, 145, 175, 0.35);
-            border-radius: 2px;
-        }
-        .spec-modal-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 18px; margin-top: 12px;
-        }
-        .spec-modal-title {
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 17px; font-weight: var(--font-weight-semibold);
-            color: var(--color-ink);
-            letter-spacing: -0.01em;
-        }
-        .spec-modal-close {
-            background: rgba(120, 145, 175, 0.14);
-            border: none; border-radius: 50%;
-            width: 34px; height: 34px; font-size: 14px; cursor: pointer;
-            color: var(--color-muted);
-            transition: transform 0.22s, background 0.22s, color 0.22s;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .spec-modal-close:hover {
-            background: rgba(16, 20, 26, 0.12);
-            color: var(--color-ink);
-            transform: rotate(90deg);
-        }
-        .spec-modal-body {
-            font-size: 13px; line-height: 1.6;
-            color: var(--color-muted);
-            letter-spacing: -0.01em;
+        .faq-item.open { border-color: var(--color-ink-soft); }
+        .faq-question {
+            padding: var(--spacing-16);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: var(--text-body);
             font-weight: var(--font-weight-medium);
+            color: var(--color-ink);
+            letter-spacing: -0.01em;
+            gap: var(--spacing-12);
         }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition);
+        }
+        .faq-item.open .faq-answer { max-height: 400px; }
+        .faq-answer-inner {
+            padding: 0 var(--spacing-16) var(--spacing-16);
+            font-size: var(--text-body);
+            color: var(--color-mid-gray);
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+        }
+        .faq-chevron {
+            transition: transform var(--transition);
+            color: var(--color-mid-gray);
+            display: inline-flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .faq-chevron svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .faq-item.open .faq-chevron { transform: rotate(180deg); }
 
         /* ============================================================
            CART DRAWER
            ============================================================ */
         .cart-overlay {
-            position: fixed; inset: 0; background: rgba(16, 20, 26, 0);
-            backdrop-filter: blur(0px); z-index: 200; pointer-events: none;
-            transition: background 0.22s ease, backdrop-filter 0.22s ease;
+            position: fixed;
+            inset: 0;
+            background: transparent;
+            backdrop-filter: blur(0px);
+            z-index: 200;
+            pointer-events: none;
+            transition: background var(--transition), backdrop-filter var(--transition);
         }
         .cart-overlay.open {
-            background: rgba(16, 20, 26, 0.4);
+            background: color-mix(in srgb, var(--color-ink) 40%, transparent);
             backdrop-filter: blur(4px);
             pointer-events: auto;
         }
         .cart-drawer {
-            position: fixed; top: 0; right: 0; bottom: 0;
-            width: var(--drawer-w); max-width: 100vw;
-            background: var(--bg-page);
-            z-index: 201; display: flex; flex-direction: column;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: var(--drawer-w);
+            max-width: 100vw;
+            background: var(--color-canvas);
+            z-index: 201;
+            display: flex;
+            flex-direction: column;
             transform: translateX(100%);
-            transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
-            box-shadow: -16px 0 48px rgba(16, 20, 26, 0.14);
+            transition: transform var(--transition);
+            box-shadow: var(--shadow-overlay);
         }
         .cart-drawer.open { transform: translateX(0); }
         .drawer-header {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 22px 24px 18px;
-            border-bottom: 1px solid rgba(120, 145, 175, 0.14);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-20) var(--spacing-24) var(--spacing-16);
+            border-bottom: 1px solid var(--color-hairline);
             flex-shrink: 0;
-            background: rgba(255, 255, 255, 0.78);
+            background: color-mix(in srgb, var(--color-paper) 88%, transparent);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
-        .drawer-header-left { display: flex; align-items: center; gap: 12px; }
+        .drawer-header-left {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-12);
+        }
         .drawer-title {
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 17px; font-weight: var(--font-weight-semibold);
-            letter-spacing: 0.04em;
+            font-family: var(--font-geist);
+            font-size: var(--text-subheading);
+            font-weight: var(--font-weight-semibold);
+            letter-spacing: -0.02em;
             color: var(--color-ink);
         }
         .drawer-item-count {
-            background: var(--color-ink); color: #ffffff;
-            font-size: 11px; font-weight: var(--font-weight-semibold);
-            min-width: 24px; height: 24px;
-            border-radius: var(--radius-pill);
-            display: flex; align-items: center; justify-content: center;
+            background: var(--color-ink);
+            color: var(--color-paper);
+            font-size: var(--text-caption);
+            font-weight: var(--font-weight-medium);
+            min-width: 24px;
+            height: 24px;
+            border-radius: var(--radius-badges);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 0 7px;
-            letter-spacing: 0.04em;
+            line-height: 1;
         }
         .drawer-close {
-            background: rgba(120, 145, 175, 0.14);
-            border: none; border-radius: 50%;
-            width: 36px; height: 36px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 14px; color: var(--color-muted);
+            background: var(--color-canvas);
+            border: 1px solid var(--color-hairline);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-mid-gray);
             cursor: pointer;
-            transition: transform 0.22s, background 0.22s, color 0.22s;
+            transition: background var(--transition), color var(--transition), transform var(--transition);
             flex-shrink: 0;
         }
+        .drawer-close svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
         .drawer-close:hover {
-            background: rgba(16, 20, 26, 0.14);
+            background: var(--color-hairline);
             color: var(--color-ink);
-            transform: rotate(90deg);
         }
+
+        /* Free shipping progress in drawer */
+        .shipping-progress {
+            padding: var(--spacing-12) var(--spacing-24);
+            background: var(--color-surface-alt);
+            border-bottom: 1px solid var(--color-hairline);
+        }
+        .shipping-progress-text {
+            font-size: var(--text-caption);
+            color: var(--color-mid-gray);
+            margin-bottom: var(--spacing-8);
+            font-weight: var(--font-weight-regular);
+            letter-spacing: 0;
+            line-height: 1.4;
+        }
+        .shipping-progress-text strong { color: var(--color-ink); font-weight: var(--font-weight-semibold); }
+        .shipping-progress-bar {
+            height: 6px;
+            background: var(--color-hairline);
+            border-radius: var(--radius-badges);
+            overflow: hidden;
+        }
+        .shipping-progress-fill {
+            height: 100%;
+            background: var(--color-ink);
+            border-radius: var(--radius-badges);
+            transition: width var(--transition);
+            width: 0;
+        }
+        .shipping-progress-bar.achieved .shipping-progress-fill { width: 100%; }
+
         .drawer-body {
-            flex: 1; overflow-y: auto; padding: 0;
+            flex: 1;
+            overflow-y: auto;
+            padding: 0;
             scrollbar-width: thin;
-            scrollbar-color: rgba(120, 145, 175, 0.4) transparent;
+            scrollbar-color: var(--color-hairline) transparent;
         }
         .drawer-body::-webkit-scrollbar { width: 6px; }
         .drawer-body::-webkit-scrollbar-thumb {
-            background: rgba(120, 145, 175, 0.4); border-radius: 6px;
+            background: var(--color-hairline);
+            border-radius: 6px;
         }
         .drawer-empty {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 60px 30px; text-align: center; height: 100%;
-            color: var(--color-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px var(--spacing-24);
+            text-align: center;
+            height: 100%;
+            color: var(--color-mid-gray);
+            gap: var(--spacing-12);
         }
-        .drawer-empty-icon { font-size: 3.5rem; margin-bottom: 18px; opacity: 0.35; }
+        .drawer-empty-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--color-canvas);
+            border: 1px solid var(--color-hairline);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-8);
+        }
+        .drawer-empty-icon svg { width: 24px; height: 24px; stroke: var(--color-mid-gray); stroke-width: 1.75; fill: none; stroke-linecap: round; stroke-linejoin: round; }
         .drawer-empty-title {
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 17px; font-weight: var(--font-weight-semibold);
+            font-family: var(--font-geist);
+            font-size: var(--text-subheading);
+            font-weight: var(--font-weight-semibold);
             color: var(--color-ink);
-            letter-spacing: -0.01em;
-            margin-bottom: 8px;
+            letter-spacing: -0.02em;
         }
-        .drawer-empty-sub { font-size: 13px; line-height: 1.6; }
-        .drawer-items { padding: 0 20px; }
+        .drawer-empty-sub {
+            font-size: var(--text-body);
+            line-height: 1.5;
+            color: var(--color-mid-gray);
+            max-width: 280px;
+        }
+        .drawer-empty-actions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-8);
+            margin-top: var(--spacing-16);
+            width: 100%;
+            max-width: 240px;
+        }
+        .drawer-btn-reorder {
+            background: var(--color-ink);
+            color: var(--color-paper);
+            border: none;
+            border-radius: var(--radius-buttons);
+            padding: var(--spacing-12) var(--spacing-16);
+            font-family: var(--font-geist);
+            font-size: var(--text-body);
+            font-weight: var(--font-weight-medium);
+            cursor: pointer;
+            letter-spacing: 0;
+            transition: transform var(--transition), background var(--transition);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-8);
+        }
+        .drawer-btn-reorder.shown { display: inline-flex; }
+        .drawer-btn-reorder:hover { background: var(--color-ink-soft); transform: translateY(-1px); }
+        .drawer-btn-reorder:active { transform: scale(0.97); }
+        .drawer-btn-reorder svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .drawer-btn-shop {
+            background: transparent;
+            color: var(--color-ink);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-buttons);
+            padding: var(--spacing-12) var(--spacing-16);
+            font-family: var(--font-geist);
+            font-size: var(--text-body);
+            font-weight: var(--font-weight-medium);
+            cursor: pointer;
+            letter-spacing: 0;
+            transition: background var(--transition), border-color var(--transition);
+        }
+        .drawer-btn-shop:hover { background: var(--color-canvas); border-color: var(--color-ink-soft); }
+
+        .drawer-items { padding: 0 var(--spacing-20); }
         .drawer-cart-item {
-            border-bottom: 1px solid rgba(120, 145, 175, 0.14);
-            padding: 18px 0;
+            border-bottom: 1px solid var(--color-hairline);
+            padding: var(--spacing-16) 0;
         }
-        .drawer-item-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+        .drawer-item-header {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-12);
+            margin-bottom: var(--spacing-8);
+        }
         .drawer-item-icon {
-            width: 46px; height: 46px;
-            border-radius: var(--radius-sm);
-            background: var(--bg-glass-alt);
-            border: 1px solid rgba(120, 145, 175, 0.18);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem; flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-nested);
+            background: var(--color-canvas);
+            border: 1px solid var(--color-hairline);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.3rem;
         }
         .drawer-item-meta { flex: 1; min-width: 0; }
         .drawer-item-name {
-            font-weight: var(--font-weight-semibold);
-            font-size: 14px; line-height: 1.3; margin-bottom: 4px;
+            font-weight: var(--font-weight-medium);
+            font-size: var(--text-body);
+            line-height: 1.3;
+            margin-bottom: var(--spacing-4);
             color: var(--color-ink);
             letter-spacing: -0.01em;
         }
         .drawer-item-sub {
-            font-size: 12px; color: var(--color-muted);
-            letter-spacing: 0.04em; line-height: 1.5;
+            font-size: var(--text-caption);
+            color: var(--color-mid-gray);
+            letter-spacing: 0;
+            line-height: 1.4;
         }
         .drawer-item-price-row {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: var(--spacing-8);
         }
         .drawer-item-price {
-            font-size: 16px; font-weight: var(--font-weight-semibold);
-            letter-spacing: -0.01em;
+            font-size: var(--text-body-lg);
+            font-weight: var(--font-weight-semibold);
+            letter-spacing: -0.02em;
             color: var(--color-ink);
         }
         .drawer-remove-btn {
-            background: none;
-            border: 1px solid rgba(120, 145, 175, 0.28);
-            border-radius: var(--radius-pill);
-            padding: 6px 14px; font-size: 11px;
-            color: var(--color-muted); cursor: pointer;
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-weight: var(--font-weight-semibold);
-            letter-spacing: 0.04em; text-transform: uppercase;
-            transition: transform 0.22s, border-color 0.22s, color 0.22s, background 0.22s;
+            background: transparent;
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-badges);
+            padding: var(--spacing-4) var(--spacing-12);
+            font-size: var(--text-caption);
+            color: var(--color-mid-gray);
+            cursor: pointer;
+            font-family: var(--font-geist);
+            font-weight: var(--font-weight-medium);
+            letter-spacing: 0;
+            text-transform: uppercase;
+            transition: border-color var(--transition), color var(--transition), background var(--transition);
         }
         .drawer-remove-btn:hover {
-            border-color: rgba(200, 60, 60, 0.5);
-            color: #8a2b2b;
-            background: rgba(200, 60, 60, 0.06);
+            border-color: color-mix(in srgb, var(--color-ember) 50%, transparent);
+            color: var(--color-ember);
+            background: color-mix(in srgb, var(--color-ember) 6%, transparent);
         }
         .drawer-footer {
-            border-top: 1px solid rgba(120, 145, 175, 0.14);
-            padding: 22px 24px 28px;
-            background: rgba(255, 255, 255, 0.78);
+            border-top: 1px solid var(--color-hairline);
+            padding: var(--spacing-20) var(--spacing-24) var(--spacing-24);
+            background: color-mix(in srgb, var(--color-paper) 88%, transparent);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             flex-shrink: 0;
         }
-        .drawer-totals { margin-bottom: 18px; }
+        .drawer-totals { margin-bottom: var(--spacing-16); }
         .drawer-total-row {
-            display: flex; justify-content: space-between; align-items: center;
-            font-size: 13px; padding: 6px 0;
-            color: var(--color-muted);
-            font-weight: var(--font-weight-medium);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: var(--text-body);
+            padding: var(--spacing-4) 0;
+            color: var(--color-mid-gray);
+            font-weight: var(--font-weight-regular);
             letter-spacing: -0.01em;
         }
-        .drawer-total-row.subtotal { color: var(--color-ink); font-weight: var(--font-weight-semibold); }
-        .drawer-total-row.discount { color: #14612f; font-weight: var(--font-weight-semibold); }
-        .drawer-total-row.shipping-free { color: #14612f; font-weight: var(--font-weight-semibold); }
+        .drawer-total-row.subtotal { color: var(--color-ink); font-weight: var(--font-weight-medium); }
+        .drawer-total-row.discount { color: var(--color-ink); font-weight: var(--font-weight-medium); }
+        .drawer-total-row.shipping-free { color: var(--color-ink); font-weight: var(--font-weight-medium); }
         .drawer-grand-total {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 18px 0 0; margin-top: 8px;
-            border-top: 1px dashed rgba(120, 145, 175, 0.35);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-16) 0 0;
+            margin-top: var(--spacing-8);
+            border-top: 1px dashed var(--color-hairline);
         }
         .drawer-grand-total .label {
-            font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+            font-size: var(--text-caption);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
             font-weight: var(--font-weight-semibold);
             color: var(--color-ink);
         }
         .drawer-grand-total .amount {
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 34px; font-weight: var(--font-weight-semibold);
-            letter-spacing: -0.02em;
+            font-family: var(--font-geist);
+            font-size: var(--text-heading);
+            font-weight: var(--font-weight-semibold);
+            letter-spacing: var(--tracking-heading);
             color: var(--color-ink);
-            line-height: var(--leading-tight);
+            line-height: 1.1;
         }
-        .drawer-actions { display: flex; flex-direction: column; gap: 10px; }
+        .drawer-actions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-8);
+        }
         .drawer-btn-wa {
             background: var(--color-ink);
-            color: #ffffff; border: none;
-            border-radius: var(--radius-sm);
-            padding: 16px;
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 13px; font-weight: var(--font-weight-semibold);
-            letter-spacing: 0.04em; text-transform: uppercase;
-            cursor: pointer; width: 100%;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            transition: transform 0.22s, box-shadow 0.22s, background 0.22s;
-            box-shadow: var(--shadow-sm);
+            color: var(--color-paper);
+            border: none;
+            border-radius: var(--radius-buttons);
+            padding: var(--spacing-16);
+            font-family: var(--font-geist);
+            font-size: var(--text-body);
+            font-weight: var(--font-weight-medium);
+            letter-spacing: 0;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-8);
+            transition: transform var(--transition), background var(--transition);
         }
         .drawer-btn-wa:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+            background: var(--color-ink-soft);
         }
         .drawer-btn-wa:active { transform: scale(0.98); }
+        .drawer-btn-wa svg { width: 16px; height: 16px; fill: currentColor; }
         .drawer-btn-clear {
             background: transparent;
-            color: var(--color-muted);
-            border: 1px solid rgba(120, 145, 175, 0.28);
-            border-radius: var(--radius-sm);
-            padding: 12px 16px;
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 12px; font-weight: var(--font-weight-semibold);
-            letter-spacing: 0.04em; text-transform: uppercase;
-            cursor: pointer; width: 100%;
-            transition: transform 0.22s, background 0.22s, color 0.22s, border-color 0.22s;
+            color: var(--color-mid-gray);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-buttons);
+            padding: var(--spacing-12) var(--spacing-16);
+            font-family: var(--font-geist);
+            font-size: var(--text-caption);
+            font-weight: var(--font-weight-medium);
+            letter-spacing: 0;
+            text-transform: uppercase;
+            cursor: pointer;
+            width: 100%;
+            transition: background var(--transition), color var(--transition), border-color var(--transition);
         }
         .drawer-btn-clear:hover {
-            background: rgba(120, 145, 175, 0.10);
-            color: var(--color-ink);
-            border-color: rgba(16, 20, 26, 0.3);
+            background: color-mix(in srgb, var(--color-ember) 5%, transparent);
+            color: var(--color-ember);
+            border-color: color-mix(in srgb, var(--color-ember) 30%, transparent);
         }
 
         /* ============================================================
            CART FAB
            ============================================================ */
         .cart-fab {
-            position: fixed; top: 70px; right: 20px; z-index: 190;
-            background: rgba(255, 255, 255, 0.78);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            position: fixed;
+            top: 76px;
+            right: var(--spacing-16);
+            z-index: 190;
+            background: var(--color-paper);
             color: var(--color-ink);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: var(--radius-pill);
-            padding: 12px 20px;
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 12px; font-weight: var(--font-weight-semibold);
-            letter-spacing: 0.04em; text-transform: uppercase;
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-buttons);
+            padding: var(--spacing-12) var(--spacing-16);
+            font-family: var(--font-geist);
+            font-size: var(--text-caption);
+            font-weight: var(--font-weight-medium);
+            letter-spacing: 0;
+            text-transform: uppercase;
             cursor: pointer;
-            display: flex; align-items: center; gap: 10px;
-            box-shadow: var(--shadow-md);
-            transition: opacity 0.22s ease, transform 0.22s;
-            opacity: 0; pointer-events: none; width: fit-content;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-8);
+            box-shadow: var(--shadow-elevated);
+            transition: opacity var(--transition), transform var(--transition);
+            opacity: 0;
+            pointer-events: none;
+            width: fit-content;
         }
         .cart-fab.visible { opacity: 1; pointer-events: auto; }
         .cart-fab:hover { transform: translateY(-2px); }
         .cart-fab:active { transform: scale(0.97); }
+        .cart-fab svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
         .cart-fab-count {
-            background: var(--color-ink); color: #ffffff;
-            font-size: 11px; font-weight: var(--font-weight-semibold);
-            min-width: 22px; height: 22px;
-            border-radius: var(--radius-pill);
-            display: flex; align-items: center; justify-content: center;
+            background: var(--color-ink);
+            color: var(--color-paper);
+            font-size: var(--text-caption);
+            font-weight: var(--font-weight-medium);
+            min-width: 20px;
+            height: 20px;
+            border-radius: var(--radius-badges);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 0 6px;
+            line-height: 1;
         }
 
         /* ============================================================
-           ACTION BUTTONS
+           ACTION BUTTONS — Sticky bottom
            ============================================================ */
         .action-buttons {
-            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-            width: 100%; max-width: 480px;
-            padding: 18px 20px 24px;
-            background: linear-gradient(to top,
-                rgba(232, 238, 246, 1) 60%,
-                rgba(232, 238, 246, 0));
-            display: flex; gap: 12px; z-index: 90;
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: var(--container-max-width);
+            padding: var(--spacing-16) var(--spacing-16) var(--spacing-20);
+            background: linear-gradient(to top, var(--color-canvas) 60%, transparent);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-8);
+            z-index: 90;
+        }
+        .live-subtotal {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-8) var(--spacing-16);
+            background: var(--color-paper);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-nested);
+            box-shadow: var(--shadow-subtle);
+            font-size: var(--text-caption);
+            font-weight: var(--font-weight-regular);
+            color: var(--color-mid-gray);
+            letter-spacing: 0;
+            transition: opacity var(--transition);
+        }
+        .live-subtotal.shown { display: flex; }
+        .live-subtotal .live-amount {
+            font-size: var(--text-body-lg);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-ink);
+            letter-spacing: -0.02em;
         }
         .btn-add {
-            flex: 1; border: none;
-            border-radius: var(--radius-sm);
-            padding: 17px;
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 13px; font-weight: var(--font-weight-semibold);
-            letter-spacing: 0.04em; text-transform: uppercase;
+            flex: 1;
+            border: none;
+            border-radius: var(--radius-buttons);
+            padding: var(--spacing-16);
+            font-family: var(--font-geist);
+            font-size: var(--text-body);
+            font-weight: var(--font-weight-medium);
+            letter-spacing: 0;
+            text-transform: uppercase;
             cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-8);
             background: var(--color-ink);
-            color: #ffffff;
-            box-shadow: var(--shadow-sm);
-            transition: transform 0.22s, box-shadow 0.22s, background 0.22s;
+            color: var(--color-paper);
+            transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
         }
         .btn-add:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            background: var(--color-ink-soft);
         }
         .btn-add:active { transform: scale(0.97); }
+        .btn-add.glow {
+            box-shadow: var(--shadow-elevated);
+        }
+        .btn-add svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
         /* ============================================================
            TOAST
            ============================================================ */
         .toast {
-            position: fixed; top: 100px; left: 50%;
+            position: fixed;
+            top: 100px;
+            left: 50%;
             transform: translateX(-50%) translateY(-20px) scale(0.95);
             background: var(--color-ink);
-            color: #ffffff;
-            padding: 14px 26px;
-            border-radius: var(--radius-pill);
-            font-size: 13px; font-weight: var(--font-weight-semibold);
+            color: var(--color-paper);
+            padding: var(--spacing-12) var(--spacing-24);
+            border-radius: var(--radius-badges);
+            font-size: var(--text-body);
+            font-weight: var(--font-weight-medium);
             letter-spacing: -0.01em;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-                        transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition), transform var(--transition);
             z-index: 3000;
-            box-shadow: var(--shadow-md);
-            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-overlay);
+            max-width: calc(100vw - 32px);
+            text-align: center;
         }
         .toast.show {
             opacity: 1;
@@ -785,175 +1403,402 @@
         }
 
         /* ============================================================
-           PRIVACY
+           PRIVACY BUTTON
            ============================================================ */
-        .privacy-section { padding: 0 20px; margin-top: 12px; }
+        .privacy-section {
+            padding: var(--spacing-16) var(--spacing-16) 0;
+        }
         .privacy-btn {
-            width: 100%; padding: 14px;
-            background: rgba(255, 255, 255, 0.58);
-            border: 1px solid rgba(120, 145, 175, 0.22);
-            border-radius: var(--radius-sm);
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 12px; font-weight: var(--font-weight-semibold);
-            color: var(--color-muted); cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            transition: transform 0.22s, border-color 0.22s, color 0.22s, box-shadow 0.22s;
-            box-shadow: var(--shadow-sm);
+            width: 100%;
+            padding: var(--spacing-12) var(--spacing-16);
+            background: var(--color-paper);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-buttons);
+            font-family: var(--font-geist);
+            font-size: var(--text-body);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-mid-gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-8);
+            transition: border-color var(--transition), color var(--transition);
+            box-shadow: var(--shadow-subtle);
             letter-spacing: -0.01em;
         }
         .privacy-btn:hover {
-            border-color: rgba(16, 20, 26, 0.35);
+            border-color: var(--color-ink-soft);
             color: var(--color-ink);
-            transform: translateY(-1px);
         }
+        .privacy-btn svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
         /* ============================================================
            TOUR
            ============================================================ */
         .tour-overlay {
-            position: fixed; inset: 0; background: transparent;
-            z-index: 1000; pointer-events: none; opacity: 0;
-            transition: opacity 0.22s;
+            position: fixed;
+            inset: 0;
+            background: transparent;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity var(--transition);
         }
         .tour-overlay.active { pointer-events: auto; opacity: 1; }
         .tour-highlight {
-            position: fixed; border-radius: var(--radius-sm);
-            box-shadow: 0 0 0 0 rgba(0,0,0,0); z-index: 1001; pointer-events: none;
-            transition: all 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+            position: fixed;
+            border-radius: var(--radius-nested);
+            box-shadow: 0 0 0 0 transparent;
+            z-index: 1001;
+            pointer-events: none;
+            transition: all var(--transition);
         }
         .tour-highlight.active {
-            box-shadow: 0 0 0 9999px rgba(16, 20, 26, 0.55),
-                        0 0 0 3px rgba(190, 215, 245, 0.7);
+            box-shadow: 0 0 0 9999px color-mix(in srgb, var(--color-ink) 55%, transparent),
+                        0 0 0 3px color-mix(in srgb, var(--color-ink) 60%, transparent);
         }
         .tour-tooltip {
-            position: fixed; z-index: 1003;
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: var(--radius-md);
-            padding: 22px 24px; max-width: 300px;
+            position: fixed;
+            z-index: 1003;
+            background: var(--color-paper);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-cards);
+            padding: var(--spacing-20) var(--spacing-24);
+            max-width: 300px;
             width: calc(100vw - 40px);
-            box-shadow: var(--shadow-md);
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.22s,
-                        top 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-                        left 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: var(--shadow-overlay);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition), top var(--transition), left var(--transition);
         }
         .tour-tooltip.active { opacity: 1; pointer-events: auto; }
-        .tour-tooltip::before {
-            content: ''; position: absolute;
-            width: 14px; height: 14px;
-            background: rgba(255, 255, 255, 0.92);
-            transform: rotate(45deg);
-        }
-        .tour-tooltip.arrow-top::before { top: -7px; left: 28px; }
-        .tour-tooltip.arrow-bottom::before { bottom: -7px; left: 28px; }
         .tour-step-label {
-            font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-            font-weight: var(--font-weight-semibold);
-            color: var(--color-muted);
-            margin-bottom: 8px;
+            font-size: var(--text-caption);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-weight: var(--font-weight-medium);
+            color: var(--color-mid-gray);
+            margin-bottom: var(--spacing-8);
         }
         .tour-title {
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 17px; font-weight: var(--font-weight-semibold);
+            font-family: var(--font-geist);
+            font-size: var(--text-subheading);
+            font-weight: var(--font-weight-semibold);
             color: var(--color-ink);
-            margin-bottom: 8px;
-            letter-spacing: -0.01em;
-            line-height: var(--leading-tight);
+            margin-bottom: var(--spacing-8);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
         }
         .tour-body {
-            font-size: 13px; color: var(--color-muted);
-            line-height: 1.6; margin-bottom: 20px;
+            font-size: var(--text-body);
+            color: var(--color-mid-gray);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-20);
             letter-spacing: -0.01em;
         }
-        .tour-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-        .tour-dots { display: flex; gap: 6px; }
+        .tour-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-8);
+        }
+        .tour-dots {
+            display: flex;
+            gap: var(--spacing-4);
+        }
         .tour-dot {
-            width: 7px; height: 7px; border-radius: 50%;
-            background: rgba(120, 145, 175, 0.35);
-            transition: all 0.22s;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-hairline);
+            transition: all var(--transition);
         }
         .tour-dot.active {
             background: var(--color-ink);
-            width: 20px; border-radius: 4px;
+            width: 20px;
+            border-radius: var(--radius-badges);
         }
-        .tour-actions { display: flex; gap: 8px; }
+        .tour-actions {
+            display: flex;
+            gap: var(--spacing-8);
+        }
         .tour-btn-skip {
-            background: none;
-            border: 1px solid rgba(120, 145, 175, 0.28);
-            border-radius: var(--radius-sm);
-            padding: 9px 16px;
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 12px; color: var(--color-muted);
-            cursor: pointer; letter-spacing: 0.04em;
-            font-weight: var(--font-weight-semibold);
-            transition: border-color 0.22s, color 0.22s;
+            background: transparent;
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-buttons);
+            padding: var(--spacing-8) var(--spacing-16);
+            font-family: var(--font-geist);
+            font-size: var(--text-caption);
+            color: var(--color-mid-gray);
+            cursor: pointer;
+            letter-spacing: 0;
+            font-weight: var(--font-weight-medium);
+            transition: border-color var(--transition), color var(--transition);
         }
         .tour-btn-skip:hover { border-color: var(--color-ink); color: var(--color-ink); }
         .tour-btn-next {
             background: var(--color-ink);
             border: none;
-            border-radius: var(--radius-sm);
-            padding: 9px 20px;
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-size: 12px; font-weight: var(--font-weight-semibold);
-            color: #ffffff; cursor: pointer;
-            letter-spacing: 0.04em; text-transform: uppercase;
-            transition: transform 0.22s, box-shadow 0.22s;
-            box-shadow: var(--shadow-sm);
+            border-radius: var(--radius-buttons);
+            padding: var(--spacing-8) var(--spacing-20);
+            font-family: var(--font-geist);
+            font-size: var(--text-caption);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-paper);
+            cursor: pointer;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            transition: transform var(--transition), background var(--transition);
         }
-        .tour-btn-next:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); }
+        .tour-btn-next:hover { transform: translateY(-1px); background: var(--color-ink-soft); }
+
+        /* ============================================================
+           SPEC MODAL — Bottom sheet
+           ============================================================ */
+        .spec-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: color-mix(in srgb, var(--color-ink) 45%, transparent);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition);
+        }
+        .spec-modal-overlay.open { opacity: 1; pointer-events: auto; }
+        .spec-modal {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(40px);
+            width: 100%;
+            max-width: var(--container-max-width);
+            background: var(--color-paper);
+            border-top-left-radius: var(--radius-cards);
+            border-top-right-radius: var(--radius-cards);
+            padding: var(--spacing-24);
+            z-index: 2001;
+            box-shadow: var(--shadow-overlay);
+            transition: transform var(--transition);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .spec-modal-overlay.open .spec-modal { transform: translateX(-50%) translateY(0); }
+        .spec-modal::before {
+            content: '';
+            position: absolute;
+            top: var(--spacing-8);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 4px;
+            background: var(--color-hairline);
+            border-radius: var(--radius-small);
+        }
+        .spec-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-16);
+            margin-top: var(--spacing-12);
+            gap: var(--spacing-12);
+        }
+        .spec-modal-title {
+            font-family: var(--font-geist);
+            font-size: var(--text-subheading);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-ink);
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+            flex: 1;
+        }
+        .spec-modal-close {
+            background: var(--color-canvas);
+            border: 1px solid var(--color-hairline);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            color: var(--color-mid-gray);
+            transition: background var(--transition), color var(--transition), transform var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .spec-modal-close svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .spec-modal-close:hover {
+            background: var(--color-hairline);
+            color: var(--color-ink);
+            transform: rotate(90deg);
+        }
+        .spec-modal-body {
+            font-size: var(--text-body);
+            line-height: 1.6;
+            color: var(--color-mid-gray);
+            letter-spacing: -0.01em;
+            font-weight: var(--font-weight-regular);
+        }
 
         /* ============================================================
            CONFIRM MODAL
            ============================================================ */
-        .confirm-actions { display: flex; gap: 10px; margin-top: 24px; }
+        .confirm-actions {
+            display: flex;
+            gap: var(--spacing-8);
+            margin-top: var(--spacing-20);
+        }
         .confirm-btn-edit {
             flex: 1;
-            background: rgba(120, 145, 175, 0.12);
+            background: var(--color-canvas);
             color: var(--color-ink);
-            border: 1px solid rgba(120, 145, 175, 0.22);
-            padding: 14px;
-            border-radius: var(--radius-sm);
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-weight: var(--font-weight-semibold);
+            border: 1px solid var(--color-hairline);
+            padding: var(--spacing-12);
+            border-radius: var(--radius-buttons);
+            font-family: var(--font-geist);
+            font-weight: var(--font-weight-medium);
             cursor: pointer;
-            transition: background 0.22s, border-color 0.22s;
-            font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;
+            transition: background var(--transition), border-color var(--transition);
+            font-size: var(--text-body);
+            letter-spacing: 0;
         }
         .confirm-btn-edit:hover {
-            background: rgba(120, 145, 175, 0.2);
-            border-color: rgba(16, 20, 26, 0.28);
+            background: var(--color-hairline);
+            border-color: var(--color-ink-soft);
         }
         .confirm-btn-go {
             flex: 1.5;
             background: var(--color-ink);
-            color: #ffffff; border: none;
-            padding: 14px;
-            border-radius: var(--radius-sm);
-            font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-            font-weight: var(--font-weight-semibold);
+            color: var(--color-paper);
+            border: none;
+            padding: var(--spacing-12);
+            border-radius: var(--radius-buttons);
+            font-family: var(--font-geist);
+            font-weight: var(--font-weight-medium);
             cursor: pointer;
-            transition: transform 0.22s, box-shadow 0.22s;
-            box-shadow: var(--shadow-sm);
-            font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em;
+            transition: transform var(--transition), background var(--transition);
+            font-size: var(--text-body);
+            letter-spacing: 0;
         }
         .confirm-btn-go:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            background: var(--color-ink-soft);
+        }
+
+        /* ============================================================
+           SEARCH MODAL — Command palette style
+           ============================================================ */
+        .search-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: color-mix(in srgb, var(--color-ink) 40%, transparent);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 2100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition);
+        }
+        .search-modal-overlay.open { opacity: 1; pointer-events: auto; }
+        .search-modal {
+            position: fixed;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            width: calc(100vw - 32px);
+            max-width: var(--container-max-width);
+            background: var(--color-paper);
+            border: 1px solid var(--color-hairline);
+            border-radius: var(--radius-cards);
+            z-index: 2101;
+            box-shadow: var(--shadow-overlay);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition), transform var(--transition);
+            overflow: hidden;
+        }
+        .search-modal-overlay.open .search-modal {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+        .search-input-wrap {
+            padding: var(--spacing-16);
+            border-bottom: 1px solid var(--color-hairline);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-12);
+        }
+        .search-input-wrap svg { width: 16px; height: 16px; stroke: var(--color-mid-gray); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-family: var(--font-geist);
+            font-size: var(--text-body-lg);
+            color: var(--color-ink);
+            outline: none;
+            font-weight: var(--font-weight-medium);
+            letter-spacing: -0.02em;
+        }
+        .search-input::placeholder { color: var(--color-mid-gray); font-weight: var(--font-weight-regular); }
+        .search-results {
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        .search-result {
+            padding: var(--spacing-12) var(--spacing-16);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-12);
+            transition: background var(--transition);
+            border-bottom: 1px solid var(--color-hairline);
+        }
+        .search-result:last-child { border-bottom: none; }
+        .search-result:hover, .search-result.highlighted { background: var(--color-canvas); }
+        .search-result-info { min-width: 0; flex: 1; }
+        .search-result-name { font-size: var(--text-body); font-weight: var(--font-weight-medium); color: var(--color-ink); letter-spacing: -0.01em; }
+        .search-result-sub { font-size: var(--text-caption); color: var(--color-mid-gray); margin-top: 2px; letter-spacing: 0; }
+        .search-result-price { font-size: var(--text-body); font-weight: var(--font-weight-semibold); color: var(--color-ink); letter-spacing: -0.01em; }
+        .search-empty {
+            padding: var(--spacing-24);
+            text-align: center;
+            color: var(--color-mid-gray);
+            font-size: var(--text-body);
         }
 
         @media (max-width: 380px) {
             .specs-grid { grid-template-columns: 1fr; }
-            .product-info h2 { font-size: 28px; }
+            .product-info h2 { font-size: var(--text-heading-sm); }
+            .trust-badges { grid-template-columns: 1fr; }
+            .search-trigger .kbd { display: none; }
+        }
+
+        @media (max-width: 360px) {
+            .header h1 { font-size: var(--text-body); }
+            .search-trigger .label-text { display: none; }
+            .search-trigger { padding: var(--spacing-8) var(--spacing-10); }
         }
     </style>
 </head>
 <body>
-    <div class="announcement-bar"><div class="marquee-track"><span>💧 AGUA PURIFICADA A DOMICILIO · ENTREGA RÁPIDA <span class="marquee-sep">◆</span></span><span>✨ AGUA PLUS CON PERLAS DE PLATA <span class="marquee-sep">◆</span></span><span>🚚 ENVÍO GRATIS EN 6+ GARRAFONES <span class="marquee-sep">◆</span></span></div></div>
+    <!-- Announcement marquee -->
+    <div class="announcement-bar">
+        <div class="marquee-track">
+            <span>Agua purificada a domicilio · Entrega express <span class="marquee-sep">◆</span></span>
+            <span>Agua Plus con perlas de plata <span class="marquee-sep">◆</span></span>
+            <span>Envío gratis en 6+ garrafones <span class="marquee-sep">◆</span></span>
+            <span>Pago contra entrega <span class="marquee-sep">◆</span></span>
+        </div>
+    </div>
+
     <div class="toast" id="toast"></div>
 
+    <!-- Tour overlays -->
     <div class="tour-overlay" id="tour-overlay" onclick="tourSkip()"></div>
     <div class="tour-highlight" id="tour-highlight"></div>
     <div class="tour-tooltip" id="tour-tooltip">
@@ -969,28 +1814,49 @@
         </div>
     </div>
 
+    <!-- Cart drawer -->
     <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-    <aside class="cart-drawer" id="cart-drawer">
+    <aside class="cart-drawer" id="cart-drawer" aria-label="Carrito de compras">
         <div class="drawer-header">
             <div class="drawer-header-left">
                 <span class="drawer-title">Carrito</span>
                 <span class="drawer-item-count" id="drawer-item-count">0</span>
             </div>
-            <button class="drawer-close" onclick="closeCart()" aria-label="Cerrar carrito">✕</button>
+            <button class="drawer-close" onclick="closeCart()" aria-label="Cerrar carrito">
+                <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
         </div>
+
+        <div class="shipping-progress" id="shipping-progress" style="display:none;">
+            <div class="shipping-progress-text" id="shipping-progress-text"></div>
+            <div class="shipping-progress-bar" id="shipping-progress-bar">
+                <div class="shipping-progress-fill"></div>
+            </div>
+        </div>
+
         <div class="drawer-body" id="drawer-body">
             <div class="drawer-empty" id="drawer-empty">
-                <div class="drawer-empty-icon">💧</div>
+                <div class="drawer-empty-icon">
+                    <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                </div>
                 <div class="drawer-empty-title">Tu carrito está vacío</div>
-                <div class="drawer-empty-sub">Selecciona tipo de agua, envases y cantidad<br>para comenzar tu pedido.</div>
+                <div class="drawer-empty-sub">Selecciona marca, tipo de agua y cantidad para comenzar tu pedido.</div>
+                <div class="drawer-empty-actions">
+                    <button class="drawer-btn-reorder" id="drawer-btn-reorder" onclick="reorderLast()">
+                        <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                        Repetir pedido anterior
+                    </button>
+                    <button class="drawer-btn-shop" onclick="closeCart()">Explorar productos</button>
+                </div>
             </div>
             <div class="drawer-items" id="drawer-items" style="display:none;"></div>
         </div>
+
         <div class="drawer-footer" id="drawer-footer" style="display:none;">
             <div class="drawer-totals" id="drawer-totals"></div>
             <div class="drawer-actions">
                 <button class="drawer-btn-wa" onclick="sendToWhatsApp()">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                     Finalizar por WhatsApp
                 </button>
                 <button class="drawer-btn-clear" onclick="clearCart()">Vaciar carrito</button>
@@ -998,81 +1864,165 @@
         </div>
     </aside>
 
+    <!-- Floating cart FAB -->
     <button class="cart-fab" id="cart-fab" onclick="openCart()" aria-label="Ver carrito">
-        🛒 Ver Carrito
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+        <span>Carrito</span>
         <span class="cart-fab-count" id="cart-fab-count">0</span>
     </button>
 
-    <div class="header">
-        <img src="https://gluglu.mx/images/logo%20gota.png?crc=3931633593" alt="Gota Glú" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-        <h1 style="display:none;">Gota Glú</h1>
-        <h1>Gota Glú</h1>
-    </div>
-
-    <div class="container">
-        <div class="product-image-wrap">
-            <img src="https://gluglu.mx/images/garrafon%20glu.png?crc=3958356213" alt="Garrafón" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect fill=%22%23e8f4fd%22 width=%22300%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%230077be%22 font-size=%2248%22>💧</text></svg>';">
-            <div class="rating-badge">⭐ 4.9 · Entrega hoy</div>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-brand">
+            <img src="https://gluglu.mx/images/logo%20gota.png?crc=3931633593" alt="Gota Glú" onerror="this.style.display='none';document.getElementById('header-title').style.display='block';">
+            <h1 id="header-title" style="display:none;">Gota Glú</h1>
+            <h1>Gota Glú</h1>
         </div>
-        <div class="product-info"><h2>Agua Purificada</h2><div class="product-subtitle">Elige envase, tipo y cantidad</div></div>
-        <div class="divider"></div>
-
-        <div class="option-section" id="tour-anchor-brands">
-            <div class="section-label"><span class="step-number">1</span> Envases y tipo de agua</div>
-            <div class="brand-grid" id="brand-grid"></div>
-        </div>
-        <div class="divider"></div>
-
-        <div class="option-section" id="tour-anchor-address">
-            <div class="section-label"><span class="step-number">2</span> Dirección de Entrega</div>
-            <div class="address-form">
-                <input type="text" id="addr-nombre" placeholder="Nombre de quien recibe *" required>
-                <input type="text" id="addr-calle" placeholder="Calle o Edificio *" required>
-                <div class="address-row">
-                    <input type="text" id="addr-numero" placeholder="Número exterior o Mz *" required>
-                    <input type="text" id="addr-interior" placeholder="Interior o Lote (opcional)">
-                </div>
-                <div class="address-row">
-                    <input type="text" id="addr-colonia" placeholder="Colonia *" required>
-                    <input type="text" id="addr-cp" placeholder="Código Postal *" required>
-                </div>
-                <textarea id="addr-detalles" placeholder="Detalles o referencias adicionales (opcional)" rows="2"></textarea>
-            </div>
-        </div>
-        <div class="divider"></div>
-
-        <div class="coupon-section" id="tour-anchor-coupon">
-            <div class="section-label"><span class="step-number">3</span> Código Promocional (Opcional)</div>
-            <div class="coupon-wrap">
-                <input type="text" id="coupon-input" placeholder="Ingresa tu código" maxlength="20">
-                <button class="btn-apply-coupon" onclick="applyCoupon()">Aplicar</button>
-            </div>
-            <div class="coupon-feedback" id="coupon-feedback">
-                <span class="coupon-feedback-icon" id="coupon-icon"></span>
-                <span class="coupon-feedback-text" id="coupon-text"></span>
-                <button class="btn-remove-coupon" id="btn-remove-coupon" onclick="removeCoupon()" style="display:none;">✕</button>
-            </div>
-        </div>
-        <div class="divider"></div>
-
-        <div class="option-section" id="tour-anchor-specs">
-            <div class="section-label spec-toggle" onclick="toggleSpecs()">
-                <span class="step-number">i</span> Especificaciones del Servicio
-                <span class="toggle-arrow" id="spec-toggle-arrow">▼</span>
-            </div>
-            <div class="specs-grid" id="specs-grid" style="display:none;"></div>
-        </div>
-
-        <div class="privacy-section">
-            <button class="privacy-btn" onclick="openSpecModal('privacidad')">
-                📜 Aviso de Privacidad
-                <span class="info-btn unseen" id="spec-btn-privacidad" style="margin-left:8px;">i</span>
+        <div class="header-actions">
+            <button class="search-trigger" id="search-trigger" onclick="openSearch()" aria-label="Buscar productos">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <span class="label-text">Buscar</span>
+                <span class="kbd">⌘K</span>
+            </button>
+            <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
+                <svg id="theme-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
             </button>
         </div>
-    </div>
+    </header>
 
+    <!-- Product hero card -->
+    <main class="container">
+        <section class="product-hero">
+            <div class="product-image-wrap">
+                <img src="https://gluglu.mx/images/garrafon%20glu.png?crc=3958356213" alt="Garrafón Gota Glú" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22%3E%3Crect fill=%22%23f5f5f5%22 width=%22300%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%230a0a0a%22 font-size=%22120%22%3E%E2%86%93%3C/text%3E%3C/svg%3E';">
+                <div class="rating-badge">
+                    <span class="star">★</span>
+                    <span>4.9</span>
+                    <span class="divider-dot">·</span>
+                    <span>Entrega hoy</span>
+                </div>
+            </div>
+            <div class="product-info">
+                <h2>Agua Purificada</h2>
+                <div class="product-subtitle">Elige envase, tipo y cantidad</div>
+            </div>
+            <div class="shipping-strip">
+                <svg viewBox="0 0 24 24"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                <span>Envío gratis en pedidos de 6 o más garrafones</span>
+            </div>
+        </section>
+
+        <!-- Step 1: Brand selection -->
+        <section class="section-card flush" id="tour-anchor-brands">
+            <div class="section-header">
+                <div class="section-label"><span class="step-number">1</span> Envases y tipo de agua</div>
+            </div>
+            <div class="section-body">
+                <div class="brand-grid" id="brand-grid"></div>
+            </div>
+        </section>
+
+        <!-- Step 2: Address form -->
+        <section class="section-card flush" id="tour-anchor-address">
+            <div class="section-header">
+                <div class="section-label"><span class="step-number">2</span> Dirección de Entrega</div>
+            </div>
+            <div class="section-body">
+                <div class="address-form">
+                    <input type="text" id="addr-nombre" placeholder="Nombre de quien recibe *" required>
+                    <input type="text" id="addr-calle" placeholder="Calle o Edificio *" required>
+                    <div class="address-row">
+                        <input type="text" id="addr-numero" placeholder="Número exterior o Mz *" required>
+                        <input type="text" id="addr-interior" placeholder="Interior o Lote (opcional)">
+                    </div>
+                    <div class="address-row">
+                        <input type="text" id="addr-colonia" placeholder="Colonia *" required>
+                        <input type="text" id="addr-cp" placeholder="Código Postal *" required inputmode="numeric">
+                    </div>
+                    <textarea id="addr-detalles" placeholder="Detalles o referencias adicionales (opcional)" rows="2"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 3: Coupon -->
+        <section class="section-card flush" id="tour-anchor-coupon">
+            <div class="section-header">
+                <div class="section-label"><span class="step-number">3</span> Código Promocional</div>
+            </div>
+            <div class="section-body">
+                <div class="coupon-wrap">
+                    <input type="text" id="coupon-input" placeholder="Ingresa tu código" maxlength="20">
+                    <button class="btn-apply-coupon" onclick="applyCoupon()">Aplicar</button>
+                </div>
+                <div class="coupon-feedback" id="coupon-feedback">
+                    <span class="coupon-feedback-icon" id="coupon-icon"></span>
+                    <span class="coupon-feedback-text" id="coupon-text"></span>
+                    <button class="btn-remove-coupon" id="btn-remove-coupon" onclick="removeCoupon()" style="display:none;" aria-label="Eliminar cupón">✕</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust badges -->
+        <section class="trust-badges">
+            <div class="trust-badge">
+                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                <div class="trust-badge-title">Express</div>
+                <div class="trust-badge-sub">25 min promedio</div>
+            </div>
+            <div class="trust-badge">
+                <svg viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
+                <div class="trust-badge-title">Garantía</div>
+                <div class="trust-badge-sub">2 días post-entrega</div>
+            </div>
+            <div class="trust-badge">
+                <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+                <div class="trust-badge-title">Pago</div>
+                <div class="trust-badge-sub">Contra entrega</div>
+            </div>
+        </section>
+
+        <!-- Step 4: Specs accordion -->
+        <section class="section-card flush" id="tour-anchor-specs">
+            <div class="section-header">
+                <div class="section-label spec-toggle" onclick="toggleSpecs()">
+                    <span class="step-number" style="font-style:italic;font-family:Georgia,serif;">i</span>
+                    Especificaciones del Servicio
+                    <span class="toggle-arrow" id="spec-toggle-arrow">
+                        <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+                    </span>
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="specs-grid" id="specs-grid" style="display:none;"></div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section-card">
+            <div class="section-label">Preguntas Frecuentes</div>
+            <div class="faq-list" id="faq-list"></div>
+        </section>
+
+        <!-- Privacy button -->
+        <div class="privacy-section">
+            <button class="privacy-btn" onclick="openSpecModal('privacidad')">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg>
+                Aviso de Privacidad
+                <span class="info-btn unseen" id="spec-btn-privacidad" style="margin-left:4px;width:18px;height:18px;font-size:10px;">i</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- Sticky action button + live subtotal -->
     <div class="action-buttons" id="tour-anchor-actions">
-        <button class="btn-add" id="btn-add-cart" onclick="addToCart()">💧 Añadir al carrito</button>
+        <div class="live-subtotal" id="live-subtotal">
+            <span>Subtotal actual</span>
+            <span class="live-amount" id="live-amount">$0.00</span>
+        </div>
+        <button class="btn-add" id="btn-add-cart" onclick="addToCart()">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            Añadir al carrito
+        </button>
     </div>
 
     <!-- Spec Modal -->
@@ -1080,7 +2030,9 @@
         <div class="spec-modal" onclick="event.stopPropagation()">
             <div class="spec-modal-header">
                 <span class="spec-modal-title" id="spec-modal-title"></span>
-                <button class="spec-modal-close" onclick="closeSpecModal()">✕</button>
+                <button class="spec-modal-close" onclick="closeSpecModal()" aria-label="Cerrar">
+                    <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
             </div>
             <div class="spec-modal-body" id="spec-modal-body"></div>
         </div>
@@ -1091,7 +2043,9 @@
         <div class="spec-modal" onclick="event.stopPropagation()">
             <div class="spec-modal-header">
                 <span class="spec-modal-title">Confirma tus datos</span>
-                <button class="spec-modal-close" onclick="closeConfirmModal()">✕</button>
+                <button class="spec-modal-close" onclick="closeConfirmModal()" aria-label="Cerrar">
+                    <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
             </div>
             <div class="spec-modal-body" id="confirm-modal-body"></div>
             <div class="confirm-actions">
@@ -1101,12 +2055,26 @@
         </div>
     </div>
 
+    <!-- Search Modal -->
+    <div class="search-modal-overlay" id="search-modal-overlay" onclick="closeSearch()">
+        <div class="search-modal" onclick="event.stopPropagation()">
+            <div class="search-input-wrap">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                <input type="text" class="search-input" id="search-input" placeholder="Buscar marca o tipo de agua..." autocomplete="off">
+                <button class="theme-toggle" onclick="closeSearch()" aria-label="Cerrar" style="width:28px;height:28px;">
+                    <svg viewBox="0 0 24 24" style="width:12px;height:12px;"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </div>
+
     <script>
         // ============================================
         // CONFIGURACIÓN
         // ============================================
         const BRAND_PRICES = {
-            "Bonafont":        { tradicional: 35.00, plus: 50.00 },
+            "Bonafont":        { tradicional: 35.00, plus: 50.00, popular: true },
             "Bonafont chico":  { tradicional: 30.00, plus: 45.00 },
             "Electropura":     { tradicional: 32.00, plus: 48.00 },
             "E-pura":          { tradicional: 33.00, plus: 49.00 },
@@ -1116,6 +2084,7 @@
         const BRANDS = Object.keys(BRAND_PRICES);
         const WA_NUMBER = "5215560909630";
         const ADDRESS_KEY = 'gg_address_cache';
+        const LAST_ORDER_KEY = 'gg_last_order';
 
         const SPECS = [
             { id: "express", title: "Servicio Express", text: "Modalidad de entrega con preferencia y rapidez, teniendo un rango de entre 20 minutos a hora y media, siendo 25 minutos el promedio. Estos pueden verse afectados y variar conforme a la demanda, tráfico vehicular en la zona, condiciones climáticas adversas como lluvia, etc." },
@@ -1125,14 +2094,12 @@
             { id: "programado", title: "Atención Programada", text: "Para ti, que necesitas el agua de forma muy recurrente, tenemos la opción de programar el día y la hora de entrega de tu servicio de agua. Siempre atentos a tus necesidades, realizamos llamada previa o mensaje vía Whatsapp para asegurar la entrega. Sujeto a disponibilidad de horario." },
             { id: "dtox", title: "D-TOX", text: "Es un servicio de desintoxicación del botellón que puede ser preventivo, o resolutivo, en caso de eliminación de olores o sabores muy penetrantes (Cloro - Jamaica - presencia de hongo por exposición al sol - Etc)." },
             { id: "botellones", title: "Uso de Botellones", text: "Los botellones o garrafones de intercambio en ocasiones serán nuevos, y a veces de media vida, debido a que los botellones van cumpliendo su función, van obteniendo un desgaste natural, sin embargo contamos con la política de eliminación de inventario de garrafones que ya no están en condiciones adecuadas de uso. Nosotros preguntaremos por el color y características del garrafón, para llevarte uno de mismas características." },
-            { id: "garantia", title: "Garantía de Servicio Glu Glú", text: "Si una vez que has hecho tu pedido y el garrafón que te fue entregado cuenta con una anomalía o fuga, no te preocupes, cuentas con un periodo máximo de 2 días para notificarlo y este será cambiado por nuestro personal a la brevedad posible sin costo." },
+            { id: "garantia", title: "Garantía de Servicio", text: "Si una vez que has hecho tu pedido y el garrafón que te fue entregado cuenta con una anomalía o fuga, no te preocupes, cuentas con un periodo máximo de 2 días para notificarlo y este será cambiado por nuestro personal a la brevedad posible sin costo." },
             { id: "precio", title: "Precio", text: "El precio del servicio y el agua puede variar de acuerdo a la sucursal, debido a diversos factores como puede ser, la competitividad, la oferta y demanda habitual y especifica como en momentos de contingencia, inflación o factores externos como el incremento de algún insumo, sin embargo, habrá mensajes de difusión para tratar de mandar aviso a la mayor gente posible, de esta manera puede contar con la mejor calidad del agua, el mejor servicio y siempre al precio justo." },
             { id: "precio-especial", title: "Precio Especial Glu Glú", text: "Debido a que Glu Glú maneja tiempos de entrega en la modalidad 'Servicio o Entrega Express' hay un precio especial para pedir 1 (uno) y hasta máximo 2 (dos) garrafones/botellones, esto para el costo de servicio por envío, precio que siempre vendrá en el flyer de la 'Sucursal Gota Glú' o 'Punto de Venta Móvil' u 'Online' de Glu Glú." },
             { id: "precio-lista", title: "Precio de Lista", text: "El precio de lista suele ser mayor y será cobrado a cada garrafón en caso de que su petición sea de 3 (tres) o más garrafones. En todo momento es válido pedir 2 garrafones varias veces al día para obtener el 'Precio Especial Glu Glú' siempre y cuando estas veces estén espaciadas de al menos 4 horas y sean peticiones dentro de nuestros horarios de atención y zona de cobertura." },
             { id: "mas", title: "Servicio Glu Glú Más", text: "Pídenos lo que quieras de la tienda junto con el pedido de tu servicio de agua." },
-            { id: "mas-ex", title: "Servicio Glu Glú Más EX", text: "Es un servicio exclusivo de tienda, sin depender de un pedido de servicio de agua." },
             { id: "peticion-especial", title: "Petición Especial Glu Glú", text: "Pídenos lo que se te ocurra, nuestros expertos en logística te dirán si es viable y el costo justo y adecuado por el servicio. Una pizza o un café por ejemplo. Nota: Hay servicios que pueden llegar a juntarse como una petición especial con una petición a distancia, en cuyo caso se te hará un precio derivado de ambos. Estos servicios no están disponibles en todas las sucursales Gota Glú del país, así mismo podrían llegar a ser negados debido a la alta demanda o inviabilidad de la petición. En todo momento aplican restricciones." },
-            { id: "nota-general", title: "Nota General del Servicio Glu Glú Más", text: "Debido a la gran petición de nuestros clientes, es posible que puedas pedir en nuestros servicios como Petición Especial Glu Glú alcohol o cigarros, siempre y cuando estos sean adquiribles de forma legal y por marcas reconocidas en tiendas con la autorización correspondiente. Siendo el mayor requisito solicitar estos servicios junto con el producto deseado única y exclusivamente vía Whatsapp, donde se tiene un registro previo suyo como cliente habitual de Glu Glú, así mismo deberá enviar una fotografía legible con su credencial INE, para autentificar la mayoría de edad, del mismo modo sírvase de saber que deberá ser la misma persona que recibe el servicio autentificando con la misma identificación al momento de recibir el servicio y producto, de lo contrario el servicio no podrá ser completado y será devuelto a su entidad origen, aunado a que primero se pasará por el dinero a su domicilio para concretar la compra. Del mismo modo, merece la pena aclarar que el 'Servicio de Tienda' se refiere en todo momento a artículos que pueden adquirirse en una tienda de abarrotes, como la usual tiendita de la esquina, y no un servicio de tienda departamental o autoservicios. El máximo de artículos permitidos en una petición Servicio de Tienda Glu Glú Más es de 7 (siete). Aplican Restricciones." },
             { id: "repartidor", title: "Repartidor", text: "El repartidor no lleva más de $50 (cincuenta pesos) moneda local, en cambio." },
             { id: "negocio", title: "Negocio", text: "Todo el servicio de Glu Glú Negocio suele ir de la mano con un previo acuerdo entre Glu Glú y el responsable, encargado o dueño de la empresa o negocio a surtir. Estamos deseosos de atenderte." },
             { id: "facturacion", title: "Facturación", text: "La factura por tu servicio suele ser inmediata, esto puede cambiar por disposición de horario o factores diversos como una falla en el sistema o la web, sin embargo siempre contarás con ella." },
@@ -1140,7 +2107,41 @@
             { id: "promociones", title: "Promociones", text: "La mayoría de nuestras promociones son vía Whatsapp, así mismo también contamos con promociones exclusivas para esta red social, guarda nuestro número y quédate atento para que logres tener acceso a todas ellas. Son increíbles." }
         ];
 
-        const PRIVACIDAD_TEXT = `AVISO DE PRIVACIDAD\n\nELTHON JAEL TAPIA LEYVA (en lo sucesivo "GLU GLÚ"), con domicilio en Rincón del Río 103, Colonia Bosque Residencial del Sur. Xochimilco, Ciudad de México, 16010, México y de conformidad con lo dispuesto en la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y en su reglamento, hace de su conocimiento que es responsable de recabar sus datos personales, del uso que se les dé a los mismos y de su protección.\n\nFINALIDAD EN EL TRATAMIENTO DE SUS DATOS PERSONALES\nRecopilamos sus datos personales, por lo que solicitamos su consentimiento a través del presente Aviso de Privacidad con el objeto de utilizarlos para los siguientes fines: Comprar productos de GLU GLÚ. Recibir información sobre productos y servicios de GLU GLÚ. Participar en las comunidades en línea de GLU GLÚ, incluidos nuestros canales, páginas en las redes sociales y blogs. Almacenar sus preferencias para futuras interacciones y comunicaciones de GLU GLÚ. Ayudarnos a desarrollar productos y crear campañas diseñadas teniendo en cuenta sus intereses, optimizar los servicios al cliente y mejorar continuamente nuestros sitios web. Ayudarnos a mejorar los productos y servicios y permitir que GLU GLÚ le mantenga informado y le invite a participar en las pruebas de nuevos productos y servicios. Resolver problemas relacionados con el consumidor o los productos. Recibir mensajes personalizados, ofertas especiales y anuncios relevantes para sus intereses personales, en función de la información que ha compartido con nosotros y la que hemos recopilado a través de las cookies o técnicas similares en relación con su uso de los sitios web, las redes sociales y los blogs de GLU GLÚ.\n\nTIPO DE DATOS\nPara las finalidades antes mencionadas requerimos obtener sus siguientes datos personales: Su nombre completo. Su dirección de correo electrónico. Su dirección postal. Su número de teléfono. Su perfil en las redes sociales. Su edad. Información sobre los productos que ha adquirido. Sus intereses relacionados con GLU GLÚ. El uso y las actividades que realiza en nuestras páginas de GLU GLÚ. Sus datos bancarios para el procesamiento de pagos de productos o servicios de GLU GLÚ.\n\nFUENTE DE OBTENCIÓN DE LOS DATOS\nLos datos personales y/o sensibles pueden ser recabados de distintas formas: A través de la página de Internet gluglu.mx, de correo electrónico, redes sociales, personalmente, por teléfono o por escrito.\n\nMEDIOS PARA LIMITAR EL USO O DIVULGACIÓN DE SUS DATOS PERSONALES\nHacemos de su conocimiento que sus datos personales serán tratados y resguardados con base en los principios de licitud, calidad, consentimiento, información, finalidad, lealtad, proporcionalidad y responsabilidad, consagrados en la Ley Federal de Protección de Datos Personales en Posesión de Particulares y su reglamento. De igual forma, le reiteramos que sus datos personales serán resguardados bajo estrictas medidas de seguridad administrativas, técnicas y físicas las cuales han sido implementadas con el objeto de proteger sus datos personales contra daño, pérdida, alteración, destrucción o el uso, acceso o tratamiento no autorizados.\n\nMEDIOS PARA EL EJERCICIO DE SUS DERECHOS COMO TITULAR DE LOS DATOS PERSONALES\nComo titular de los datos personales objeto del presente Aviso de Privacidad usted podrá ejercitar sus derechos de acceso, rectificación, cancelación u oposición (Derechos ARCO), mismos que se consagran en la Ley Federal de Protección de Datos Personales en Posesión de Particulares y en su reglamento. Así mismo podrá revocar el consentimiento otorgado para el uso de sus datos personales en cualquier momento. En cualquiera de estos supuestos, puede realizar su solicitud mediante el envío de un correo electrónico a la dirección GotaGlu@hotmail.com o personalmente en el domicilio ubicado en Residencial Prados Coapa 3ra Sección, Calle Acequia numero 25-C, delegacion Tlalpan, Ciudad de México. poniéndose en contacto con nuestro departamento de datos personales, con MARTÍN TAPIA GONZALEZ, en el teléfono 0445518054385. Usted recibirá una respuesta en un plazo de 5 días hábiles en relación a dicha solicitud y la manera en que está siendo atendida. Con la finalidad de poder atender su solicitud, ésta deberá satisfacer todos los requisitos estipulados en la Ley Federal de Protección de Datos Personales en Posesión de los particulares y en su reglamento.\n\nUTILIZACIÓN DE COOKIES\nLas "Cookies" son archivos o piezas de información que se almacenan por su buscador en el disco duro de su computadora. GLU GLÚ podría usar "Cookies" para recabar información adicional sobre usted durante su visita a cualquiera de nuestras páginas de Internet. Recolectamos esta información con la finalidad de poder ajustar nuestra página y nuestros productos a sus intereses y necesidades. Las "Cookies" también podrían ser utilizadas para acelerar la velocidad de sus futuras actividades en nuestras páginas. La mayoría de los buscadores se encuentran programados para aceptar "Cookies". Si usted prefiere, usted puede programar el suyo con la finalidad de rechazar "Cookies" o de alertarlo cuando las "Cookies" se estén enviando. La restricción de "Cookies" al momento de entrar a una página de Internet podría resultar en la inhabilidad para visitar ciertas áreas de la página o recibir información personalizada durante su visita a la misma. Asimismo, en caso de utilizar cookies, o cualquier otro mecanismo o tecnología similar que permita acceder a sus datos personales, éstos podrán ser deshabilitados si usted así lo solicita a la siguiente dirección electrónica: GotaGlu@hotmail.com\n\nCAMBIOS AL PRESENTE AVISO DE PRIVACIDAD\nGLU GLÚ se reserva el derecho de cambiar, modificar o actualizar en cualquier momento el presente Aviso de Privacidad en virtud de cambios en los requerimientos legales, o bien cambios en las políticas o procesos internos. Dichas modificaciones se harán de su conocimiento mediante el envío de un correo electrónico a la cuenta que usted nos proporcionó inicialmente para hacer de su conocimiento el presente Aviso de Privacidad y/o mediante la publicación del mismo en la siguiente página web: GluGlu.mx. No seremos responsables en caso de que usted no reciba la referida notificación de cambio en el Aviso de Privacidad por causa de algún problema con su cuenta de correo electrónico o de transmisión de datos por internet. Sin embargo, por su seguridad, el Aviso de Privacidad vigente estará disponible en todo momento en la página web antes señalada.\n\nFecha de última actualización 25 DE SEPTIEMBRE DEL 2017.`;
+        const FAQ_ITEMS = [
+            { q: "¿Cuánto tarda la entrega?", a: "El servicio Express promedia 25 minutos, con un rango de 20 minutos a hora y media. Puede variar según demanda, tráfico o condiciones climáticas." },
+            { q: "¿Cuál es el mínimo de envío?", a: "Aceptamos pedidos desde 1 garrafón con el Precio Especial Glu Glú. El envío es gratis cuando pides 6 o más garrafones en una sola orden." },
+            { q: "¿Cómo pago?", a: "Pago contra entrega. El repartidor lleva cambio hasta por $50 MXN. Para pedidos mayores, te sugerimos preparar el monto exacto." },
+            { q: "¿Qué hago si el garrafón llega con fuga?", a: "Tienes 2 días para notificarlo. Cambiamos el garrafón sin costo adicional. Solo contáctanos por WhatsApp con tu número de pedido." },
+            { q: "¿Pueden llevarme otros productos de la tienda?", a: "Sí, con el Servicio Glu Glú Más puedes pedir lo que quieras de la tienda junto con tu agua. Con Glu Glú Más EX pides solo de tienda, sin depender del pedido de agua." },
+            { q: "¿Puedo programar entregas recurrentes?", a: "Sí, con Atención Programada puedes fijar día y hora de entrega. Realizamos llamada previa o mensaje de WhatsApp para confirmar." }
+        ];
+
+        const PRIVACIDAD_TEXT = `AVISO DE PRIVACIDAD
+
+ELTHON JAEL TAPIA LEYVA (en lo sucesivo "GLU GLÚ"), con domicilio en Rincón del Río 103, Colonia Bosque Residencial del Sur. Xochimilco, Ciudad de México, 16010, México y de conformidad con lo dispuesto en la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y en su reglamento, hace de su conocimiento que es responsable de recabar sus datos personales, del uso que se les dé a los mismos y de su protección.
+
+FINALIDAD EN EL TRATAMIENTO DE SUS DATOS PERSONALES
+Recopilamos sus datos personales, por lo que solicitamos su consentimiento a través del presente Aviso de Privacidad con el objeto de utilizarlos para los siguientes fines: Comprar productos de GLU GLÚ. Recibir información sobre productos y servicios de GLU GLÚ. Participar en las comunidades en línea de GLU GLÚ, incluidos nuestros canales, páginas en las redes sociales y blogs. Almacenar sus preferencias para futuras interacciones y comunicaciones de GLU GLÚ. Ayudarnos a desarrollar productos y crear campañas diseñadas teniendo en cuenta sus intereses, optimizar los servicios al cliente y mejorar continuamente nuestros sitios web. Ayudarnos a mejorar los productos y servicios y permitir que GLU GLÚ le mantenga informado y le invite a participar en las pruebas de nuevos productos y servicios. Resolver problemas relacionados con el consumidor o los productos. Recibir mensajes personalizados, ofertas especiales y anuncios relevantes para sus intereses personales, en función de la información que ha compartido con nosotros y la que hemos recopilado a través de las cookies o técnicas similares en relación con su uso de los sitios web, las redes sociales y los blogs de GLU GLÚ.
+
+TIPO DE DATOS
+Para las finalidades antes mencionadas requerimos obtener sus siguientes datos personales: Su nombre completo. Su dirección de correo electrónico. Su dirección postal. Su número de teléfono. Su perfil en las redes sociales. Su edad. Información sobre los productos que ha adquirido. Sus intereses relacionados con GLU GLÚ. El uso y las actividades que realiza en nuestras páginas de GLU GLÚ. Sus datos bancarios para el procesamiento de pagos de productos o servicios de GLU GLÚ.
+
+FUENTE DE OBTENCIÓN DE LOS DATOS
+Los datos personales y/o sensibles pueden ser recabados de distintas formas: A través of the página de Internet gluglu.mx, de correo electrónico, redes sociales, personalmente, por teléfono o por escrito.
+
+MEDIOS PARA LIMITAR EL USO O DIVULGACIÓN DE SUS DATOS PERSONALES
+Hacemos de su conocimiento que sus datos personales serán tratados y resguardados con base en los principios de licitud, calidad, consentimiento, información, finalidad, lealtad, proporcionalidad y responsabilidad, consagrados en la Ley Federal de Protección de Datos Personales en Posesión de Particulares y su reglamento. De igual forma, le reiteramos que sus datos personales serán resguardados bajo estrictas medidas de seguridad administrativas, técnicas y físicas las cuales han sido implementadas con el objeto de proteger sus datos personales contra daño, pérdida, alteración, destrucción o el uso, acceso o tratamiento no autorizados.
+
+MEDIOS PARA EL EJERCICIO DE SUS DERECHOS COMO TITULAR DE LOS DATOS PERSONALES
+Como titular de los datos personales objeto del presente Aviso de Privacidad usted podrá ejercitar sus derechos de acceso, rectificación, cancelación u oposición (Derechos ARCO), mismos que se consagran en la Ley Federal de Protección de Datos Personales en Posesión de Particulares y en su reglamento. Así mismo podrá revocar el consentimiento otorgado para el uso de sus datos personales en cualquier momento. En cualquiera de estos supuestos, puede realizar su solicitud mediante el envío de un correo electrónico a la dirección GotaGlu@hotmail.com o personalmente en el domicilio ubicado en Residencial Prados Coapa 3ra Sección, Calle Acequia numero 25-C, delegacion Tlalpan, Ciudad de México. poniéndose en contacto con nuestro departamento de datos personales, con MARTÍN TAPIA GONZALEZ, en el teléfono 0445518054385. Usted recibirá una respuesta en un plazo de 5 días hábiles en relación a dicha solicitud y la manera en que está siendo atendida. Con la finalidad de poder atender su solicitud, ésta deberá satisfacer todos los requisitos estipulados en la Ley Federal de Protección de Datos Personales en Posesión de los particulares y en su reglamento.
+
+UTILIZACIÓN DE COOKIES
+Las "Cookies" son archivos o piezas de información que se almacenan por su buscador en el disco duro de su computadora. GLU GLÚ podría usar "Cookies" para recabar información adicional sobre usted durante su visita a cualquiera de nuestras páginas de Internet. Recolectamos esta información con la finalidad de poder ajustar nuestra página y nuestros productos a sus intereses y necesidades. Las "Cookies" también podrían ser utilizadas para acelerar la velocidad de sus futuras actividades en nuestras páginas. La mayoría de los buscadores se encuentran programados para aceptar "Cookies". Si usted prefiere, usted puede programar el suyo con la finalidad de rechazar "Cookies" o de alertarlo cuando las "Cookies" se estén enviando. La restricción de "Cookies" al momento de entrar a una página de Internet podría resultar en la inhabilidad para visitar ciertas áreas de la página o recibir información personalizada durante su visita a la misma. Asimismo, en caso de utilizar cookies, o cualquier otro mecanismo o tecnología similar que permita acceder a sus datos personales, éstos podrán ser deshabilitados si usted así lo solicita a la siguiente dirección electrónica: GotaGlu@hotmail.com
+
+CAMBIOS AL PRESENTE AVISO DE PRIVACIDAD
+GLU GLÚ se reserva el derecho de cambiar, modificar o actualizar en cualquier momento el presente Aviso de Privacidad en virtud de cambios en los requerimientos legales, o bien cambios en las políticas o procesos internos. Dichas modificaciones se harán de su conocimiento mediante el envío de un correo electrónico a la cuenta que usted nos proporcionó inicialmente para hacer de su conocimiento el presente Aviso de Privacidad y/o mediante la publicación del mismo en la siguiente página web: GluGlu.mx. No seremos responsables en caso de que usted no reciba la referida notificación de cambio en el Aviso de Privacidad por causa de algún problema con su cuenta de correo electrónico o de transmisión de datos por internet. Sin embargo, por su seguridad, el Aviso de Privacidad vigente estará disponible en todo momento en la página web antes señalada.
+
+Fecha de última actualización 25 DE SEPTIEMBRE DEL 2017.`;
 
         // ============================================
         // ESTADO GLOBAL
@@ -1152,6 +2153,32 @@
             addressData: { nombre: '', calle: '', numero: '', interior: '', colonia: '', cp: '', detalles: '' }
         };
         let readSpecs = JSON.parse(localStorage.getItem('gg_read_specs') || '[]');
+
+        // ============================================
+        // TEMA — Dark / Light
+        // ============================================
+        function loadTheme() {
+            const saved = localStorage.getItem('gg_theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+            updateThemeIcon(saved);
+        }
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('theme-icon');
+            if (!icon) return;
+            if (theme === 'dark') {
+                icon.innerHTML = '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
+            } else {
+                icon.innerHTML = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
+            }
+        }
+        window.toggleTheme = function() {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            const next = current === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('gg_theme', next);
+            updateThemeIcon(next);
+            showToast(next === 'dark' ? 'Modo oscuro activado' : 'Modo claro activado');
+        };
 
         // ============================================
         // CACHE DE DIRECCIÓN
@@ -1170,7 +2197,6 @@
                 }
             } catch(e) {}
         }
-
         function saveAddressData() {
             const data = {
                 nombre: document.getElementById('addr-nombre').value,
@@ -1185,35 +2211,56 @@
         }
 
         // ============================================
-        // MARCAS
+        // BRAND GRID — con presets rápidos
         // ============================================
+        const QTY_PRESETS = [1, 3, 6, 12];
         function buildBrandGrid() {
             const grid = document.getElementById('brand-grid');
             grid.innerHTML = BRANDS.map(brand => {
                 const key = brand.replace(/\s/g, '');
                 const prices = BRAND_PRICES[brand];
+                const isPopular = !!prices.popular;
                 return `
-                <div class="brand-item" id="brand-item-${key}">
+                <div class="brand-item${isPopular ? ' popular' : ''}" id="brand-item-${key}">
                     <div class="brand-header" onclick="toggleBrandDetails('${brand}')">
-                        <span class="brand-name"><span class="check-icon">✓</span> ${brand}</span>
-                        <span class="brand-qty-badge" id="badge-${key}">0</span>
+                        <span class="brand-name">
+                            <span class="brand-mark">💧</span>
+                            ${brand}
+                            ${isPopular ? '<span class="brand-popular">Más pedido</span>' : ''}
+                        </span>
+                        <span class="brand-meta">
+                            <span class="brand-qty-badge" id="badge-${key}">0</span>
+                            <span class="check-icon">✓</span>
+                        </span>
                     </div>
                     <div class="brand-details" id="details-${key}">
                         <div class="water-row">
-                            <div class="water-info"><span class="water-type-name">💧 Tradicional</span><span class="water-price">$${prices.tradicional.toFixed(2)} c/u</span></div>
+                            <div class="water-info">
+                                <span class="water-type-name">💧 Tradicional</span>
+                                <span class="water-price">$${prices.tradicional.toFixed(2)} MXN c/u</span>
+                            </div>
                             <div class="qty-control-sm">
-                                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','tradicional',-1)">−</button>
+                                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','tradicional',-1)" aria-label="Restar">−</button>
                                 <span class="qty-display-sm" id="qty-trad-${key}">0</span>
-                                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','tradicional',1)">+</button>
+                                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','tradicional',1)" aria-label="Sumar">+</button>
                             </div>
                         </div>
+                        <div class="qty-presets">
+                            ${QTY_PRESETS.map(p => `<button class="qty-preset" onclick="event.stopPropagation(); setWaterQty('${brand}','tradicional',${p})">${p}</button>`).join('')}
+                        </div>
                         <div class="water-row">
-                            <div class="water-info"><span class="water-type-name">✨ Plus</span><span class="water-price">$${prices.plus.toFixed(2)} c/u</span></div>
-                            <div class="qty-control-sm">
-                                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','plus',-1)">−</button>
-                                <span class="qty-display-sm" id="qty-plus-${key}">0</span>
-                                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','plus',1)">+</button>
+                            <div class="water-info">
+                                <span class="water-type-name">✨ Plus</span>
+                                <span class="water-price">$${prices.plus.toFixed(2)} MXN c/u</span>
                             </div>
+                            <div class="qty-control-sm">
+                                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','plus',-1)" aria-label="Restar">−</button>
+                                <span class="qty-display-sm" id="qty-plus-${key}">0</span>
+                                <button class="qty-btn-sm" onclick="event.stopPropagation(); changeWaterQty('${brand}','plus',1)" aria-label="Sumar">+</button>
+                            </div>
+                        </div>
+                        <div class="qty-presets">
+                            ${QTY_PRESETS.map(p => `<button class="qty-preset" onclick="event.stopPropagation(); setWaterQty('${brand}','plus',${p})">${p}</button>`).join('')}
                         </div>
                     </div>
                 </div>`;
@@ -1239,6 +2286,25 @@
             const hasSelection = Object.values(state.brandOrders).some(order => (order.tradicional + order.plus) > 0);
             if (hasSelection) btn.classList.add('glow');
             else btn.classList.remove('glow');
+            updateLiveSubtotal();
+        }
+
+        function updateLiveSubtotal() {
+            const subEl = document.getElementById('live-subtotal');
+            const amtEl = document.getElementById('live-amount');
+            if (!subEl || !amtEl) return;
+            const orders = Object.entries(state.brandOrders).filter(([b, o]) => o.tradicional + o.plus > 0);
+            if (orders.length === 0) {
+                subEl.classList.remove('shown');
+                return;
+            }
+            let subtotal = 0;
+            orders.forEach(([brand, order]) => {
+                const prices = BRAND_PRICES[brand];
+                subtotal += order.tradicional * prices.tradicional + order.plus * prices.plus;
+            });
+            amtEl.textContent = `$${subtotal.toFixed(2)}`;
+            subEl.classList.add('shown');
         }
 
         window.changeWaterQty = function(brand, type, delta) {
@@ -1255,6 +2321,16 @@
             updateAddButtonGlow();
         };
 
+        window.setWaterQty = function(brand, type, qty) {
+            if (!state.brandOrders[brand]) state.brandOrders[brand] = { tradicional: 0, plus: 0 };
+            state.brandOrders[brand][type] = qty;
+            const key = brand.replace(/\s/g, '');
+            document.getElementById(`qty-${type === 'tradicional' ? 'trad' : 'plus'}-${key}`).textContent = qty;
+            const total = state.brandOrders[brand].tradicional + state.brandOrders[brand].plus;
+            document.getElementById(`badge-${key}`).textContent = total;
+            updateAddButtonGlow();
+        };
+
         // ============================================
         // ESPECIFICACIONES
         // ============================================
@@ -1265,10 +2341,32 @@
                 return `
                 <div class="spec-item" onclick="openSpecModal('${spec.id}')">
                     <span>${spec.title}</span>
-                    <button class="info-btn ${isRead ? '' : 'unseen'}" id="spec-btn-${spec.id}">i</button>
+                    <button class="info-btn ${isRead ? '' : 'unseen'}" id="spec-btn-${spec.id}" aria-label="Más info">i</button>
                 </div>`;
             }).join('');
         }
+
+        // ============================================
+        // FAQ ACCORDION
+        // ============================================
+        function buildFaqList() {
+            const list = document.getElementById('faq-list');
+            list.innerHTML = FAQ_ITEMS.map((item, i) => `
+                <div class="faq-item" id="faq-item-${i}">
+                    <div class="faq-question" onclick="toggleFaq(${i})">
+                        <span>${item.q}</span>
+                        <span class="faq-chevron"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">${item.a}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        window.toggleFaq = function(i) {
+            const item = document.getElementById(`faq-item-${i}`);
+            item.classList.toggle('open');
+        };
 
         window.toggleSpecs = function() {
             const grid = document.getElementById('specs-grid');
@@ -1313,6 +2411,76 @@
         };
 
         // ============================================
+        // SEARCH MODAL — Command palette style
+        // ============================================
+        window.openSearch = function() {
+            document.getElementById('search-modal-overlay').classList.add('open');
+            setTimeout(() => document.getElementById('search-input').focus(), 100);
+            renderSearchResults('');
+        };
+        window.closeSearch = function() {
+            document.getElementById('search-modal-overlay').classList.remove('open');
+            document.getElementById('search-input').value = '';
+        };
+        function renderSearchResults(query) {
+            const resultsEl = document.getElementById('search-results');
+            const q = query.toLowerCase().trim();
+            const items = [];
+            BRANDS.forEach(brand => {
+                const prices = BRAND_PRICES[brand];
+                items.push({ brand, type: 'tradicional', label: `${brand} · Tradicional`, sub: 'Agua purificada tradicional', price: prices.tradicional });
+                items.push({ brand, type: 'plus', label: `${brand} · Plus`, sub: 'Agua purificada con perlas de plata', price: prices.plus });
+            });
+            const filtered = q ? items.filter(it => it.label.toLowerCase().includes(q) || it.sub.toLowerCase().includes(q)) : items;
+            if (filtered.length === 0) {
+                resultsEl.innerHTML = `<div class="search-empty">Sin resultados para "${query}"</div>`;
+                return;
+            }
+            resultsEl.innerHTML = filtered.map(it => `
+                <div class="search-result" onclick="quickAddFromSearch('${it.brand}','${it.type}')">
+                    <div class="search-result-info">
+                        <div class="search-result-name">${it.label}</div>
+                        <div class="search-result-sub">${it.sub}</div>
+                    </div>
+                    <div class="search-result-price">$${it.price.toFixed(2)}</div>
+                </div>
+            `).join('');
+        }
+        window.quickAddFromSearch = function(brand, type) {
+            // Open brand details and set qty to 1
+            const key = brand.replace(/\s/g, '');
+            const item = document.getElementById(`brand-item-${key}`);
+            const details = document.getElementById(`details-${key}`);
+            if (!item.classList.contains('active-brand')) {
+                details.style.display = 'flex';
+                item.classList.add('active-brand');
+            }
+            setWaterQty(brand, type, 1);
+            closeSearch();
+            item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            showToast(`Añadido: ${brand} · ${type === 'tradicional' ? 'Tradicional' : 'Plus'} x1`);
+        };
+        document.addEventListener('keydown', function(e) {
+            // ⌘K / Ctrl+K to open search
+            if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                openSearch();
+                return;
+            }
+            if (e.key === 'Escape') {
+                closeSearch();
+                closeCart();
+                closeConfirmModal();
+                closeSpecModal();
+            }
+        });
+        document.addEventListener('input', function(e) {
+            if (e.target && e.target.id === 'search-input') {
+                renderSearchResults(e.target.value);
+            }
+        });
+
+        // ============================================
         // CUPÓN
         // ============================================
         window.applyCoupon = function() {
@@ -1320,11 +2488,11 @@
             if (!input) return showToast('Ingresa un código');
             if (state.appliedCoupon) return showToast('Ya tienes un código aplicado');
             const promo = { "GOTA10": { discount: 10, type: "percent", description: "10% de descuento" }, "AGUA5": { discount: 5, type: "fixed", description: "$5 MXN de descuento por garrafón" }, "PLUS15": { discount: 15, type: "percent", description: "15% de descuento en agua Plus" } }[input];
-            if (!promo) { showCouponFeedback('error', '✕', `Código "${input}" no válido.`); return; }
+            if (!promo) { showCouponFeedback('error', '✕', `Código <strong>${input}</strong> no válido.`); return; }
             state.appliedCoupon = { code: input, ...promo };
             document.getElementById('coupon-input').value = '';
             document.getElementById('coupon-input').disabled = true;
-            showCouponFeedback('success', '✓', `Código <strong>${input}</strong> aplicado — ${promo.description}`, true);
+            showCouponFeedback('success', '✓', `Código <strong>${input}</strong> aplicado · ${promo.description}`, true);
             updateCartDrawer();
             showToast(`¡Código ${input} aplicado!`);
         };
@@ -1369,9 +2537,11 @@
                 return { brand, tradicional: order.tradicional, plus: order.plus, totalQty, total: totalPrice };
             });
             state.cartItems.push(...items);
+            // Save last order for quick reorder
+            try { localStorage.setItem(LAST_ORDER_KEY, JSON.stringify(state.cartItems.slice())); } catch(e) {}
             updateCartDrawer();
-            showToast(`${items.length} producto(s) añadido(s)`);
-            setTimeout(() => openCart(), 500);
+            showToast(`${items.length} producto(s) añadido(s) al carrito`);
+            setTimeout(() => openCart(), 400);
             state.brandOrders = {};
             document.querySelectorAll('.brand-item').forEach(el => el.classList.remove('active-brand'));
             document.querySelectorAll('.brand-details').forEach(el => el.style.display = 'none');
@@ -1383,7 +2553,9 @@
         window.removeCartItem = function(index) {
             state.cartItems.splice(index, 1);
             updateCartDrawer();
-            if (state.cartItems.length === 0) closeCart();
+            if (state.cartItems.length === 0) {
+                // keep drawer open so user sees the empty state
+            }
         };
 
         window.clearCart = function() {
@@ -1391,6 +2563,21 @@
             updateCartDrawer();
             closeCart();
             showToast('Carrito vaciado');
+        };
+
+        window.reorderLast = function() {
+            try {
+                const last = JSON.parse(localStorage.getItem(LAST_ORDER_KEY) || 'null');
+                if (!last || !Array.isArray(last) || last.length === 0) {
+                    showToast('No hay pedidos anteriores guardados');
+                    return;
+                }
+                state.cartItems = last.map(item => ({...item}));
+                updateCartDrawer();
+                showToast('Pedido anterior cargado en el carrito');
+            } catch(e) {
+                showToast('No se pudo cargar el pedido anterior');
+            }
         };
 
         function updateCartDrawer() {
@@ -1404,10 +2591,43 @@
             const emptyEl = document.getElementById('drawer-empty');
             const itemsEl = document.getElementById('drawer-items');
             const footerEl = document.getElementById('drawer-footer');
+            const progressEl = document.getElementById('shipping-progress');
+            const reorderBtn = document.getElementById('drawer-btn-reorder');
+
+            // Show reorder button in empty state if there's a saved last order
+            try {
+                const last = JSON.parse(localStorage.getItem(LAST_ORDER_KEY) || 'null');
+                if (last && Array.isArray(last) && last.length > 0 && count === 0) {
+                    reorderBtn.classList.add('shown');
+                } else {
+                    reorderBtn.classList.remove('shown');
+                }
+            } catch(e) { reorderBtn.classList.remove('shown'); }
+
             if (count === 0) {
-                emptyEl.style.display = 'flex'; itemsEl.style.display = 'none'; footerEl.style.display = 'none'; return;
+                emptyEl.style.display = 'flex'; itemsEl.style.display = 'none'; footerEl.style.display = 'none';
+                progressEl.style.display = 'none';
+                return;
             }
             emptyEl.style.display = 'none'; itemsEl.style.display = 'block'; footerEl.style.display = 'block';
+
+            // Free shipping progress
+            const totalQty = items.reduce((s, i) => s + i.totalQty, 0);
+            const FREE_SHIP_THRESHOLD = 6;
+            progressEl.style.display = 'block';
+            const bar = document.getElementById('shipping-progress-bar');
+            const text = document.getElementById('shipping-progress-text');
+            if (totalQty >= FREE_SHIP_THRESHOLD) {
+                bar.classList.add('achieved');
+                text.innerHTML = '<strong>¡Envío gratis desbloqueado!</strong> Tu pedido califica para entrega sin costo.';
+            } else {
+                bar.classList.remove('achieved');
+                const remaining = FREE_SHIP_THRESHOLD - totalQty;
+                const pct = Math.min(100, (totalQty / FREE_SHIP_THRESHOLD) * 100);
+                bar.querySelector('.shipping-progress-fill').style.width = pct + '%';
+                text.innerHTML = `Agrega <strong>${remaining} garrafón${remaining !== 1 ? 'es' : ''} más</strong> para obtener envío gratis.`;
+            }
+
             let html = '';
             items.forEach((item, i) => {
                 const parts = [];
@@ -1419,7 +2639,7 @@
                         <div class="drawer-item-icon">💧</div>
                         <div class="drawer-item-meta">
                             <div class="drawer-item-name">${item.brand}</div>
-                            <div class="drawer-item-sub">${parts.join(', ')} · Total ${item.totalQty} garrafón(es)</div>
+                            <div class="drawer-item-sub">${parts.join(' · ')} · Total ${item.totalQty} garrafón(es)</div>
                         </div>
                     </div>
                     <div class="drawer-item-price-row">
@@ -1429,16 +2649,16 @@
                 </div>`;
             });
             itemsEl.innerHTML = html;
+
             const subtotal = items.reduce((s, i) => s + i.total, 0);
-            const totalQty = items.reduce((s, i) => s + i.totalQty, 0);
             const discount = calculateDiscount(subtotal, totalQty);
-            const freeShip = totalQty >= 6;
+            const freeShip = totalQty >= FREE_SHIP_THRESHOLD;
             const shipping = freeShip ? 0 : 49;
             const grand = subtotal - discount + shipping;
             document.getElementById('drawer-totals').innerHTML = `
                 <div class="drawer-total-row subtotal"><span>Subtotal (${totalQty} garrafón${totalQty !== 1 ? 'es' : ''})</span><span>$${subtotal.toFixed(2)}</span></div>
-                ${discount > 0 ? `<div class="drawer-total-row discount"><span>🏷️ Descuento</span><span>−$${discount.toFixed(2)}</span></div>` : ''}
-                <div class="drawer-total-row ${freeShip ? 'shipping-free' : ''}"><span>🚚 Envío</span><span>${freeShip ? '✓ Gratis' : '$49.00 MXN'}</span></div>
+                ${discount > 0 ? `<div class="drawer-total-row discount"><span>Descuento</span><span>−$${discount.toFixed(2)}</span></div>` : ''}
+                <div class="drawer-total-row ${freeShip ? 'shipping-free' : ''}"><span>Envío</span><span>${freeShip ? 'Gratis' : '$49.00 MXN'}</span></div>
                 <div class="drawer-grand-total"><span class="label">Total</span><span class="amount">$${grand.toFixed(2)}</span></div>`;
         }
 
@@ -1447,7 +2667,6 @@
             document.getElementById('cart-drawer').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
-
         function closeCart() {
             document.getElementById('cart-overlay').classList.remove('open');
             document.getElementById('cart-drawer').classList.remove('open');
@@ -1472,14 +2691,14 @@
             saveAddressData();
 
             let previewHTML = `
-                <div style="text-align: left; font-size: 14px; color: var(--color-ink); line-height: 1.8; font-weight: 500; padding: 4px 0;">
-                    <p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:120px;">👤 Nombre:</strong> ${nombre}</p>
-                    <p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:120px;">📍 Calle/Edificio:</strong> ${calle}</p>
-                    <p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:120px;">🔢 Número/Mz:</strong> ${numero}</p>
-                    ${interior ? `<p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:120px;">🚪 Interior/Lote:</strong> ${interior}</p>` : ''}
-                    <p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:120px;">🏘️ Colonia:</strong> ${colonia}</p>
-                    <p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:120px;">📮 C.P.:</strong> ${cp}</p>
-                    ${detalles ? `<p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:120px;">📝 Referencias:</strong> ${detalles}</p>` : ''}
+                <div style="text-align: left; font-size: 14px; color: var(--color-ink); line-height: 1.7; font-weight: 400; padding: 4px 0;">
+                    <p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:130px; font-weight:600;">Nombre:</strong> ${nombre}</p>
+                    <p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:130px; font-weight:600;">Calle/Edificio:</strong> ${calle}</p>
+                    <p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:130px; font-weight:600;">Número/Mz:</strong> ${numero}</p>
+                    ${interior ? `<p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:130px; font-weight:600;">Interior/Lote:</strong> ${interior}</p>` : ''}
+                    <p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:130px; font-weight:600;">Colonia:</strong> ${colonia}</p>
+                    <p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:130px; font-weight:600;">C.P.:</strong> ${cp}</p>
+                    ${detalles ? `<p style="margin-bottom:8px;"><strong style="color:var(--color-ink); display:inline-block; width:130px; font-weight:600;">Referencias:</strong> ${detalles}</p>` : ''}
                 </div>
             `;
 
@@ -1562,7 +2781,7 @@
 
         (function initDraggableFab() {
             const fab=document.getElementById('cart-fab'); let dragging=false,wasDrag=false,sx,sy,ol,ot;
-            fab.style.top='70px';fab.style.right='20px';
+            fab.style.top='76px';fab.style.right='16px';
             function getPos(){const r=fab.getBoundingClientRect();return{left:r.left,top:r.top};}
             function applyPos(l,t){const mx=window.innerWidth-fab.offsetWidth-8,my=window.innerHeight-fab.offsetHeight-8;l=Math.max(8,Math.min(l,mx));t=Math.max(8,Math.min(t,my));fab.style.right='auto';fab.style.bottom='auto';fab.style.left=l+'px';fab.style.top=t+'px';}
             fab.addEventListener('mousedown',e=>{if(e.button!==0)return;dragging=true;wasDrag=false;const p=getPos();sx=e.clientX;sy=e.clientY;ol=p.left;ot=p.top;e.preventDefault();});
@@ -1577,11 +2796,11 @@
         // TOUR
         // ============================================
         const TOUR_STEPS = [
-            { anchor: 'tour-anchor-brands', title: 'Envases y tipo de agua', body: 'Selecciona una marca, luego elige cantidad de agua Tradicional y/o Plus. Puedes combinar ambos tipos.', arrow: 'arrow-top', position: 'below' },
-            { anchor: 'tour-anchor-address', title: 'Dirección de Entrega', body: 'Completa todos los campos obligatorios. Se guardarán automáticamente para tu próximo pedido.', arrow: 'arrow-top', position: 'below' },
-            { anchor: 'tour-anchor-coupon', title: 'Código Promocional', body: 'Si tienes un cupón de descuento, ingrésalo aquí y presiona "Aplicar".', arrow: 'arrow-top', position: 'below' },
-            { anchor: 'tour-anchor-specs', title: 'Especificaciones del Servicio', body: 'Revisa los detalles importantes del servicio. Toca para expandir la sección. Los íconos brillan hasta que los lees.', arrow: 'arrow-top', position: 'below' },
-            { anchor: 'tour-anchor-actions', title: '¡Listo para pedir!', body: 'Presiona "Añadir al carrito" para acumular productos. El botón se ilumina cuando tienes algo seleccionado.', arrow: 'arrow-bottom', position: 'above' }
+            { anchor: 'tour-anchor-brands', title: 'Envases y tipo de agua', body: 'Selecciona una marca y elige cantidad de agua Tradicional o Plus. Usa los presets (1, 3, 6, 12) para pedidos rápidos.', arrow: 'arrow-top', position: 'below' },
+            { anchor: 'tour-anchor-address', title: 'Dirección de Entrega', body: 'Completa los campos obligatorios. Se guardan automáticamente para tu próximo pedido.', arrow: 'arrow-top', position: 'below' },
+            { anchor: 'tour-anchor-coupon', title: 'Código Promocional', body: 'Si tienes un cupón de descuento, ingrésalo y presiona "Aplicar".', arrow: 'arrow-top', position: 'below' },
+            { anchor: 'tour-anchor-specs', title: 'Especificaciones del Servicio', body: 'Revisa los detalles del servicio. Toca para expandir. Los íconos brillan hasta que los lees.', arrow: 'arrow-top', position: 'below' },
+            { anchor: 'tour-anchor-actions', title: '¡Listo para pedir!', body: 'Presiona "Añadir al carrito". El subtotal se actualiza en vivo. El botón se ilumina cuando hay selección.', arrow: 'arrow-bottom', position: 'above' }
         ];
         let tourStep = 0, tourActive = false;
 
@@ -1621,7 +2840,7 @@
                 document.getElementById('tour-title').textContent = step.title;
                 document.getElementById('tour-body').textContent = step.body;
                 document.getElementById('tour-dots').innerHTML = TOUR_STEPS.map((_, i) => `<div class="tour-dot ${i === tourStep ? 'active' : ''}"></div>`).join('');
-                nextBtn.textContent = tourStep === TOUR_STEPS.length - 1 ? '¡Entendido! ✓' : 'Siguiente →';
+                nextBtn.textContent = tourStep === TOUR_STEPS.length - 1 ? '¡Entendido!' : 'Siguiente →';
                 tooltip.classList.add('active');
             }, 350);
         }
@@ -1649,8 +2868,10 @@
         // INICIALIZACIÓN
         // ============================================
         window.onload = function() {
+            loadTheme();
             buildBrandGrid();
             buildSpecsGrid();
+            buildFaqList();
             updateCartDrawer();
             updateAddButtonGlow();
             loadAddressData();
@@ -1667,11 +2888,16 @@
             if (e.key === 'Escape') {
                 closeCart();
                 closeConfirmModal();
+                closeSpecModal();
+                closeSearch();
             }
         });
 
         window.openCart = openCart;
         window.closeCart = closeCart;
+        window.openSearch = openSearch;
+        window.closeSearch = closeSearch;
+        window.toggleTheme = toggleTheme;
     </script>
 </body>
 </html>
