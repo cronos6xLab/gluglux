@@ -2292,12 +2292,14 @@
         // ============================================================
 
         // ⚠️ Número de WhatsApp principal para recibir pedidos
-        const WHATSAPP_NUMBER = "+5255XXXXXXXX"; // ← CAMBIA ESTO
+        const WHATSAPP_NUMBER = "+5255XXXXXXXX"; // ← CAMBIA ESTO por tu WhatsApp real
 
-        // ⚠️ URLs del proxy (Worker de Cloudflare) — REEMPLAZA POR TUS URLs REALES
-        // El menú carga productos desde aquí, y envía pedidos a /order
-        const MENU_API_URL = "https://gotaglu.cronos6xlab.workers.dev//menu";
-        const MAKE_WEBHOOK_URL = "https://gotaglu.cronos6xlab.workers.dev//order";
+        // ⚠️ URLs del proxy (Worker de Cloudflare).
+        // ✅ FIX CRÍTICO: Antes tenía "//menu" y "//order" (doble slash) → HTTP 404 →
+        //    el menú cargaba productos FALLBACK y los pedidos NUNCA llegaban a Apps Script.
+        //    Ahora con un solo slash "/", el Worker responde 200 OK y reenvía a Apps Script.
+        const MENU_API_URL = "https://gotaglu.cronos6xlab.workers.dev/menu";
+        const MAKE_WEBHOOK_URL = "https://gotaglu.cronos6xlab.workers.dev/order";
 
         // Horario de servicio (24h, en minutos desde medianoche)
         const SCHEDULE = {
@@ -3759,9 +3761,30 @@
             params.append('total', orderData.total);
             params.append('pedido_detalle', orderData.pedido_detalle);
             params.append('pedido_json', JSON.stringify(orderData.cart_raw));
+            // ✅ MEJORA: Log visible en consola para diagnóstico + toast informativo al usuario
+            console.log('📦 Enviando pedido al Worker /order → Apps Script...', { pedido_id: orderData.pedido_id, total: orderData.total });
             fetch(MAKE_WEBHOOK_URL, { method: 'POST', body: params, keepalive: true })
-                .then(r => { if (!r.ok) console.warn('Make respondió HTTP ' + r.status); else console.log('Pedido enviado a Make.com (vía Worker)'); })
-                .catch(err => console.warn('No se pudo enviar a Make:', err));
+                .then(async r => {
+                    if (!r.ok) {
+                        console.error('❌ Worker respondió HTTP ' + r.status);
+                        showNotification('⚠️ No se pudo guardar el pedido en el servidor (HTTP ' + r.status + '). Revisa la consola.', 'error');
+                        return;
+                    }
+                    const data = await r.json().catch(() => null);
+                    if (data && data.ok) {
+                        console.log('✅ Pedido guardado en hoja "Pedidos":', data.pedido || data);
+                        showNotification('✅ Pedido #' + orderData.pedido_id + ' guardado en el servidor', 'success');
+                    } else if (data && data.error) {
+                        console.error('❌ Apps Script rechazó el pedido:', data.error);
+                        showNotification('⚠️ El servidor rechazó el pedido: ' + data.error, 'error');
+                    } else {
+                        console.log('Pedido enviado (respuesta sin JSON)');
+                    }
+                })
+                .catch(err => {
+                    console.error('❌ No se pudo contactar al Worker:', err);
+                    showNotification('⚠️ No se pudo contactar al servidor. Tu pedido se envió por WhatsApp pero no quedó registrado.', 'error');
+                });
         }
 
         // ============================================================
